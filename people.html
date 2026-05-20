@@ -59,7 +59,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:14
 .search input::placeholder{color:var(--text3)}
 .tb-btn{width:36px;height:36px;border-radius:var(--radius-sm);background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;position:relative;transition:background .15s;color:var(--text2)}
 .tb-btn:hover{background:var(--surface3)}
-.tb-dot{position:absolute;top:5px;right:5px;width:7px;height:7px;border-radius:50%;background:var(--red);border:2px solid var(--surface)}
 .btn-primary{display:flex;align-items:center;gap:6px;background:var(--accent);color:#fff;border:none;padding:9px 16px;border-radius:var(--radius-sm);font-family:var(--body);font-size:13px;font-weight:600;cursor:pointer;transition:opacity .15s;white-space:nowrap}
 .btn-primary:hover{opacity:.88}
 .btn-ghost{display:flex;align-items:center;gap:6px;background:var(--surface2);color:var(--text2);border:1px solid var(--border);padding:8px 14px;border-radius:var(--radius-sm);font-family:var(--body);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;white-space:nowrap}
@@ -80,13 +79,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:14
 .tab.active .tab-count{background:rgba(255,255,255,.25)}
 .tab:not(.active) .tab-count{background:var(--surface2);color:var(--text3)}
 
-/* ─── SECTION CARDS ─── */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:18px}
-.card-hd{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 14px;border-bottom:1px solid var(--border)}
-.card-title{font-family:var(--head);font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:7px}
-.card-dot{width:7px;height:7px;border-radius:50%}
-.card-bd{padding:20px}
-
 /* ─── CHIPS / BADGES ─── */
 .chip{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600}
 .chip.green{background:rgba(16,185,129,.1);color:var(--green)}
@@ -98,14 +90,25 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:14
 .chip.gray{background:var(--surface2);color:var(--text2)}
 
 /* ─── GRADE BADGE ─── */
-.grade{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:13px;font-weight:800;flex-shrink:0}
+.grade{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:12px;font-weight:800;flex-shrink:0}
 .grade.A{background:rgba(16,185,129,.15);color:var(--green);border:1px solid rgba(16,185,129,.25)}
 .grade.B{background:rgba(59,126,248,.12);color:var(--accent);border:1px solid rgba(59,126,248,.2)}
 .grade.C{background:rgba(245,158,11,.12);color:var(--amber);border:1px solid rgba(245,158,11,.2)}
 .grade.D{background:rgba(244,63,94,.12);color:var(--red);border:1px solid rgba(244,63,94,.2)}
+.grade.none{background:var(--surface3);color:var(--text3);border:1px solid var(--border);font-size:9px;text-align:center;line-height:1.2}
+
+/* ─── OVERVIEW STATS ─── */
+.ov-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.ov-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+.ov-stat-val{font-family:var(--head);font-size:22px;font-weight:700;margin-bottom:3px}
+.ov-stat-lbl{font-size:12px;color:var(--text2)}
+.ov-stat-sub{font-size:11px;color:var(--text3);margin-top:4px}
+.ov-stat-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+
+/* ─── PERSON GRID ─── */
+.person-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 
 /* ─── PERSON CARD ─── */
-.person-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .person-card{
   background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);
   padding:20px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;
@@ -113,67 +116,45 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:14
 .person-card:hover{border-color:var(--accent);transform:translateY(-2px);background:var(--surface3)}
 .person-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--card-accent,var(--accent));opacity:0;transition:opacity .2s}
 .person-card:hover::before{opacity:1}
-
 .pc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px}
 .pc-av{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:15px;font-weight:700;color:#fff;flex-shrink:0}
 .pc-meta{flex:1;margin-left:12px;min-width:0}
 .pc-name{font-size:14px;font-weight:700;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pc-role{font-size:11px;color:var(--text3);margin-bottom:6px}
-.pc-tags{display:flex;gap:5px;flex-wrap:wrap}
+.pc-role{font-size:11px;color:var(--text3);margin-bottom:5px}
+.avail{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600}
+.avail-dot{width:7px;height:7px;border-radius:50%}
 
+/* ─── KPI GRID ─── */
 .pc-kpis{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}
 .kpi-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center}
 .kpi-val{font-family:var(--head);font-size:16px;font-weight:700;margin-bottom:2px}
 .kpi-lbl{font-size:10px;color:var(--text3);line-height:1.3}
+.kpi-empty{font-family:var(--head);font-size:12px;font-weight:600;color:var(--text3);margin-bottom:2px}
 
+/* ─── BAR ROW ─── */
 .pc-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
 .pc-bar-label{font-size:11px;color:var(--text3);width:80px;flex-shrink:0}
 .pc-bar-track{flex:1;height:4px;background:var(--surface);border-radius:2px;overflow:hidden}
 .pc-bar-fill{height:100%;border-radius:2px}
 .pc-bar-val{font-size:11px;font-weight:600;width:30px;text-align:right;flex-shrink:0}
+.pc-bar-empty{font-size:10px;color:var(--text3);width:30px;text-align:right;flex-shrink:0}
 
-.pc-footer{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--border);margin-top:4px}
+/* ─── FOOTER ─── */
+.pc-footer{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--border);margin-top:8px}
 .pc-salary{font-size:12px;color:var(--text3)}
 .pc-salary strong{color:var(--text);font-weight:600}
-.pc-status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 
-/* ─── CALL LOG TABLE ─── */
+/* ─── TABLE ─── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:18px}
+.card-hd{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 14px;border-bottom:1px solid var(--border)}
+.card-title{font-family:var(--head);font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:7px}
+.card-dot{width:7px;height:7px;border-radius:50%}
+.card-bd{padding:20px}
 .tbl{width:100%;border-collapse:collapse}
-.tbl th{font-size:10.5px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;color:var(--text3);padding:8px 14px;text-align:left;border-bottom:1px solid var(--border)}
+.tbl th{font-size:10.5px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;color:var(--text3);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border)}
 .tbl td{padding:11px 14px;font-size:13px;border-bottom:1px solid rgba(28,45,85,.4);vertical-align:middle}
 .tbl tr:last-child td{border-bottom:none}
 .tbl tr:hover td{background:rgba(59,126,248,.03)}
-
-/* ─── PROFILE DETAIL PANEL ─── */
-.detail-panel{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
-.dp-section{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
-.dp-title{font-size:11px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;color:var(--text3);margin-bottom:12px}
-.dp-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(28,45,85,.4)}
-.dp-row:last-child{border-bottom:none}
-.dp-label{font-size:12px;color:var(--text2)}
-.dp-val{font-size:12px;font-weight:600;text-align:right}
-
-/* ─── PROGRESS BAR ─── */
-.prog-wrap{display:flex;align-items:center;gap:8px}
-.prog-bar{flex:1;height:4px;background:var(--surface2);border-radius:2px;overflow:hidden}
-.prog-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--teal))}
-.prog-pct{font-size:11px;color:var(--text2);width:28px;text-align:right}
-
-/* ─── PERF SCORE BAR ─── */
-.score-track{height:8px;background:var(--surface3);border-radius:4px;overflow:hidden;flex:1}
-.score-fill{height:100%;border-radius:4px;transition:width 1.2s ease}
-
-/* ─── SECTION HEADER ─── */
-.sec-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.sec-title{font-family:var(--head);font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px}
-.sec-actions{display:flex;gap:8px}
-
-/* ─── AVAIL DOT ─── */
-.avail{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600}
-.avail-dot{width:7px;height:7px;border-radius:50%}
-
-/* ─── STAR RATING ─── */
-.stars{color:var(--amber);font-size:13px;letter-spacing:1px}
 
 /* ─── SKILL TAGS ─── */
 .skill-tag{display:inline-flex;background:var(--surface3);border:1px solid var(--border);color:var(--text2);font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;margin:2px}
@@ -184,14 +165,52 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:14
 .task-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px}
 .task-name{font-size:13px;font-weight:700}
 .task-client{font-size:11px;color:var(--text3);margin-top:2px}
-.task-meta{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap}
-.task-status-wrap{display:flex;gap:6px;margin-top:8px}
+.task-status-wrap{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
 .status-opt{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text3);cursor:pointer}
-.status-opt.sel{color:var(--text);font-weight:600}
 .status-circle{width:10px;height:10px;border-radius:50%;border:2px solid var(--border)}
-.status-circle.filled{border-color:var(--accent);background:var(--accent)}
-.status-circle.green{border-color:var(--green);background:var(--green)}
-.status-circle.amber{border-color:var(--amber);background:var(--amber)}
+
+/* ─── EMPTY STATE ─── */
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:52px 20px;text-align:center}
+.empty-icon{font-size:36px;margin-bottom:14px;opacity:.5}
+.empty-title{font-family:var(--head);font-size:15px;font-weight:700;color:var(--text2);margin-bottom:6px}
+.empty-sub{font-size:13px;color:var(--text3);max-width:320px;line-height:1.6;margin-bottom:18px}
+
+/* ─── SECTION HEADER ─── */
+.sec-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.sec-title{font-family:var(--head);font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px}
+.sec-actions{display:flex;gap:8px}
+
+/* ─── TAB PANELS ─── */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.tab-panel.active{animation:fadeIn .22s ease}
+
+/* ─── ADD PERSON MODAL ─── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(4,9,26,.82);z-index:500;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:16px;width:520px;max-width:95vw;max-height:88vh;overflow-y:auto;padding:28px}
+.modal-title{font-family:var(--head);font-size:18px;font-weight:700;margin-bottom:6px}
+.modal-sub{font-size:13px;color:var(--text3);margin-bottom:22px}
+.modal-close{position:absolute;top:20px;right:20px;width:30px;height:30px;border-radius:8px;background:var(--surface2);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--text2)}
+.form-row{margin-bottom:14px}
+.form-label{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--text3);margin-bottom:6px;display:block}
+.form-input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 13px;font-family:var(--body);font-size:13px;color:var(--text);outline:none;transition:border-color .15s}
+.form-input:focus{border-color:var(--accent)}
+.form-input::placeholder{color:var(--text3)}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.form-select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 13px;font-family:var(--body);font-size:13px;color:var(--text);outline:none;cursor:pointer}
+.form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:24px;padding-top:18px;border-top:1px solid var(--border)}
+.type-selector{display:flex;gap:8px;margin-bottom:18px}
+.type-btn{flex:1;padding:10px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface2);color:var(--text2);font-size:12px;font-weight:600;cursor:pointer;text-align:center;transition:all .15s}
+.type-btn.sel{border-color:var(--accent);background:rgba(59,126,248,.1);color:var(--accent)}
+
+/* ─── CONNECT DB BANNER ─── */
+.db-banner{background:linear-gradient(90deg,rgba(59,126,248,.08),rgba(34,211,184,.06));border:1px solid rgba(59,126,248,.2);border-radius:var(--radius);padding:14px 18px;display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.db-banner-icon{font-size:20px;flex-shrink:0}
+.db-banner-text{flex:1}
+.db-banner-title{font-size:13px;font-weight:700;margin-bottom:2px}
+.db-banner-sub{font-size:11px;color:var(--text3)}
 
 /* ─── ANIMATIONS ─── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
@@ -203,18 +222,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:14
 .person-card:nth-child(5){animation-delay:.20s}
 .person-card:nth-child(6){animation-delay:.24s}
 
-/* ─── TAB PANELS ─── */
-.tab-panel{display:none}
-.tab-panel.active{display:block}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.tab-panel.active{animation:fadeIn .25s ease}
-
-/* ─── OVERVIEW STATS ─── */
-.ov-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
-.ov-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
-.ov-stat-val{font-family:var(--head);font-size:22px;font-weight:700;margin-bottom:3px}
-.ov-stat-lbl{font-size:12px;color:var(--text2)}
-.ov-stat-sub{font-size:11px;color:var(--text3);margin-top:4px}
+/* ─── MATCHING FILTER BAR ─── */
+.filter-bar{background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius);padding:14px 18px;margin-bottom:18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.form-select-sm{background:var(--surface3);border:1px solid var(--border);color:var(--text2);padding:7px 12px;border-radius:var(--radius-sm);font-family:var(--body);font-size:12px;cursor:pointer;outline:none}
 </style>
 </head>
 <body>
@@ -232,8 +242,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:14
     <div class="nav-group">
       <div class="nav-section-label">Main</div>
       <a class="nav-item" href="index.html"><span class="nav-icon">⊞</span> Dashboard</a>
-      <a class="nav-item active" href="people.html"><span class="nav-icon">👥</span> People <span class="nav-badge blue">34</span></a>
-      <a class="nav-item" href="pipeline.html"><span class="nav-icon">⟶</span> Pipeline <span class="nav-badge teal">721</span></a>
+      <a class="nav-item active" href="people.html"><span class="nav-icon">👥</span> People <span class="nav-badge blue" id="nav-total">0</span></a>
+      <a class="nav-item" href="pipeline.html"><span class="nav-icon">⟶</span> Pipeline</a>
       <a class="nav-item" href="projects.html"><span class="nav-icon">📁</span> Projects</a>
       <a class="nav-item" href="analytics.html"><span class="nav-icon">📊</span> Analytics</a>
     </div>
@@ -246,7 +256,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:14
     </div>
     <div class="nav-group">
       <div class="nav-section-label">System</div>
-      <a class="nav-item" href="#"><span class="nav-icon">🔔</span> Alerts <span class="nav-badge">3</span></a>
+      <a class="nav-item" href="#"><span class="nav-icon">🔔</span> Alerts</a>
       <a class="nav-item" href="#"><span class="nav-icon">⚙️</span> Settings</a>
     </div>
   </nav>
@@ -266,28 +276,38 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:14
     <div class="breadcrumb">Home / <strong>People Management</strong></div>
     <div class="search">
       <span style="color:var(--text3);font-size:13px">🔍</span>
-      <input type="text" placeholder="Search by name, niche, role…"/>
+      <input type="text" id="search-input" placeholder="Search by name, niche, role…" oninput="handleSearch(this.value)"/>
       <span style="color:var(--text3);font-size:11px;background:var(--surface3);border:1px solid var(--border);padding:1px 6px;border-radius:4px;flex-shrink:0">⌘K</span>
     </div>
     <div style="display:flex;gap:7px">
-      <div class="tb-btn">🔔<span class="tb-dot"></span></div>
-      <div class="tb-btn">✉️</div>
+      <div class="tb-btn" title="Notifications">🔔</div>
+      <div class="tb-btn" title="Messages">✉️</div>
     </div>
-    <button class="btn-primary">+ Add Person</button>
+    <button class="btn-primary" onclick="openModal()">+ Add Person</button>
   </header>
 
   <main class="content">
+
+    <!-- DB BANNER -->
+    <div class="db-banner">
+      <div class="db-banner-icon">🔌</div>
+      <div class="db-banner-text">
+        <div class="db-banner-title">Connect your database to load real team data</div>
+        <div class="db-banner-sub">People added here will sync with your backend once the API is configured. All data below is live from your database.</div>
+      </div>
+      <button class="btn-ghost" style="font-size:12px;padding:7px 12px">Configure API</button>
+    </div>
 
     <!-- PAGE HEADER -->
     <div class="page-header">
       <div>
         <div class="page-title">People Management</div>
-        <div class="page-sub">Cold Callers · Cold Outreachers · Freelancers — 34 total</div>
+        <div class="page-sub" id="page-sub-count">Cold Callers · Cold Outreachers · Freelancers — 0 people added</div>
       </div>
       <div style="display:flex;gap:8px">
-        <button class="btn-ghost">📥 Export CSV</button>
+        <button class="btn-ghost" onclick="exportCSV()">📥 Export CSV</button>
         <button class="btn-ghost">⚙️ Scoring Rules</button>
-        <button class="btn-primary">+ Add Person</button>
+        <button class="btn-primary" onclick="openModal()">+ Add Person</button>
       </div>
     </div>
 
@@ -296,366 +316,87 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:14
       <div class="ov-stat">
         <div style="display:flex;justify-content:space-between;align-items:flex-start">
           <div>
-            <div class="ov-stat-val">12</div>
+            <div class="ov-stat-val" id="stat-callers">0</div>
             <div class="ov-stat-lbl">Cold Callers</div>
-            <div class="ov-stat-sub">Avg 38 calls/day · 2.4% close rate</div>
+            <div class="ov-stat-sub" id="stat-callers-sub">No callers added yet</div>
           </div>
-          <div style="width:36px;height:36px;border-radius:10px;background:rgba(59,126,248,.14);display:flex;align-items:center;justify-content:center;font-size:18px">📞</div>
+          <div class="ov-stat-icon" style="background:rgba(59,126,248,.14)">📞</div>
         </div>
       </div>
       <div class="ov-stat">
         <div style="display:flex;justify-content:space-between;align-items:flex-start">
           <div>
-            <div class="ov-stat-val">8</div>
+            <div class="ov-stat-val" id="stat-outreachers">0</div>
             <div class="ov-stat-lbl">Outreachers</div>
-            <div class="ov-stat-sub">Avg 9.4% reply rate · 180 msgs/day</div>
+            <div class="ov-stat-sub" id="stat-outreachers-sub">No outreachers added yet</div>
           </div>
-          <div style="width:36px;height:36px;border-radius:10px;background:rgba(34,211,184,.12);display:flex;align-items:center;justify-content:center;font-size:18px">📧</div>
+          <div class="ov-stat-icon" style="background:rgba(34,211,184,.12)">📧</div>
         </div>
       </div>
       <div class="ov-stat">
         <div style="display:flex;justify-content:space-between;align-items:flex-start">
           <div>
-            <div class="ov-stat-val">14</div>
+            <div class="ov-stat-val" id="stat-freelancers">0</div>
             <div class="ov-stat-lbl">Freelancers</div>
-            <div class="ov-stat-sub">8 active · 4.7★ avg rating</div>
+            <div class="ov-stat-sub" id="stat-freelancers-sub">No freelancers added yet</div>
           </div>
-          <div style="width:36px;height:36px;border-radius:10px;background:rgba(139,92,246,.12);display:flex;align-items:center;justify-content:center;font-size:18px">🎨</div>
+          <div class="ov-stat-icon" style="background:rgba(139,92,246,.12)">🎨</div>
         </div>
       </div>
       <div class="ov-stat">
         <div style="display:flex;justify-content:space-between;align-items:flex-start">
           <div>
-            <div class="ov-stat-val">$18,400</div>
+            <div class="ov-stat-val" id="stat-cost">$0</div>
             <div class="ov-stat-lbl">Team Cost / Month</div>
-            <div class="ov-stat-sub">Callers $6,200 · FL $8,400 · OR $3,800</div>
+            <div class="ov-stat-sub" id="stat-cost-sub">Add team members to calculate</div>
           </div>
-          <div style="width:36px;height:36px;border-radius:10px;background:rgba(245,158,11,.12);display:flex;align-items:center;justify-content:center;font-size:18px">💰</div>
+          <div class="ov-stat-icon" style="background:rgba(245,158,11,.12)">💰</div>
         </div>
       </div>
     </div>
 
     <!-- TABS -->
     <div class="tabs">
-      <div class="tab active" onclick="switchTab('callers',this)">📞 Cold Callers <span class="tab-count">12</span></div>
-      <div class="tab" onclick="switchTab('outreachers',this)">📧 Outreachers <span class="tab-count">8</span></div>
-      <div class="tab" onclick="switchTab('freelancers',this)">🎨 Freelancers <span class="tab-count">14</span></div>
+      <div class="tab active" onclick="switchTab('callers',this)">📞 Cold Callers <span class="tab-count" id="tab-count-callers">0</span></div>
+      <div class="tab" onclick="switchTab('outreachers',this)">📧 Outreachers <span class="tab-count" id="tab-count-outreachers">0</span></div>
+      <div class="tab" onclick="switchTab('freelancers',this)">🎨 Freelancers <span class="tab-count" id="tab-count-freelancers">0</span></div>
     </div>
 
-    <!-- ══════════════════════════════════════════ -->
-    <!-- TAB 1: COLD CALLERS                        -->
-    <!-- ══════════════════════════════════════════ -->
+    <!-- ══════════════════ TAB 1: COLD CALLERS ══════════════════ -->
     <div class="tab-panel active" id="panel-callers">
-
       <div class="sec-header">
         <div class="sec-title"><span style="color:var(--accent)">●</span> Cold Callers Team</div>
         <div class="sec-actions">
-          <button class="btn-ghost">🔽 Filter by Grade</button>
-          <button class="btn-ghost">📊 Niche</button>
+          <button class="btn-ghost" onclick="filterByGrade('callers')">🔽 Filter by Grade</button>
+          <button class="btn-ghost" onclick="filterByNiche('callers')">📊 Niche</button>
         </div>
       </div>
 
-      <div class="person-grid">
+      <div class="person-grid" id="grid-callers">
+        <!-- Populated by JS -->
+      </div>
 
-        <!-- Caller 1 -->
-        <div class="person-card" style="--card-accent:var(--green)">
-          <div class="pc-top">
-            <div style="display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0">
-              <div class="pc-av" style="background:linear-gradient(135deg,#f59e0b,#f97316)">KM</div>
-              <div class="pc-meta">
-                <div class="pc-name">Karim Moussaoui</div>
-                <div class="pc-role">📞 Cold Caller · E-commerce</div>
-                <div class="pc-tags">
-                  <div class="avail"><span class="avail-dot" style="background:var(--green)"></span><span style="color:var(--green)">Active</span></div>
-                  <span style="color:var(--text3)">·</span>
-                  <span style="font-size:11px;color:var(--text3)">Since Jan 2026</span>
-                </div>
-              </div>
-            </div>
-            <div class="grade A">A+</div>
-          </div>
-
-          <div class="pc-kpis">
-            <div class="kpi-box">
-              <div class="kpi-val" style="color:var(--accent)">52</div>
-              <div class="kpi-lbl">Calls<br/>today</div>
-            </div>
-            <div class="kpi-box">
-              <div class="kpi-val" style="color:var(--teal)">4</div>
-              <div class="kpi-lbl">Meetings<br/>booked</div>
-            </div>
-            <div class="kpi-box">
-              <div class="kpi-val" style="color:var(--green)">2</div>
-              <div class="kpi-lbl">Closes<br/>this week</div>
-            </div>
-          </div>
-
-          <div class="pc-bar-row">
-            <div class="pc-bar-label">Call rate</div>
-            <div class="pc-bar-track"><div class="pc-bar-fill" style="width:92%;background:var(--accent)"></div></div>
-            <div class="pc-bar-val" style="color:var(--accent)">92%</div>
-          </div>
-          <div class="pc-bar-row">
-            <div class="pc-bar-label">Pickup rate</div>
-            <div class="pc-bar-track"><div class="pc-bar-fill" style="width:34%;background:var(--teal)"></div></div>
-            <div class="pc-bar-val" style="color:var(--teal)">34%</div>
-          </div>
-          <div class="pc-bar-row">
-            <div class="pc-bar-label">Meeting rate</div>
-            <div class="pc-bar-track"><div class="pc-bar-fill" style="width:78%;background:var(--green)"></div></div>
-            <div class="pc-bar-val" style="color:var(--green)">3.1%</div>
-          </div>
-
-          <div class="pc-footer">
-            <div class="pc-salary">Base <strong>$800</strong> + <strong>$50</strong>/meet + <strong>$200</strong>/close</div>
-            <div style="display:flex;align-items:center;gap:5px">
-              <div class="pc-status-dot" style="background:var(--green)"></div>
-              <span style="font-size:11px;color:var(--green)">On call now</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Caller 2 -->
-        <div class="person-card" style="--card-accent:var(--accent)">
-          <div class="pc-top">
-            <div style="display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0">
-              <div class="pc-av" style="background:linear-gradient(135deg,#8b5cf6,#3b7ef8)">SB</div>
-              <div class="pc-meta">
-                <div class="pc-name">Salma Bouzidi</div>
-                <div class="pc-role">📞 Cold Caller · SaaS</div>
-                <div class="pc-tags">
-                  <div class="avail"><span class="avail-dot" style="background:var(--green)"></span><span style="color:var(--green)">Active</span></div>
-                  <span style="color:var(--text3)">·</span>
-                  <span style="font-size:11px;color:var(--text3)">Since Feb 2026</span>
-                </div>
-              </div>
-            </div>
-            <div class="grade A">A</div>
-          </div>
-          <div class="pc-kpis">
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--accent)">48</div><div class="kpi-lbl">Calls<br/>today</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--teal)">3</div><div class="kpi-lbl">Meetings<br/>booked</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--green)">1</div><div class="kpi-lbl">Closes<br/>this week</div></div>
-          </div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Call rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:86%;background:var(--accent)"></div></div><div class="pc-bar-val" style="color:var(--accent)">86%</div></div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Pickup rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:31%;background:var(--teal)"></div></div><div class="pc-bar-val" style="color:var(--teal)">31%</div></div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Meeting rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:62%;background:var(--green)"></div></div><div class="pc-bar-val" style="color:var(--green)">2.4%</div></div>
-          <div class="pc-footer">
-            <div class="pc-salary">Base <strong>$750</strong> + <strong>$50</strong>/meet + <strong>$200</strong>/close</div>
-            <div style="display:flex;align-items:center;gap:5px"><div class="pc-status-dot" style="background:var(--green)"></div><span style="font-size:11px;color:var(--green)">Active</span></div>
-          </div>
-        </div>
-
-        <!-- Caller 3 — needs attention -->
-        <div class="person-card" style="--card-accent:var(--amber)">
-          <div class="pc-top">
-            <div style="display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0">
-              <div class="pc-av" style="background:linear-gradient(135deg,#10b981,#22d3b8)">MR</div>
-              <div class="pc-meta">
-                <div class="pc-name">Mehdi Rachidi</div>
-                <div class="pc-role">📞 Cold Caller · Real Estate</div>
-                <div class="pc-tags">
-                  <div class="avail"><span class="avail-dot" style="background:var(--amber)"></span><span style="color:var(--amber)">Warning</span></div>
-                  <span style="color:var(--text3)">·</span>
-                  <span style="font-size:11px;color:var(--text3)">Since Mar 2026</span>
-                </div>
-              </div>
-            </div>
-            <div class="grade C">C</div>
-          </div>
-          <div class="pc-kpis">
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--red)">12</div><div class="kpi-lbl">Calls<br/>today</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--amber)">1</div><div class="kpi-lbl">Meetings<br/>booked</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--text3)">0</div><div class="kpi-lbl">Closes<br/>this week</div></div>
-          </div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Call rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:52%;background:var(--amber)"></div></div><div class="pc-bar-val" style="color:var(--amber)">52%</div></div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Pickup rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:22%;background:var(--amber)"></div></div><div class="pc-bar-val" style="color:var(--amber)">22%</div></div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Meeting rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:18%;background:var(--red)"></div></div><div class="pc-bar-val" style="color:var(--red)">0.8%</div></div>
-          <div class="pc-footer">
-            <div class="pc-salary">Base <strong>$650</strong> + <strong>$50</strong>/meet</div>
-            <div style="display:flex;align-items:center;gap:5px"><span style="font-size:11px;color:var(--amber)">⚠ Low activity</span></div>
-          </div>
-        </div>
-
-        <!-- Caller 4 -->
-        <div class="person-card" style="--card-accent:var(--teal)">
-          <div class="pc-top">
-            <div style="display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0">
-              <div class="pc-av" style="background:linear-gradient(135deg,#3b7ef8,#22d3b8)">YA</div>
-              <div class="pc-meta">
-                <div class="pc-name">Youssef Alaoui</div>
-                <div class="pc-role">📞 Cold Caller · Agencies</div>
-                <div class="pc-tags">
-                  <div class="avail"><span class="avail-dot" style="background:var(--green)"></span><span style="color:var(--green)">Active</span></div>
-                  <span style="color:var(--text3)">· Jan 2026</span>
-                </div>
-              </div>
-            </div>
-            <div class="grade A">A</div>
-          </div>
-          <div class="pc-kpis">
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--accent)">47</div><div class="kpi-lbl">Calls<br/>today</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--teal)">3</div><div class="kpi-lbl">Meetings<br/>booked</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--green)">1</div><div class="kpi-lbl">Closes<br/>this week</div></div>
-          </div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Call rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:80%;background:var(--accent)"></div></div><div class="pc-bar-val" style="color:var(--accent)">80%</div></div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Pickup rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:29%;background:var(--teal)"></div></div><div class="pc-bar-val" style="color:var(--teal)">29%</div></div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Meeting rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:55%;background:var(--green)"></div></div><div class="pc-bar-val" style="color:var(--green)">2.1%</div></div>
-          <div class="pc-footer">
-            <div class="pc-salary">Base <strong>$750</strong> + <strong>$50</strong>/meet + <strong>$200</strong>/close</div>
-            <div style="display:flex;align-items:center;gap:5px"><div class="pc-status-dot" style="background:var(--green)"></div><span style="font-size:11px;color:var(--green)">Active</span></div>
-          </div>
-        </div>
-
-        <!-- Caller 5 — PIP -->
-        <div class="person-card" style="--card-accent:var(--red)">
-          <div class="pc-top">
-            <div style="display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0">
-              <div class="pc-av" style="background:linear-gradient(135deg,#f43f5e,#f59e0b)">OB</div>
-              <div class="pc-meta">
-                <div class="pc-name">Omar Benali</div>
-                <div class="pc-role">📞 Cold Caller · Coaches</div>
-                <div class="pc-tags">
-                  <div class="avail"><span class="avail-dot" style="background:var(--red)"></span><span style="color:var(--red)">PIP</span></div>
-                  <span style="color:var(--text3)">· Apr 2026</span>
-                </div>
-              </div>
-            </div>
-            <div class="grade D">D</div>
-          </div>
-          <div class="pc-kpis">
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--red)">8</div><div class="kpi-lbl">Calls<br/>today</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--text3)">0</div><div class="kpi-lbl">Meetings<br/>booked</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--text3)">0</div><div class="kpi-lbl">Closes<br/>this week</div></div>
-          </div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Call rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:35%;background:var(--red)"></div></div><div class="pc-bar-val" style="color:var(--red)">35%</div></div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Pickup rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:16%;background:var(--red)"></div></div><div class="pc-bar-val" style="color:var(--red)">16%</div></div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Meeting rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:5%;background:var(--red)"></div></div><div class="pc-bar-val" style="color:var(--red)">0.2%</div></div>
-          <div class="pc-footer">
-            <div class="pc-salary">Base <strong>$500</strong> — on probation</div>
-            <div><span style="font-size:11px;color:var(--red);font-weight:600">🚨 PIP Active</span></div>
-          </div>
-        </div>
-
-        <!-- Caller 6 -->
-        <div class="person-card" style="--card-accent:var(--purple)">
-          <div class="pc-top">
-            <div style="display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0">
-              <div class="pc-av" style="background:linear-gradient(135deg,#8b5cf6,#22d3b8)">AK</div>
-              <div class="pc-meta">
-                <div class="pc-name">Aminé Kachour</div>
-                <div class="pc-role">📞 Cold Caller · SaaS</div>
-                <div class="pc-tags">
-                  <div class="avail"><span class="avail-dot" style="background:var(--green)"></span><span style="color:var(--green)">Active</span></div>
-                  <span style="color:var(--text3)">· Feb 2026</span>
-                </div>
-              </div>
-            </div>
-            <div class="grade B">B</div>
-          </div>
-          <div class="pc-kpis">
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--accent)">38</div><div class="kpi-lbl">Calls<br/>today</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--teal)">2</div><div class="kpi-lbl">Meetings<br/>booked</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--green)">1</div><div class="kpi-lbl">Closes<br/>this week</div></div>
-          </div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Call rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:72%;background:var(--accent)"></div></div><div class="pc-bar-val" style="color:var(--accent)">72%</div></div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Pickup rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:27%;background:var(--teal)"></div></div><div class="pc-bar-val" style="color:var(--teal)">27%</div></div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Meeting rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:44%;background:var(--purple)"></div></div><div class="pc-bar-val" style="color:var(--purple)">1.7%</div></div>
-          <div class="pc-footer">
-            <div class="pc-salary">Base <strong>$700</strong> + <strong>$50</strong>/meet + <strong>$200</strong>/close</div>
-            <div style="display:flex;align-items:center;gap:5px"><div class="pc-status-dot" style="background:var(--green)"></div><span style="font-size:11px;color:var(--green)">Active</span></div>
-          </div>
-        </div>
-
-      </div><!-- /person-grid callers -->
-
-      <!-- CALL LOG TABLE -->
+      <!-- Call Log Table -->
       <div class="card" style="margin-top:20px">
         <div class="card-hd">
           <div class="card-title"><span class="card-dot" style="background:var(--accent)"></span>Today's Call Log</div>
           <div style="display:flex;gap:8px;align-items:center">
-            <div class="chip blue">342 calls</div>
-            <div style="font-size:12px;color:var(--accent);cursor:pointer;font-weight:500">Export →</div>
+            <div class="chip blue" id="call-log-count">0 calls</div>
+            <div style="font-size:12px;color:var(--accent);cursor:pointer;font-weight:500" onclick="exportCallLog()">Export →</div>
           </div>
         </div>
-        <table class="tbl">
-          <thead>
-            <tr>
-              <th>Caller</th>
-              <th>Company Called</th>
-              <th>Time</th>
-              <th>Duration</th>
-              <th>Outcome</th>
-              <th>Pain Noted</th>
-              <th>Next Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="font-weight:600">Karim M.</td>
-              <td>NexFlow Inc.</td>
-              <td style="color:var(--text3);font-size:12px">09:14</td>
-              <td><div class="chip green">4:32</div></td>
-              <td><div class="chip green">✅ Meeting booked</div></td>
-              <td style="color:var(--text2);font-size:12px">No visibility on ROI</td>
-              <td style="color:var(--teal);font-size:12px">Zoom — May 22</td>
-            </tr>
-            <tr>
-              <td style="font-weight:600">Salma B.</td>
-              <td>BlueSoft Ltd.</td>
-              <td style="color:var(--text3);font-size:12px">09:38</td>
-              <td><div class="chip yellow">2:10</div></td>
-              <td><div class="chip yellow">🔄 Call back</div></td>
-              <td style="color:var(--text2);font-size:12px">Lead gen costs too high</td>
-              <td style="color:var(--accent);font-size:12px">Follow-up tomorrow</td>
-            </tr>
-            <tr>
-              <td style="font-weight:600">Karim M.</td>
-              <td>DataNova AG</td>
-              <td style="color:var(--text3);font-size:12px">10:02</td>
-              <td><div class="chip blue">6:48</div></td>
-              <td><div class="chip green">✅ Meeting booked</div></td>
-              <td style="color:var(--text2);font-size:12px">Inconsistent pipeline</td>
-              <td style="color:var(--teal);font-size:12px">Zoom — May 23</td>
-            </tr>
-            <tr>
-              <td style="font-weight:600">Youssef A.</td>
-              <td>PropVision</td>
-              <td style="color:var(--text3);font-size:12px">10:22</td>
-              <td><div class="chip gray">0:45</div></td>
-              <td><div class="chip gray">❌ No pickup</div></td>
-              <td style="color:var(--text3);font-size:12px">—</td>
-              <td style="color:var(--text3);font-size:12px">Retry tomorrow AM</td>
-            </tr>
-            <tr>
-              <td style="font-weight:600">Salma B.</td>
-              <td>CloudGo SaaS</td>
-              <td style="color:var(--text3);font-size:12px">10:55</td>
-              <td><div class="chip blue">5:20</div></td>
-              <td><div class="chip blue">📄 Proposal requested</div></td>
-              <td style="color:var(--text2);font-size:12px">Budget pressure, need ROI proof</td>
-              <td style="color:var(--accent);font-size:12px">Send deck by EOD</td>
-            </tr>
-            <tr>
-              <td style="font-weight:600">Mehdi R.</td>
-              <td>BuildCo Real Est.</td>
-              <td style="color:var(--text3);font-size:12px">11:10</td>
-              <td><div class="chip red">1:02</div></td>
-              <td><div class="chip red">❌ Not interested</div></td>
-              <td style="color:var(--text2);font-size:12px">Happy with current agency</td>
-              <td style="color:var(--text3);font-size:12px">Archive — 3 month FU</td>
-            </tr>
-          </tbody>
-        </table>
+        <div id="call-log-body">
+          <div class="empty-state">
+            <div class="empty-icon">📋</div>
+            <div class="empty-title">No calls logged today</div>
+            <div class="empty-sub">Call activity will appear here once callers start making calls. Connect your call tracking tool to auto-log calls.</div>
+          </div>
+        </div>
       </div>
-    </div><!-- /panel-callers -->
+    </div>
 
-
-    <!-- ══════════════════════════════════════════ -->
-    <!-- TAB 2: COLD OUTREACHERS                    -->
-    <!-- ══════════════════════════════════════════ -->
+    <!-- ══════════════════ TAB 2: OUTREACHERS ══════════════════ -->
     <div class="tab-panel" id="panel-outreachers">
-
       <div class="sec-header">
         <div class="sec-title"><span style="color:var(--teal)">●</span> Cold Outreach Team</div>
         <div class="sec-actions">
@@ -664,535 +405,735 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:14
         </div>
       </div>
 
-      <div class="person-grid">
-
-        <!-- Outreacher 1 -->
-        <div class="person-card" style="--card-accent:var(--teal)">
-          <div class="pc-top">
-            <div style="display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0">
-              <div class="pc-av" style="background:linear-gradient(135deg,#22d3b8,#3b7ef8)">LM</div>
-              <div class="pc-meta">
-                <div class="pc-name">Leila Mansouri</div>
-                <div class="pc-role">📧 Cold Outreach · Email + LinkedIn</div>
-                <div class="pc-tags">
-                  <div class="avail"><span class="avail-dot" style="background:var(--green)"></span><span style="color:var(--green)">Active</span></div>
-                  <span style="color:var(--text3)">· Jan 2026</span>
-                </div>
-              </div>
-            </div>
-            <div class="grade A">A+</div>
-          </div>
-          <div class="pc-kpis">
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--teal)">214</div><div class="kpi-lbl">Emails<br/>sent</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--accent)">82</div><div class="kpi-lbl">LinkedIn<br/>msgs</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--green)">11.4%</div><div class="kpi-lbl">Reply<br/>rate</div></div>
-          </div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Email sent</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:107%;background:var(--teal)"></div></div><div class="pc-bar-val" style="color:var(--teal)">107%</div></div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Reply rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:95%;background:var(--green)"></div></div><div class="pc-bar-val" style="color:var(--green)">11.4%</div></div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Meetings</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:80%;background:var(--accent)"></div></div><div class="pc-bar-val" style="color:var(--accent)">5/mo</div></div>
-          <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
-            <div style="font-size:10px;color:var(--text3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.8px">Tools</div>
-            <div style="display:flex;gap:5px;flex-wrap:wrap">
-              <div class="chip teal">Instantly</div>
-              <div class="chip blue">Apollo</div>
-              <div class="chip purple">Expandi</div>
-            </div>
-          </div>
-          <div class="pc-footer">
-            <div class="pc-salary">Base <strong>$700</strong> + <strong>$60</strong>/meet</div>
-            <div style="display:flex;align-items:center;gap:5px"><div class="pc-status-dot" style="background:var(--green)"></div><span style="font-size:11px;color:var(--green)">Sending now</span></div>
-          </div>
-        </div>
-
-        <!-- Outreacher 2 -->
-        <div class="person-card" style="--card-accent:var(--accent)">
-          <div class="pc-top">
-            <div style="display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0">
-              <div class="pc-av" style="background:linear-gradient(135deg,#f59e0b,#8b5cf6)">RT</div>
-              <div class="pc-meta">
-                <div class="pc-name">Rania Tahiri</div>
-                <div class="pc-role">📱 Cold Outreach · Instagram + Email</div>
-                <div class="pc-tags">
-                  <div class="avail"><span class="avail-dot" style="background:var(--green)"></span><span style="color:var(--green)">Active</span></div>
-                  <span style="color:var(--text3)">· Feb 2026</span>
-                </div>
-              </div>
-            </div>
-            <div class="grade A">A</div>
-          </div>
-          <div class="pc-kpis">
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--accent)">190</div><div class="kpi-lbl">Emails<br/>sent</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--purple)">95</div><div class="kpi-lbl">Instagram<br/>DMs</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--green)">9.8%</div><div class="kpi-lbl">Reply<br/>rate</div></div>
-          </div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Email sent</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:95%;background:var(--accent)"></div></div><div class="pc-bar-val" style="color:var(--accent)">95%</div></div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Reply rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:81%;background:var(--green)"></div></div><div class="pc-bar-val" style="color:var(--green)">9.8%</div></div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Meetings</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:60%;background:var(--teal)"></div></div><div class="pc-bar-val" style="color:var(--teal)">4/mo</div></div>
-          <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
-            <div style="font-size:10px;color:var(--text3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.8px">Tools</div>
-            <div style="display:flex;gap:5px;flex-wrap:wrap">
-              <div class="chip teal">Instantly</div>
-              <div class="chip blue">Apollo</div>
-            </div>
-          </div>
-          <div class="pc-footer">
-            <div class="pc-salary">Base <strong>$680</strong> + <strong>$60</strong>/meet</div>
-            <div style="display:flex;align-items:center;gap:5px"><div class="pc-status-dot" style="background:var(--green)"></div><span style="font-size:11px;color:var(--green)">Active</span></div>
-          </div>
-        </div>
-
-        <!-- Outreacher 3 — needs improvement -->
-        <div class="person-card" style="--card-accent:var(--amber)">
-          <div class="pc-top">
-            <div style="display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0">
-              <div class="pc-av" style="background:linear-gradient(135deg,#f43f5e,#f59e0b)">HB</div>
-              <div class="pc-meta">
-                <div class="pc-name">Hicham Berrada</div>
-                <div class="pc-role">📧 Cold Outreach · Email + LinkedIn</div>
-                <div class="pc-tags">
-                  <div class="avail"><span class="avail-dot" style="background:var(--amber)"></span><span style="color:var(--amber)">Warning</span></div>
-                  <span style="color:var(--text3)">· Mar 2026</span>
-                </div>
-              </div>
-            </div>
-            <div class="grade C">C</div>
-          </div>
-          <div class="pc-kpis">
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--amber)">128</div><div class="kpi-lbl">Emails<br/>sent</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--accent)">44</div><div class="kpi-lbl">LinkedIn<br/>msgs</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--red)">4.2%</div><div class="kpi-lbl">Reply<br/>rate</div></div>
-          </div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Email sent</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:64%;background:var(--amber)"></div></div><div class="pc-bar-val" style="color:var(--amber)">64%</div></div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Reply rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:35%;background:var(--red)"></div></div><div class="pc-bar-val" style="color:var(--red)">4.2%</div></div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Meetings</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:20%;background:var(--amber)"></div></div><div class="pc-bar-val" style="color:var(--amber)">1/mo</div></div>
-          <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
-            <div style="font-size:10px;color:var(--text3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.8px">Tools</div>
-            <div style="display:flex;gap:5px"><div class="chip teal">Instantly</div><div class="chip blue">Apollo</div></div>
-          </div>
-          <div class="pc-footer">
-            <div class="pc-salary">Base <strong>$600</strong> + <strong>$60</strong>/meet</div>
-            <div><span style="font-size:11px;color:var(--amber)">⚠ Low reply rate</span></div>
-          </div>
-        </div>
+      <div class="person-grid" id="grid-outreachers">
+        <!-- Populated by JS -->
       </div>
 
-      <!-- MESSAGE LOG -->
+      <!-- Message Log Table -->
       <div class="card" style="margin-top:20px">
         <div class="card-hd">
           <div class="card-title"><span class="card-dot" style="background:var(--teal)"></span>Message Log — Today</div>
           <div style="display:flex;gap:8px;align-items:center">
-            <div class="chip teal">428 messages</div>
+            <div class="chip teal" id="msg-log-count">0 messages</div>
             <div style="font-size:12px;color:var(--accent);cursor:pointer;font-weight:500">Export →</div>
           </div>
         </div>
-        <table class="tbl">
-          <thead>
-            <tr>
-              <th>Sender</th>
-              <th>Company</th>
-              <th>Channel</th>
-              <th>Message Preview</th>
-              <th>Sent</th>
-              <th>Reply</th>
-              <th>Next Step</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="font-weight:600">Leila M.</td>
-              <td>TechNova SaaS</td>
-              <td><div class="chip teal">Email</div></td>
-              <td style="color:var(--text2);font-size:12px;max-width:200px">"Hi John, I noticed your team is scaling fast…"</td>
-              <td style="color:var(--text3);font-size:12px">08:42</td>
-              <td><div class="chip green">✅ Yes</div></td>
-              <td style="color:var(--teal);font-size:12px">Book meeting</td>
-            </tr>
-            <tr>
-              <td style="font-weight:600">Rania T.</td>
-              <td>FitCoach Pro</td>
-              <td><div class="chip purple">Instagram</div></td>
-              <td style="color:var(--text2);font-size:12px;max-width:200px">"Love what you're building — we help coaches like you get more clients…"</td>
-              <td style="color:var(--text3);font-size:12px">09:15</td>
-              <td><div class="chip green">✅ Yes</div></td>
-              <td style="color:var(--teal);font-size:12px">Send case study</td>
-            </tr>
-            <tr>
-              <td style="font-weight:600">Leila M.</td>
-              <td>CloudGo B2B</td>
-              <td><div class="chip blue">LinkedIn</div></td>
-              <td style="color:var(--text2);font-size:12px;max-width:200px">"Hi Sarah — saw your post about outbound struggles…"</td>
-              <td style="color:var(--text3);font-size:12px">10:30</td>
-              <td><div class="chip gray">❌ No</div></td>
-              <td style="color:var(--text3);font-size:12px">Follow-up D+2</td>
-            </tr>
-            <tr>
-              <td style="font-weight:600">Hicham B.</td>
-              <td>AgencyX</td>
-              <td><div class="chip teal">Email</div></td>
-              <td style="color:var(--text2);font-size:12px;max-width:200px">"Hey Alex, quick question about your current lead gen…"</td>
-              <td style="color:var(--text3);font-size:12px">11:04</td>
-              <td><div class="chip gray">❌ No</div></td>
-              <td style="color:var(--text3);font-size:12px">Retry new angle</td>
-            </tr>
-            <tr>
-              <td style="font-weight:600">Rania T.</td>
-              <td>GrowthHive</td>
-              <td><div class="chip blue">LinkedIn</div></td>
-              <td style="color:var(--text2);font-size:12px;max-width:200px">"Mark, your company is doing great — we've helped 3 similar…"</td>
-              <td style="color:var(--text3);font-size:12px">12:20</td>
-              <td><div class="chip blue">🔄 Interested</div></td>
-              <td style="color:var(--accent);font-size:12px">Send proposal</td>
-            </tr>
-          </tbody>
-        </table>
+        <div id="msg-log-body">
+          <div class="empty-state">
+            <div class="empty-icon">💬</div>
+            <div class="empty-title">No messages logged today</div>
+            <div class="empty-sub">Outreach activity will appear here once your team starts sending. Connect Instantly, Apollo, or Expandi to auto-import logs.</div>
+          </div>
+        </div>
       </div>
-    </div><!-- /panel-outreachers -->
+    </div>
 
-
-    <!-- ══════════════════════════════════════════ -->
-    <!-- TAB 3: FREELANCERS                         -->
-    <!-- ══════════════════════════════════════════ -->
+    <!-- ══════════════════ TAB 3: FREELANCERS ══════════════════ -->
     <div class="tab-panel" id="panel-freelancers">
-
       <div class="sec-header">
         <div class="sec-title"><span style="color:var(--purple)">●</span> Freelancer Talent Pool</div>
         <div class="sec-actions">
           <button class="btn-ghost">🔽 Filter by Skill</button>
           <button class="btn-ghost">📊 Availability</button>
-          <button class="btn-primary">+ Add Freelancer</button>
+          <button class="btn-primary" onclick="openModalType('freelancer')">+ Add Freelancer</button>
         </div>
       </div>
 
       <!-- Matching Filter Bar -->
-      <div style="background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius);padding:14px 18px;margin-bottom:18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <div class="filter-bar">
         <div style="font-size:12px;font-weight:700;color:var(--text2)">🔍 Find Talent:</div>
-        <select style="background:var(--surface3);border:1px solid var(--border);color:var(--text2);padding:7px 12px;border-radius:var(--radius-sm);font-family:var(--body);font-size:12px;cursor:pointer">
-          <option>All Skills</option>
+        <select class="form-select-sm" id="fl-filter-skill" onchange="applyFLFilter()">
+          <option value="">All Skills</option>
           <option>Design</option>
           <option>Development</option>
           <option>SEO</option>
           <option>Paid Ads</option>
           <option>Video</option>
+          <option>Copywriting</option>
+          <option>Automation</option>
         </select>
-        <select style="background:var(--surface3);border:1px solid var(--border);color:var(--text2);padding:7px 12px;border-radius:var(--radius-sm);font-family:var(--body);font-size:12px;cursor:pointer">
-          <option>Any Budget</option>
+        <select class="form-select-sm" id="fl-filter-budget" onchange="applyFLFilter()">
+          <option value="">Any Budget</option>
           <option>Under $500</option>
           <option>$500–$1000</option>
           <option>$1000–$2000</option>
           <option>$2000+</option>
         </select>
-        <select style="background:var(--surface3);border:1px solid var(--border);color:var(--text2);padding:7px 12px;border-radius:var(--radius-sm);font-family:var(--body);font-size:12px;cursor:pointer">
-          <option>Any Timezone</option>
+        <select class="form-select-sm" id="fl-filter-tz" onchange="applyFLFilter()">
+          <option value="">Any Timezone</option>
           <option>GMT+0 (UK)</option>
           <option>GMT+1 (Morocco)</option>
           <option>GMT+2 (Egypt)</option>
           <option>EST (US)</option>
         </select>
-        <div class="chip green" style="margin-left:auto">● 8 available now</div>
+        <div class="chip green" id="fl-avail-count" style="margin-left:auto">● 0 available now</div>
       </div>
 
-      <div class="person-grid">
+      <div class="person-grid" id="grid-freelancers">
+        <!-- Populated by JS -->
+      </div>
 
-        <!-- FL 1: Designer -->
-        <div class="person-card" style="--card-accent:var(--purple)">
-          <div class="pc-top">
-            <div style="display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0">
-              <div class="pc-av" style="background:linear-gradient(135deg,#8b5cf6,#f59e0b)">NK</div>
-              <div class="pc-meta">
-                <div class="pc-name">Nour Khaldi</div>
-                <div class="pc-role">🎨 Designer · Brand + UI/UX</div>
-                <div class="pc-tags">
-                  <div class="avail"><span class="avail-dot" style="background:var(--green)"></span><span style="color:var(--green)">Available</span></div>
-                  <span style="color:var(--text3)">· GMT+1</span>
-                </div>
-              </div>
-            </div>
-            <div style="text-align:right">
-              <div style="font-family:var(--head);font-size:15px;font-weight:700;color:var(--teal)">$35/h</div>
-              <div style="font-size:10px;color:var(--text3)">or $800/proj</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px">
-            <span class="skill-tag">Figma</span><span class="skill-tag">Brand</span><span class="skill-tag">UI/UX</span><span class="skill-tag">Motion</span><span class="skill-tag">Webflow</span>
-          </div>
-          <div class="pc-kpis">
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--purple)">12</div><div class="kpi-lbl">Projects<br/>done</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--amber)">4.9★</div><div class="kpi-lbl">Client<br/>rating</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--green)">96%</div><div class="kpi-lbl">On-time<br/>delivery</div></div>
-          </div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Quality score</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:96%;background:var(--purple)"></div></div><div class="pc-bar-val" style="color:var(--purple)">96%</div></div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Revisions</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:8%;background:var(--green)"></div></div><div class="pc-bar-val" style="color:var(--green)">Low</div></div>
-          <div class="pc-footer">
-            <a href="#" style="color:var(--accent);font-size:12px;text-decoration:none">📎 Portfolio →</a>
-            <div style="display:flex;align-items:center;gap:5px"><div class="pc-status-dot" style="background:var(--green)"></div><span style="font-size:11px;color:var(--green)">Available now</span></div>
-          </div>
-        </div>
-
-        <!-- FL 2: Developer -->
-        <div class="person-card" style="--card-accent:var(--accent)">
-          <div class="pc-top">
-            <div style="display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0">
-              <div class="pc-av" style="background:linear-gradient(135deg,#3b7ef8,#10b981)">AS</div>
-              <div class="pc-meta">
-                <div class="pc-name">Adam Samir</div>
-                <div class="pc-role">💻 Developer · Full Stack</div>
-                <div class="pc-tags">
-                  <div class="avail"><span class="avail-dot" style="background:var(--amber)"></span><span style="color:var(--amber)">1 slot left</span></div>
-                  <span style="color:var(--text3)">· GMT+1</span>
-                </div>
-              </div>
-            </div>
-            <div style="text-align:right">
-              <div style="font-family:var(--head);font-size:15px;font-weight:700;color:var(--teal)">$50/h</div>
-              <div style="font-size:10px;color:var(--text3)">or $2,000/proj</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px">
-            <span class="skill-tag">React</span><span class="skill-tag">Node.js</span><span class="skill-tag">Python</span><span class="skill-tag">PostgreSQL</span><span class="skill-tag">AWS</span>
-          </div>
-          <div class="pc-kpis">
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--accent)">8</div><div class="kpi-lbl">Projects<br/>done</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--amber)">4.8★</div><div class="kpi-lbl">Client<br/>rating</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--green)">91%</div><div class="kpi-lbl">On-time<br/>delivery</div></div>
-          </div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Quality score</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:91%;background:var(--accent)"></div></div><div class="pc-bar-val" style="color:var(--accent)">91%</div></div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Revisions</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:15%;background:var(--teal)"></div></div><div class="pc-bar-val" style="color:var(--teal)">Low</div></div>
-          <div class="pc-footer">
-            <a href="#" style="color:var(--accent);font-size:12px;text-decoration:none">📎 Portfolio →</a>
-            <div><span style="font-size:11px;color:var(--amber)">⚡ 2 active projects</span></div>
-          </div>
-        </div>
-
-        <!-- FL 3: SEO/Ads -->
-        <div class="person-card" style="--card-accent:var(--teal)">
-          <div class="pc-top">
-            <div style="display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0">
-              <div class="pc-av" style="background:linear-gradient(135deg,#22d3b8,#8b5cf6)">IB</div>
-              <div class="pc-meta">
-                <div class="pc-name">Imad Benjelloun</div>
-                <div class="pc-role">📈 SEO + Paid Ads</div>
-                <div class="pc-tags">
-                  <div class="avail"><span class="avail-dot" style="background:var(--green)"></span><span style="color:var(--green)">Available</span></div>
-                  <span style="color:var(--text3)">· GMT+1</span>
-                </div>
-              </div>
-            </div>
-            <div style="text-align:right">
-              <div style="font-family:var(--head);font-size:15px;font-weight:700;color:var(--teal)">$40/h</div>
-              <div style="font-size:10px;color:var(--text3)">or $1,200/mo</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px">
-            <span class="skill-tag">Google Ads</span><span class="skill-tag">Meta Ads</span><span class="skill-tag">SEO</span><span class="skill-tag">Analytics</span>
-          </div>
-          <div class="pc-kpis">
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--teal)">15</div><div class="kpi-lbl">Projects<br/>done</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--amber)">4.7★</div><div class="kpi-lbl">Client<br/>rating</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--green)">89%</div><div class="kpi-lbl">On-time<br/>delivery</div></div>
-          </div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Quality score</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:89%;background:var(--teal)"></div></div><div class="pc-bar-val" style="color:var(--teal)">89%</div></div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Revisions</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:12%;background:var(--green)"></div></div><div class="pc-bar-val" style="color:var(--green)">Low</div></div>
-          <div class="pc-footer">
-            <a href="#" style="color:var(--accent);font-size:12px;text-decoration:none">📎 Portfolio →</a>
-            <div style="display:flex;align-items:center;gap:5px"><div class="pc-status-dot" style="background:var(--green)"></div><span style="font-size:11px;color:var(--green)">Available now</span></div>
-          </div>
-        </div>
-
-        <!-- FL 4: Video -->
-        <div class="person-card" style="--card-accent:var(--red)">
-          <div class="pc-top">
-            <div style="display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0">
-              <div class="pc-av" style="background:linear-gradient(135deg,#f43f5e,#f59e0b)">ZA</div>
-              <div class="pc-meta">
-                <div class="pc-name">Zineb Amrani</div>
-                <div class="pc-role">🎬 Video Editor + Motion</div>
-                <div class="pc-tags">
-                  <div class="avail"><span class="avail-dot" style="background:var(--red)"></span><span style="color:var(--red)">Unavailable</span></div>
-                  <span style="color:var(--text3)">· GMT+1</span>
-                </div>
-              </div>
-            </div>
-            <div style="text-align:right">
-              <div style="font-family:var(--head);font-size:15px;font-weight:700;color:var(--teal)">$30/h</div>
-              <div style="font-size:10px;color:var(--text3)">or $600/video</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px">
-            <span class="skill-tag">Premiere</span><span class="skill-tag">After Effects</span><span class="skill-tag">CapCut</span><span class="skill-tag">Shorts</span>
-          </div>
-          <div class="pc-kpis">
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--red)">9</div><div class="kpi-lbl">Projects<br/>done</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--amber)">4.6★</div><div class="kpi-lbl">Client<br/>rating</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--amber)">84%</div><div class="kpi-lbl">On-time<br/>delivery</div></div>
-          </div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Quality score</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:84%;background:var(--purple)"></div></div><div class="pc-bar-val" style="color:var(--purple)">84%</div></div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Revisions</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:25%;background:var(--amber)"></div></div><div class="pc-bar-val" style="color:var(--amber)">Med</div></div>
-          <div class="pc-footer">
-            <a href="#" style="color:var(--accent);font-size:12px;text-decoration:none">📎 Portfolio →</a>
-            <div><span style="font-size:11px;color:var(--red)">🔴 3 active projects</span></div>
-          </div>
-        </div>
-
-        <!-- FL 5: Copywriter -->
-        <div class="person-card" style="--card-accent:var(--amber)">
-          <div class="pc-top">
-            <div style="display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0">
-              <div class="pc-av" style="background:linear-gradient(135deg,#f59e0b,#10b981)">HM</div>
-              <div class="pc-meta">
-                <div class="pc-name">Hamza Mrabti</div>
-                <div class="pc-role">✍️ Copywriter + Email sequences</div>
-                <div class="pc-tags">
-                  <div class="avail"><span class="avail-dot" style="background:var(--green)"></span><span style="color:var(--green)">Available</span></div>
-                  <span style="color:var(--text3)">· GMT+1</span>
-                </div>
-              </div>
-            </div>
-            <div style="text-align:right">
-              <div style="font-family:var(--head);font-size:15px;font-weight:700;color:var(--teal)">$25/h</div>
-              <div style="font-size:10px;color:var(--text3)">or $400/seq</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px">
-            <span class="skill-tag">VSL</span><span class="skill-tag">Email Copy</span><span class="skill-tag">Landing Page</span><span class="skill-tag">Ad Copy</span>
-          </div>
-          <div class="pc-kpis">
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--amber)">18</div><div class="kpi-lbl">Projects<br/>done</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--amber)">4.8★</div><div class="kpi-lbl">Client<br/>rating</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--green)">94%</div><div class="kpi-lbl">On-time<br/>delivery</div></div>
-          </div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Quality score</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:94%;background:var(--amber)"></div></div><div class="pc-bar-val" style="color:var(--amber)">94%</div></div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Revisions</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:10%;background:var(--green)"></div></div><div class="pc-bar-val" style="color:var(--green)">Low</div></div>
-          <div class="pc-footer">
-            <a href="#" style="color:var(--accent);font-size:12px;text-decoration:none">📎 Portfolio →</a>
-            <div style="display:flex;align-items:center;gap:5px"><div class="pc-status-dot" style="background:var(--green)"></div><span style="font-size:11px;color:var(--green)">Available now</span></div>
-          </div>
-        </div>
-
-        <!-- FL 6: Automation -->
-        <div class="person-card" style="--card-accent:var(--green)">
-          <div class="pc-top">
-            <div style="display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0">
-              <div class="pc-av" style="background:linear-gradient(135deg,#10b981,#3b7ef8)">KA</div>
-              <div class="pc-meta">
-                <div class="pc-name">Khalid Azzouzi</div>
-                <div class="pc-role">⚡ Automation + CRM Setup</div>
-                <div class="pc-tags">
-                  <div class="avail"><span class="avail-dot" style="background:var(--green)"></span><span style="color:var(--green)">Available</span></div>
-                  <span style="color:var(--text3)">· GMT+1</span>
-                </div>
-              </div>
-            </div>
-            <div style="text-align:right">
-              <div style="font-family:var(--head);font-size:15px;font-weight:700;color:var(--teal)">$45/h</div>
-              <div style="font-size:10px;color:var(--text3)">or $1,500/proj</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px">
-            <span class="skill-tag">Zapier</span><span class="skill-tag">Make</span><span class="skill-tag">GoHighLevel</span><span class="skill-tag">n8n</span>
-          </div>
-          <div class="pc-kpis">
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--green)">6</div><div class="kpi-lbl">Projects<br/>done</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--amber)">5.0★</div><div class="kpi-lbl">Client<br/>rating</div></div>
-            <div class="kpi-box"><div class="kpi-val" style="color:var(--green)">100%</div><div class="kpi-lbl">On-time<br/>delivery</div></div>
-          </div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Quality score</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:100%;background:var(--green)"></div></div><div class="pc-bar-val" style="color:var(--green)">100%</div></div>
-          <div class="pc-bar-row"><div class="pc-bar-label">Revisions</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:5%;background:var(--green)"></div></div><div class="pc-bar-val" style="color:var(--green)">None</div></div>
-          <div class="pc-footer">
-            <a href="#" style="color:var(--accent);font-size:12px;text-decoration:none">📎 Portfolio →</a>
-            <div style="display:flex;align-items:center;gap:5px"><div class="pc-status-dot" style="background:var(--green)"></div><span style="font-size:11px;color:var(--green)">Available now</span></div>
-          </div>
-        </div>
-
-      </div><!-- /person-grid freelancers -->
-
-      <!-- ACTIVE TASK CARDS -->
+      <!-- Active Task Cards -->
       <div class="card" style="margin-top:20px">
         <div class="card-hd">
           <div class="card-title"><span class="card-dot" style="background:var(--purple)"></span>Active Task Cards</div>
           <div style="display:flex;gap:8px;align-items:center">
-            <div class="chip purple">11 active tasks</div>
-            <div style="font-size:12px;color:var(--accent);cursor:pointer;font-weight:500">Projects →</div>
+            <div class="chip purple" id="task-count-chip">0 active tasks</div>
+            <div style="font-size:12px;color:var(--accent);cursor:pointer;font-weight:500" href="projects.html">Projects →</div>
           </div>
         </div>
-        <div class="card-bd">
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
-
-            <div class="task-card">
-              <div class="task-top">
-                <div>
-                  <div class="task-name">Brand Identity Pack</div>
-                  <div class="task-client">Client: BatCo · Assigned: Nour K.</div>
-                </div>
-                <div class="chip red">High</div>
-              </div>
-              <div class="task-status-wrap">
-                <div class="status-opt"><div class="status-circle"></div>To Do</div>
-                <div class="status-opt"><div class="status-circle"></div>In Progress</div>
-                <div class="status-opt sel"><div class="status-circle amber"></div>In Review</div>
-                <div class="status-opt"><div class="status-circle"></div>Done</div>
-              </div>
-              <div class="task-meta">
-                <div class="chip yellow">⏰ Due Jun 12</div>
-                <div class="chip blue" style="font-size:10px">✅ Client visible</div>
-              </div>
-            </div>
-
-            <div class="task-card">
-              <div class="task-top">
-                <div>
-                  <div class="task-name">CRM Backend API</div>
-                  <div class="task-client">Client: NexFlow · Assigned: Adam S.</div>
-                </div>
-                <div class="chip red">High</div>
-              </div>
-              <div class="task-status-wrap">
-                <div class="status-opt"><div class="status-circle"></div>To Do</div>
-                <div class="status-opt sel"><div class="status-circle filled"></div>In Progress</div>
-                <div class="status-opt"><div class="status-circle"></div>In Review</div>
-                <div class="status-opt"><div class="status-circle"></div>Done</div>
-              </div>
-              <div class="task-meta">
-                <div class="chip yellow">⏰ Due Sep 9</div>
-                <div class="chip gray" style="font-size:10px">❌ Internal only</div>
-              </div>
-            </div>
-
-            <div class="task-card">
-              <div class="task-top">
-                <div>
-                  <div class="task-name">Google Ads Campaign</div>
-                  <div class="task-client">Client: GreenOps · Assigned: Imad B.</div>
-                </div>
-                <div class="chip yellow">Medium</div>
-              </div>
-              <div class="task-status-wrap">
-                <div class="status-opt"><div class="status-circle"></div>To Do</div>
-                <div class="status-opt sel"><div class="status-circle filled"></div>In Progress</div>
-                <div class="status-opt"><div class="status-circle"></div>In Review</div>
-                <div class="status-opt"><div class="status-circle"></div>Done</div>
-              </div>
-              <div class="task-meta">
-                <div class="chip red">⏰ Due Jun 1 ⚠</div>
-                <div class="chip blue" style="font-size:10px">✅ Client visible</div>
-              </div>
-            </div>
-
+        <div id="task-cards-body" class="card-bd">
+          <div class="empty-state" style="padding:32px 20px">
+            <div class="empty-icon">📌</div>
+            <div class="empty-title">No active tasks assigned</div>
+            <div class="empty-sub">Task cards will appear here when freelancers are assigned to client projects. Go to Projects to create tasks.</div>
+            <a href="projects.html" class="btn-primary" style="text-decoration:none">Go to Projects →</a>
           </div>
         </div>
       </div>
-
-    </div><!-- /panel-freelancers -->
+    </div>
 
   </main>
-</div><!-- /main -->
+</div>
+
+<!-- ═══ ADD PERSON MODAL ═══ -->
+<div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
+  <div class="modal" style="position:relative">
+    <div class="modal-close" onclick="closeModal()">✕</div>
+    <div class="modal-title">Add New Person</div>
+    <div class="modal-sub">Fill in the details. All fields marked * are required.</div>
+
+    <!-- Type selector -->
+    <div class="type-selector">
+      <div class="type-btn sel" id="type-caller" onclick="selectType('caller')">📞 Cold Caller</div>
+      <div class="type-btn" id="type-outreacher" onclick="selectType('outreacher')">📧 Outreacher</div>
+      <div class="type-btn" id="type-freelancer" onclick="selectType('freelancer')">🎨 Freelancer</div>
+    </div>
+
+    <div class="form-row-2">
+      <div class="form-row" style="margin-bottom:0">
+        <label class="form-label">Full Name *</label>
+        <input class="form-input" id="f-name" type="text" placeholder="e.g. Karim Moussaoui"/>
+      </div>
+      <div class="form-row" style="margin-bottom:0">
+        <label class="form-label">Username</label>
+        <input class="form-input" id="f-username" type="text" placeholder="@username"/>
+      </div>
+    </div>
+
+    <div class="form-row-2" style="margin-top:14px">
+      <div class="form-row" style="margin-bottom:0">
+        <label class="form-label">Phone</label>
+        <input class="form-input" id="f-phone" type="tel" placeholder="+212 6XX XXX XXX"/>
+      </div>
+      <div class="form-row" style="margin-bottom:0">
+        <label class="form-label">Gmail *</label>
+        <input class="form-input" id="f-email" type="email" placeholder="name@gmail.com"/>
+      </div>
+    </div>
+
+    <!-- Caller / Outreacher fields -->
+    <div id="caller-fields">
+      <div class="form-row" style="margin-top:14px">
+        <label class="form-label">Niche (market they call) *</label>
+        <input class="form-input" id="f-niche" type="text" placeholder="e.g. E-commerce, SaaS, Real Estate"/>
+      </div>
+      <div class="form-row-2" style="margin-top:0">
+        <div class="form-row" style="margin-bottom:0">
+          <label class="form-label">Base Salary ($/month)</label>
+          <input class="form-input" id="f-base" type="number" placeholder="e.g. 800"/>
+        </div>
+        <div class="form-row" style="margin-bottom:0">
+          <label class="form-label">Start Date</label>
+          <input class="form-input" id="f-start" type="date"/>
+        </div>
+      </div>
+      <div class="form-row-2" style="margin-top:0">
+        <div class="form-row" style="margin-bottom:0">
+          <label class="form-label">Commission / Meeting ($)</label>
+          <input class="form-input" id="f-comm-meet" type="number" placeholder="e.g. 50"/>
+        </div>
+        <div class="form-row" style="margin-bottom:0">
+          <label class="form-label">Bonus / Close ($)</label>
+          <input class="form-input" id="f-comm-close" type="number" placeholder="e.g. 200"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- Outreacher-specific -->
+    <div id="outreacher-fields" style="display:none">
+      <div class="form-row" style="margin-top:14px">
+        <label class="form-label">Channels Used *</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
+          <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer;color:var(--text2)"><input type="checkbox" id="ch-email" value="Email"/> Email</label>
+          <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer;color:var(--text2)"><input type="checkbox" id="ch-linkedin" value="LinkedIn"/> LinkedIn</label>
+          <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer;color:var(--text2)"><input type="checkbox" id="ch-instagram" value="Instagram"/> Instagram</label>
+          <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer;color:var(--text2)"><input type="checkbox" id="ch-twitter" value="Twitter/X"/> Twitter/X</label>
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div class="form-row" style="margin-bottom:0">
+          <label class="form-label">Base Salary ($/month)</label>
+          <input class="form-input" id="f-or-base" type="number" placeholder="e.g. 700"/>
+        </div>
+        <div class="form-row" style="margin-bottom:0">
+          <label class="form-label">Start Date</label>
+          <input class="form-input" id="f-or-start" type="date"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- Freelancer-specific -->
+    <div id="freelancer-fields" style="display:none">
+      <div class="form-row" style="margin-top:14px">
+        <label class="form-label">Specialization *</label>
+        <select class="form-select form-input" id="f-spec">
+          <option value="">Select specialization…</option>
+          <option>Design (Brand / UI/UX)</option>
+          <option>Development (Full Stack)</option>
+          <option>SEO + Paid Ads</option>
+          <option>Video Editing + Motion</option>
+          <option>Copywriting</option>
+          <option>Automation + CRM Setup</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Skills (comma-separated)</label>
+        <input class="form-input" id="f-skills" type="text" placeholder="e.g. Figma, Webflow, Brand Identity"/>
+      </div>
+      <div class="form-row-2">
+        <div class="form-row" style="margin-bottom:0">
+          <label class="form-label">Rate ($/h)</label>
+          <input class="form-input" id="f-rate-h" type="number" placeholder="e.g. 35"/>
+        </div>
+        <div class="form-row" style="margin-bottom:0">
+          <label class="form-label">Rate ($/project)</label>
+          <input class="form-input" id="f-rate-p" type="number" placeholder="e.g. 800"/>
+        </div>
+      </div>
+      <div class="form-row-2" style="margin-top:0">
+        <div class="form-row" style="margin-bottom:0">
+          <label class="form-label">Timezone</label>
+          <select class="form-select form-input" id="f-tz">
+            <option value="">Select…</option>
+            <option>GMT+0 (UK)</option>
+            <option>GMT+1 (Morocco)</option>
+            <option>GMT+2 (Egypt)</option>
+            <option>EST (US)</option>
+            <option>PST (US West)</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-row" style="margin-bottom:0">
+          <label class="form-label">Portfolio / Resume URL</label>
+          <input class="form-input" id="f-portfolio" type="url" placeholder="https://…"/>
+        </div>
+      </div>
+    </div>
+
+    <div id="form-error" style="display:none;background:rgba(244,63,94,.1);border:1px solid rgba(244,63,94,.25);border-radius:8px;padding:10px 13px;font-size:12px;color:var(--red);margin-top:14px"></div>
+
+    <div class="form-actions">
+      <button class="btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn-primary" onclick="savePerson()">Save Person</button>
+    </div>
+  </div>
+</div>
 
 <script>
+// ─── STATE ───
+let people = JSON.parse(localStorage.getItem('crm_people') || '[]');
+let currentType = 'caller';
+let searchQuery = '';
+
+// ─── INIT ───
+function init() {
+  renderAll();
+}
+
+// ─── RENDER ALL ───
+function renderAll() {
+  const callers = people.filter(p => p.type === 'caller');
+  const outreachers = people.filter(p => p.type === 'outreacher');
+  const freelancers = people.filter(p => p.type === 'freelancer');
+
+  // Update counts
+  document.getElementById('stat-callers').textContent = callers.length;
+  document.getElementById('stat-outreachers').textContent = outreachers.length;
+  document.getElementById('stat-freelancers').textContent = freelancers.length;
+  document.getElementById('tab-count-callers').textContent = callers.length;
+  document.getElementById('tab-count-outreachers').textContent = outreachers.length;
+  document.getElementById('tab-count-freelancers').textContent = freelancers.length;
+  document.getElementById('nav-total').textContent = people.length;
+  document.getElementById('page-sub-count').textContent =
+    `Cold Callers · Cold Outreachers · Freelancers — ${people.length} ${people.length === 1 ? 'person' : 'people'} added`;
+
+  // Stats sub
+  document.getElementById('stat-callers-sub').textContent =
+    callers.length ? `${callers.length} caller${callers.length>1?'s':''} · Activity tracked per session` : 'No callers added yet';
+  document.getElementById('stat-outreachers-sub').textContent =
+    outreachers.length ? `${outreachers.length} outreacher${outreachers.length>1?'s':''} · Reply rate tracked live` : 'No outreachers added yet';
+  document.getElementById('stat-freelancers-sub').textContent =
+    freelancers.length ? `${freelancers.length} freelancer${freelancers.length>1?'s':''} · Talent pool` : 'No freelancers added yet';
+
+  // Team cost
+  const totalCost = people.reduce((sum, p) => {
+    const base = parseInt(p.base) || parseInt(p.rateH) || 0;
+    return sum + base;
+  }, 0);
+  document.getElementById('stat-cost').textContent = totalCost > 0 ? '$' + totalCost.toLocaleString() : '$0';
+  document.getElementById('stat-cost-sub').textContent =
+    totalCost > 0 ? 'Sum of base salaries / month' : 'Add team members to calculate';
+
+  // Freelancer availability
+  const available = freelancers.filter(f => f.availability === 'available' || !f.availability).length;
+  document.getElementById('fl-avail-count').textContent = `● ${available} available now`;
+
+  renderGrid('callers', callers);
+  renderGrid('outreachers', outreachers);
+  renderGrid('freelancers', freelancers);
+}
+
+function renderGrid(type, list) {
+  const grid = document.getElementById('grid-' + type);
+  const q = searchQuery.toLowerCase();
+  const filtered = q ? list.filter(p =>
+    p.name?.toLowerCase().includes(q) ||
+    p.niche?.toLowerCase().includes(q) ||
+    p.spec?.toLowerCase().includes(q) ||
+    p.skills?.toLowerCase().includes(q)
+  ) : list;
+
+  if (!filtered.length) {
+    grid.innerHTML = buildEmptyCard(type, list.length > 0 && q);
+    return;
+  }
+  grid.innerHTML = filtered.map(p => buildPersonCard(p)).join('');
+}
+
+function buildEmptyCard(type, isFiltered) {
+  const icons = {callers:'📞', outreachers:'📧', freelancers:'🎨'};
+  const labels = {callers:'cold caller', outreachers:'outreacher', freelancers:'freelancer'};
+  const icon = icons[type];
+  const label = labels[type];
+  if (isFiltered) {
+    return `<div style="grid-column:1/-1">
+      <div class="empty-state">
+        <div class="empty-icon">🔍</div>
+        <div class="empty-title">No results match your search</div>
+        <div class="empty-sub">Try a different name, niche, or skill.</div>
+      </div></div>`;
+  }
+  return `<div style="grid-column:1/-1">
+    <div class="empty-state">
+      <div class="empty-icon">${icon}</div>
+      <div class="empty-title">No ${label}s added yet</div>
+      <div class="empty-sub">Add your first ${label} to start tracking KPIs, activity, and performance scores.</div>
+      <button class="btn-primary" onclick="openModalType('${type.replace(/s$/,'')}')">+ Add ${label.charAt(0).toUpperCase()+label.slice(1)}</button>
+    </div></div>`;
+}
+
+function buildPersonCard(p) {
+  const initials = p.name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2);
+  const gradients = [
+    'linear-gradient(135deg,#f59e0b,#f97316)',
+    'linear-gradient(135deg,#8b5cf6,#3b7ef8)',
+    'linear-gradient(135deg,#10b981,#22d3b8)',
+    'linear-gradient(135deg,#3b7ef8,#22d3b8)',
+    'linear-gradient(135deg,#f43f5e,#f59e0b)',
+    'linear-gradient(135deg,#8b5cf6,#22d3b8)',
+    'linear-gradient(135deg,#22d3b8,#3b7ef8)',
+    'linear-gradient(135deg,#f59e0b,#8b5cf6)',
+  ];
+  const grad = gradients[p.name.length % gradients.length];
+  const accentColors = {caller:'var(--accent)', outreacher:'var(--teal)', freelancer:'var(--purple)'};
+  const accent = accentColors[p.type] || 'var(--accent)';
+  const startText = p.start ? `Since ${formatDate(p.start)}` : (p.orStart ? `Since ${formatDate(p.orStart)}` : 'No start date');
+
+  if (p.type === 'caller') return buildCallerCard(p, initials, grad, accent, startText);
+  if (p.type === 'outreacher') return buildOutreacherCard(p, initials, grad, accent, startText);
+  if (p.type === 'freelancer') return buildFreelancerCard(p, initials, grad, accent);
+  return '';
+}
+
+function buildCallerCard(p, initials, grad, accent, startText) {
+  const salary = p.base ? `Base <strong>$${p.base}</strong>/mo` : 'Salary not set';
+  const commission = (p.commMeet ? ` + <strong>$${p.commMeet}</strong>/meet` : '') + (p.commClose ? ` + <strong>$${p.commClose}</strong>/close` : '');
+  return `
+  <div class="person-card" style="--card-accent:${accent}" onclick="openPersonDetail('${p.id}')">
+    <div class="pc-top">
+      <div style="display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0">
+        <div class="pc-av" style="background:${grad}">${initials}</div>
+        <div class="pc-meta">
+          <div class="pc-name">${p.name}</div>
+          <div class="pc-role">📞 Cold Caller${p.niche ? ' · ' + p.niche : ''}</div>
+          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+            <div class="avail"><span class="avail-dot" style="background:var(--green)"></span><span style="color:var(--green)">Active</span></div>
+            <span style="color:var(--text3)">·</span>
+            <span style="font-size:11px;color:var(--text3)">${startText}</span>
+          </div>
+        </div>
+      </div>
+      <div class="grade none" title="Grade calculated from KPI data">N/A</div>
+    </div>
+    <div class="pc-kpis">
+      <div class="kpi-box"><div class="kpi-empty">—</div><div class="kpi-lbl">Calls<br/>today</div></div>
+      <div class="kpi-box"><div class="kpi-empty">—</div><div class="kpi-lbl">Meetings<br/>booked</div></div>
+      <div class="kpi-box"><div class="kpi-empty">—</div><div class="kpi-lbl">Closes<br/>this week</div></div>
+    </div>
+    <div class="pc-bar-row"><div class="pc-bar-label">Call rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:0%;background:${accent}"></div></div><div class="pc-bar-empty">—</div></div>
+    <div class="pc-bar-row"><div class="pc-bar-label">Pickup rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:0%;background:var(--teal)"></div></div><div class="pc-bar-empty">—</div></div>
+    <div class="pc-bar-row"><div class="pc-bar-label">Meeting rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:0%;background:var(--green)"></div></div><div class="pc-bar-empty">—</div></div>
+    <div style="margin-top:8px;font-size:11px;color:var(--text3);display:flex;align-items:center;gap:4px">
+      <span>📊</span> KPIs will populate once call tracking is connected
+    </div>
+    <div class="pc-footer">
+      <div class="pc-salary">${salary}${commission}</div>
+      <div style="display:flex;gap:6px">
+        <button class="btn-ghost" style="padding:4px 10px;font-size:11px" onclick="event.stopPropagation();editPerson('${p.id}')">Edit</button>
+        <button class="btn-ghost" style="padding:4px 10px;font-size:11px;color:var(--red);border-color:rgba(244,63,94,.3)" onclick="event.stopPropagation();deletePerson('${p.id}')">Remove</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function buildOutreacherCard(p, initials, grad, accent, startText) {
+  const channels = p.channels ? p.channels.join(' + ') : 'No channels set';
+  const salary = p.orBase ? `Base <strong>$${p.orBase}</strong>/mo` : 'Salary not set';
+  return `
+  <div class="person-card" style="--card-accent:${accent}" onclick="openPersonDetail('${p.id}')">
+    <div class="pc-top">
+      <div style="display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0">
+        <div class="pc-av" style="background:${grad}">${initials}</div>
+        <div class="pc-meta">
+          <div class="pc-name">${p.name}</div>
+          <div class="pc-role">📧 Cold Outreach · ${channels}</div>
+          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+            <div class="avail"><span class="avail-dot" style="background:var(--green)"></span><span style="color:var(--green)">Active</span></div>
+            <span style="color:var(--text3)">·</span>
+            <span style="font-size:11px;color:var(--text3)">${startText}</span>
+          </div>
+        </div>
+      </div>
+      <div class="grade none" title="Grade calculated from reply rates">N/A</div>
+    </div>
+    <div class="pc-kpis">
+      <div class="kpi-box"><div class="kpi-empty">—</div><div class="kpi-lbl">Emails<br/>sent</div></div>
+      <div class="kpi-box"><div class="kpi-empty">—</div><div class="kpi-lbl">LinkedIn<br/>msgs</div></div>
+      <div class="kpi-box"><div class="kpi-empty">—</div><div class="kpi-lbl">Reply<br/>rate</div></div>
+    </div>
+    <div class="pc-bar-row"><div class="pc-bar-label">Email quota</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:0%;background:${accent}"></div></div><div class="pc-bar-empty">—</div></div>
+    <div class="pc-bar-row"><div class="pc-bar-label">Reply rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:0%;background:var(--teal)"></div></div><div class="pc-bar-empty">—</div></div>
+    <div class="pc-bar-row"><div class="pc-bar-label">Meetings</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:0%;background:var(--green)"></div></div><div class="pc-bar-empty">—</div></div>
+    <div style="margin-top:8px;font-size:11px;color:var(--text3);display:flex;align-items:center;gap:4px">
+      <span>🔗</span> Connect Instantly / Apollo / Expandi to auto-import stats
+    </div>
+    <div class="pc-footer">
+      <div class="pc-salary">${salary}</div>
+      <div style="display:flex;gap:6px">
+        <button class="btn-ghost" style="padding:4px 10px;font-size:11px" onclick="event.stopPropagation();editPerson('${p.id}')">Edit</button>
+        <button class="btn-ghost" style="padding:4px 10px;font-size:11px;color:var(--red);border-color:rgba(244,63,94,.3)" onclick="event.stopPropagation();deletePerson('${p.id}')">Remove</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function buildFreelancerCard(p, initials, grad, accent) {
+  const skillTags = p.skills ? p.skills.split(',').map(s=>`<span class="skill-tag">${s.trim()}</span>`).join('') : '<span style="font-size:11px;color:var(--text3)">No skills added</span>';
+  const rateDisplay = p.rateH ? `$${p.rateH}/h` : (p.rateP ? `$${p.rateP}/proj` : 'Rate not set');
+  const rateProjectText = p.rateP ? `or $${p.rateP}/proj` : '';
+  const tz = p.tz || 'TZ not set';
+  return `
+  <div class="person-card" style="--card-accent:${accent}" onclick="openPersonDetail('${p.id}')">
+    <div class="pc-top">
+      <div style="display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0">
+        <div class="pc-av" style="background:${grad}">${initials}</div>
+        <div class="pc-meta">
+          <div class="pc-name">${p.name}</div>
+          <div class="pc-role">${getSpecIcon(p.spec)} ${p.spec || 'Specialization not set'}</div>
+          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:2px">
+            <div class="avail"><span class="avail-dot" style="background:var(--green)"></span><span style="color:var(--green)">Available</span></div>
+            <span style="color:var(--text3)">· ${tz}</span>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-family:var(--head);font-size:15px;font-weight:700;color:var(--teal)">${rateDisplay !== 'Rate not set' ? rateDisplay : '—'}</div>
+        <div style="font-size:10px;color:var(--text3)">${rateProjectText}</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px;min-height:24px">${skillTags}</div>
+    <div class="pc-kpis">
+      <div class="kpi-box"><div class="kpi-empty">—</div><div class="kpi-lbl">Projects<br/>done</div></div>
+      <div class="kpi-box"><div class="kpi-empty">—</div><div class="kpi-lbl">Client<br/>rating</div></div>
+      <div class="kpi-box"><div class="kpi-empty">—</div><div class="kpi-lbl">On-time<br/>delivery</div></div>
+    </div>
+    <div style="font-size:11px;color:var(--text3);margin-bottom:10px;display:flex;align-items:center;gap:4px">
+      <span>📊</span> Performance data will show after first project
+    </div>
+    <div class="pc-footer">
+      ${p.portfolio ? `<a href="${p.portfolio}" target="_blank" style="color:var(--accent);font-size:12px;text-decoration:none" onclick="event.stopPropagation()">📎 Portfolio →</a>` : '<span style="font-size:12px;color:var(--text3)">No portfolio linked</span>'}
+      <div style="display:flex;gap:6px">
+        <button class="btn-ghost" style="padding:4px 10px;font-size:11px" onclick="event.stopPropagation();editPerson('${p.id}')">Edit</button>
+        <button class="btn-ghost" style="padding:4px 10px;font-size:11px;color:var(--red);border-color:rgba(244,63,94,.3)" onclick="event.stopPropagation();deletePerson('${p.id}')">Remove</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function getSpecIcon(spec) {
+  if (!spec) return '🎨';
+  if (spec.toLowerCase().includes('design')) return '🎨';
+  if (spec.toLowerCase().includes('dev')) return '💻';
+  if (spec.toLowerCase().includes('seo') || spec.toLowerCase().includes('ads')) return '📈';
+  if (spec.toLowerCase().includes('video')) return '🎬';
+  if (spec.toLowerCase().includes('copy')) return '✍️';
+  if (spec.toLowerCase().includes('auto')) return '⚡';
+  return '🔧';
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  try {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('en-US', {month:'short', year:'numeric'});
+  } catch { return dateStr; }
+}
+
+// ─── MODAL ───
+function openModal() { openModalType('caller'); }
+function openModalType(type) {
+  selectType(type);
+  document.getElementById('modal-overlay').classList.add('open');
+  clearForm();
+}
+function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); clearForm(); }
+function handleOverlayClick(e) { if (e.target === document.getElementById('modal-overlay')) closeModal(); }
+
+function selectType(type) {
+  currentType = type;
+  ['caller','outreacher','freelancer'].forEach(t => {
+    document.getElementById('type-' + t).classList.toggle('sel', t === type);
+  });
+  document.getElementById('caller-fields').style.display = (type === 'caller') ? '' : 'none';
+  document.getElementById('outreacher-fields').style.display = (type === 'outreacher') ? '' : 'none';
+  document.getElementById('freelancer-fields').style.display = (type === 'freelancer') ? '' : 'none';
+}
+
+function clearForm() {
+  ['f-name','f-username','f-phone','f-email','f-niche','f-base','f-start','f-comm-meet','f-comm-close',
+   'f-or-base','f-or-start','f-spec','f-skills','f-rate-h','f-rate-p','f-tz','f-portfolio'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  ['ch-email','ch-linkedin','ch-instagram','ch-twitter'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.checked = false;
+  });
+  document.getElementById('form-error').style.display = 'none';
+  document.getElementById('form-error').textContent = '';
+}
+
+function savePerson() {
+  const name = document.getElementById('f-name').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  if (!name) return showError('Full name is required.');
+  if (!email) return showError('Email is required.');
+
+  let person = {
+    id: Date.now().toString(),
+    type: currentType,
+    name, email,
+    username: document.getElementById('f-username').value.trim(),
+    phone: document.getElementById('f-phone').value.trim(),
+    createdAt: new Date().toISOString(),
+  };
+
+  if (currentType === 'caller') {
+    const niche = document.getElementById('f-niche').value.trim();
+    if (!niche) return showError('Niche is required for callers.');
+    Object.assign(person, {
+      niche,
+      base: document.getElementById('f-base').value,
+      start: document.getElementById('f-start').value,
+      commMeet: document.getElementById('f-comm-meet').value,
+      commClose: document.getElementById('f-comm-close').value,
+    });
+  } else if (currentType === 'outreacher') {
+    const channels = ['ch-email','ch-linkedin','ch-instagram','ch-twitter']
+      .filter(id => document.getElementById(id)?.checked)
+      .map(id => document.getElementById(id).value);
+    if (!channels.length) return showError('Select at least one outreach channel.');
+    Object.assign(person, {
+      channels,
+      orBase: document.getElementById('f-or-base').value,
+      orStart: document.getElementById('f-or-start').value,
+    });
+  } else if (currentType === 'freelancer') {
+    const spec = document.getElementById('f-spec').value;
+    if (!spec) return showError('Specialization is required for freelancers.');
+    Object.assign(person, {
+      spec,
+      skills: document.getElementById('f-skills').value.trim(),
+      rateH: document.getElementById('f-rate-h').value,
+      rateP: document.getElementById('f-rate-p').value,
+      tz: document.getElementById('f-tz').value,
+      portfolio: document.getElementById('f-portfolio').value.trim(),
+      availability: 'available',
+    });
+  }
+
+  people.push(person);
+  save();
+  closeModal();
+  renderAll();
+
+  // Switch to the right tab
+  const tabMap = {caller:'callers', outreacher:'outreachers', freelancer:'freelancers'};
+  const tabId = tabMap[currentType];
+  const tabEl = document.querySelector(`.tab:nth-child(${tabId==='callers'?1:tabId==='outreachers'?2:3})`);
+  if (tabEl) switchTab(tabId, tabEl);
+}
+
+function showError(msg) {
+  const el = document.getElementById('form-error');
+  el.textContent = '⚠ ' + msg;
+  el.style.display = 'block';
+}
+
+function editPerson(id) {
+  const p = people.find(x => x.id === id);
+  if (!p) return;
+  openModalType(p.type);
+  // Pre-fill
+  document.getElementById('f-name').value = p.name || '';
+  document.getElementById('f-email').value = p.email || '';
+  document.getElementById('f-username').value = p.username || '';
+  document.getElementById('f-phone').value = p.phone || '';
+  if (p.type === 'caller') {
+    document.getElementById('f-niche').value = p.niche || '';
+    document.getElementById('f-base').value = p.base || '';
+    document.getElementById('f-start').value = p.start || '';
+    document.getElementById('f-comm-meet').value = p.commMeet || '';
+    document.getElementById('f-comm-close').value = p.commClose || '';
+  } else if (p.type === 'outreacher') {
+    p.channels?.forEach(ch => {
+      const el = document.querySelector(`input[value="${ch}"]`);
+      if (el) el.checked = true;
+    });
+    document.getElementById('f-or-base').value = p.orBase || '';
+    document.getElementById('f-or-start').value = p.orStart || '';
+  } else if (p.type === 'freelancer') {
+    document.getElementById('f-spec').value = p.spec || '';
+    document.getElementById('f-skills').value = p.skills || '';
+    document.getElementById('f-rate-h').value = p.rateH || '';
+    document.getElementById('f-rate-p').value = p.rateP || '';
+    document.getElementById('f-tz').value = p.tz || '';
+    document.getElementById('f-portfolio').value = p.portfolio || '';
+  }
+  // Replace save to update
+  const saveBtn = document.querySelector('.form-actions .btn-primary');
+  saveBtn.textContent = 'Update Person';
+  saveBtn.onclick = () => updatePerson(id);
+}
+
+function updatePerson(id) {
+  people = people.filter(x => x.id !== id);
+  // Re-use save logic: save will push new record — instead, inline it
+  const name = document.getElementById('f-name').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  if (!name) return showError('Full name is required.');
+  if (!email) return showError('Email is required.');
+  let person = { id, type: currentType, name, email,
+    username: document.getElementById('f-username').value.trim(),
+    phone: document.getElementById('f-phone').value.trim(),
+    createdAt: new Date().toISOString() };
+  if (currentType === 'caller') {
+    Object.assign(person, { niche: document.getElementById('f-niche').value.trim(),
+      base: document.getElementById('f-base').value, start: document.getElementById('f-start').value,
+      commMeet: document.getElementById('f-comm-meet').value, commClose: document.getElementById('f-comm-close').value });
+  } else if (currentType === 'outreacher') {
+    const channels = ['ch-email','ch-linkedin','ch-instagram','ch-twitter']
+      .filter(i => document.getElementById(i)?.checked).map(i => document.getElementById(i).value);
+    Object.assign(person, { channels, orBase: document.getElementById('f-or-base').value,
+      orStart: document.getElementById('f-or-start').value });
+  } else if (currentType === 'freelancer') {
+    Object.assign(person, { spec: document.getElementById('f-spec').value,
+      skills: document.getElementById('f-skills').value.trim(), rateH: document.getElementById('f-rate-h').value,
+      rateP: document.getElementById('f-rate-p').value, tz: document.getElementById('f-tz').value,
+      portfolio: document.getElementById('f-portfolio').value.trim(), availability: 'available' });
+  }
+  people.push(person);
+  save();
+  closeModal();
+  renderAll();
+}
+
+function deletePerson(id) {
+  if (!confirm('Remove this person from the system?')) return;
+  people = people.filter(x => x.id !== id);
+  save();
+  renderAll();
+}
+
+function openPersonDetail(id) {
+  // Future: open detail panel or navigate to person page
+  // For now, trigger edit as placeholder
+  // editPerson(id);
+}
+
+// ─── SEARCH ───
+function handleSearch(val) {
+  searchQuery = val;
+  renderAll();
+}
+
+// ─── FILTERS ───
+function filterByGrade() { /* Future: implement grade filter */ }
+function filterByNiche() { /* Future: implement niche filter */ }
+function applyFLFilter() { /* Future: filter freelancers by skill/budget/tz */ }
+
+// ─── EXPORT ───
+function exportCSV() {
+  if (!people.length) return alert('No people to export yet.');
+  const headers = ['ID','Type','Name','Email','Phone','Niche/Spec','Start Date','Base Salary'];
+  const rows = people.map(p => [
+    p.id, p.type, p.name, p.email, p.phone || '',
+    p.niche || p.spec || (p.channels ? p.channels.join('+') : ''),
+    p.start || p.orStart || '',
+    p.base || p.orBase || (p.rateH ? `$${p.rateH}/h` : '') || ''
+  ]);
+  const csv = [headers, ...rows].map(r => r.map(c => `"${c}"`).join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'people_export_' + new Date().toISOString().split('T')[0] + '.csv';
+  a.click();
+}
+
+function exportCallLog() { alert('Call log export requires call tracking integration.'); }
+
+// ─── SAVE ───
+function save() { localStorage.setItem('crm_people', JSON.stringify(people)); }
+
+// ─── TAB SWITCH ───
 function switchTab(tabId, el) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('panel-' + tabId).classList.add('active');
 }
+
+// ─── KEYBOARD SHORTCUT ───
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault();
+    document.getElementById('search-input').focus();
+  }
+  if (e.key === 'Escape') closeModal();
+});
+
+init();
 </script>
 </body>
 </html>
