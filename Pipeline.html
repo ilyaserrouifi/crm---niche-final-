@@ -1,202 +1,271 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Niche CRM — Pipeline</title>
+<title>Niche CRM — Pipeline commercial</title>
 <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%233b7ef8'/%3E%3Ctext x='50' y='68' font-size='48' text-anchor='middle' fill='white' font-weight='bold' font-family='Arial'%3ENC%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#04091a;--bg2:#070f24;--surface:#0b152e;--surface2:#111d3f;--surface3:#162248;
   --border:#1c2d55;--border2:#243460;
-  --accent:#3b7ef8;--teal:#22d3b8;--amber:#f59e0b;--red:#f43f5e;--green:#10b981;--purple:#8b5cf6;
+  --accent:#3b7ef8;--teal:#22d3b8;--amber:#f59e0b;--red:#f43f5e;--green:#10b981;--purple:#8b5cf6;--orange:#f97316;
   --text:#e2e8f8;--text2:#8da0c4;--text3:#4e637a;
   --head:'Space Grotesk',sans-serif;--body:'Plus Jakarta Sans',sans-serif;
   --sw:240px;--radius:12px;--radius-sm:8px;
 }
 body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:14px;min-height:100vh;display:flex;overflow-x:hidden}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
 a{text-decoration:none;color:inherit}
-button{cursor:pointer}
+button{cursor:pointer;font-family:var(--body)}
 
 /* Sidebar */
 .sidebar{width:var(--sw);min-height:100vh;background:linear-gradient(180deg,var(--surface) 0%,var(--bg2) 100%);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:200}
 .logo-wrap{padding:22px 20px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--teal));display:flex;align-items:center;justify-content:center;font-family:var(--head);font-weight:700;font-size:14px;color:#fff}
-.logo-text{font-family:var(--head);font-weight:700;font-size:17px}
-.logo-ver{font-size:10px;color:var(--text3);margin-top:2px}
+.logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--teal));display:flex;align-items:center;justify-content:center;font-family:var(--head);font-weight:700;font-size:14px;color:#fff;flex-shrink:0}
+.logo-text{font-family:var(--head);font-weight:700;font-size:17px;letter-spacing:-.3px}
+.logo-ver{font-size:10px;color:var(--text3);margin-top:1px}
 .nav{flex:1;overflow-y:auto;padding:12px 0}
 .nav-section{font-size:10px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--text3);padding:10px 20px 5px}
 .nav-item{display:flex;align-items:center;gap:9px;padding:9px 14px 9px 18px;margin:1px 8px;border-radius:var(--radius-sm);font-size:13.5px;font-weight:500;color:var(--text2);transition:all .15s;position:relative}
 .nav-item:hover{background:var(--surface2);color:var(--text)}
 .nav-item.active{background:linear-gradient(90deg,rgba(59,126,248,.18),rgba(59,126,248,.06));color:var(--accent);font-weight:600}
 .nav-item.active::before{content:'';position:absolute;left:0;top:22%;height:56%;width:2.5px;background:var(--accent);border-radius:0 2px 2px 0}
-.nav-ic{font-size:15px;width:18px;text-align:center}
+.nav-ic{font-size:15px;width:18px;text-align:center;flex-shrink:0}
+.nav-badge{margin-left:auto;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:rgba(244,63,94,.18);color:var(--red)}
+.nav-badge.blue{background:rgba(59,126,248,.15);color:var(--accent)}
+.nav-badge.teal{background:rgba(34,211,184,.12);color:var(--teal)}
 .sidebar-footer{padding:14px 16px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.profile-av{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#3b7ef8,#22d3b8);display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:13px;font-weight:700;color:#fff}
+.profile-av{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#3b7ef8,#22d3b8);display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
 .profile-name{font-size:13px;font-weight:600}
 .profile-role{font-size:11px;color:var(--text3)}
-.profile-menu{margin-left:auto;width:26px;height:26px;border-radius:6px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.profile-menu{margin-left:auto;width:26px;height:26px;border-radius:6px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;color:var(--text2)}
 
 /* Main */
 .main{margin-left:var(--sw);flex:1;display:flex;flex-direction:column;min-height:100vh}
 .topbar{height:60px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 28px;gap:14px;position:sticky;top:0;z-index:100}
 .breadcrumb{flex:1;font-size:13px;color:var(--text2)}
-.breadcrumb strong{color:var(--text)}
-.search{display:flex;align-items:center;gap:7px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 13px;width:230px}
+.breadcrumb strong{color:var(--text);font-weight:600}
+.search{display:flex;align-items:center;gap:7px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 13px;width:250px;transition:border-color .15s}
+.search:focus-within{border-color:var(--accent)}
 .search input{background:none;border:none;outline:none;font-family:var(--body);font-size:13px;color:var(--text);width:100%}
 .search input::placeholder{color:var(--text3)}
-.kbd{font-size:11px;background:var(--surface3);border:1px solid var(--border);padding:1px 6px;border-radius:4px;color:var(--text3)}
-.tb-btn{width:36px;height:36px;border-radius:var(--radius-sm);background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;color:var(--text2)}
-.btn-primary{display:flex;align-items:center;gap:6px;background:var(--accent);color:#fff;border:none;padding:9px 16px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer}
+.kbd{font-size:11px;background:var(--surface3);border:1px solid var(--border);padding:1px 6px;border-radius:4px;flex-shrink:0;color:var(--text3)}
+.tb-btn{width:36px;height:36px;border-radius:var(--radius-sm);background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;color:var(--text2);transition:background .15s}
+.tb-btn:hover{background:var(--surface3)}
+.btn-primary{display:flex;align-items:center;gap:6px;background:var(--accent);color:#fff;border:none;padding:9px 16px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;transition:opacity .15s;white-space:nowrap}
 .btn-primary:hover{opacity:.88}
-.btn-ghost{display:flex;align-items:center;gap:6px;background:var(--surface2);color:var(--text2);border:1px solid var(--border);padding:8px 14px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;cursor:pointer}
+.btn-ghost{display:flex;align-items:center;gap:6px;background:var(--surface2);color:var(--text2);border:1px solid var(--border);padding:8px 14px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;white-space:nowrap}
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
 .btn-sm{padding:6px 12px;font-size:12px}
 .content{padding:26px 28px;flex:1}
 
+/* Page Header */
 .page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
 .page-title{font-family:var(--head);font-size:22px;font-weight:700}
 .page-sub{font-size:13px;color:var(--text3);margin-top:4px}
 
+/* Stats Row */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px}
+.stat-label{font-size:11px;color:var(--text3);font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-bottom:8px}
+.stat-val{font-family:var(--head);font-size:24px;font-weight:700}
+.stat-sub{font-size:11px;color:var(--text3);margin-top:4px}
+
 /* Kanban */
 .kanban-container{overflow-x:auto;padding-bottom:16px}
-.kanban-board{display:flex;gap:16px;min-width:1200px}
-.kanban-col{background:var(--surface2);border-radius:var(--radius);border:1px solid var(--border);min-width:260px;width:260px;display:flex;flex-direction:column;max-height:calc(100vh - 180px)}
+.kanban-board{display:flex;gap:16px;min-width:1300px}
+.kanban-col{background:var(--surface2);border-radius:var(--radius);border:1px solid var(--border);min-width:280px;width:280px;display:flex;flex-direction:column;max-height:calc(100vh - 180px)}
 .kanban-header{padding:14px 12px;border-bottom:1px solid var(--border);background:var(--surface);border-radius:var(--radius) var(--radius) 0 0}
 .kanban-title{font-family:var(--head);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:space-between}
 .kanban-count{background:var(--surface3);padding:2px 8px;border-radius:20px;font-size:11px}
 .kanban-cards{flex:1;overflow-y:auto;padding:10px;min-height:400px}
 .kanban-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;margin-bottom:8px;cursor:grab;transition:all .15s}
-.kanban-card:hover{border-color:var(--accent);transform:translateY(-1px)}
-.card-title{font-weight:600;font-size:13px;margin-bottom:6px}
-.card-company{font-size:11px;color:var(--text3);margin-bottom:6px}
-.card-value{font-family:var(--head);font-size:13px;font-weight:700;color:var(--teal);margin-bottom:6px}
-.card-meta{display:flex;justify-content:space-between;align-items:center}
+.kanban-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.2)}
+.card-title{font-weight:700;font-size:14px;margin-bottom:6px;color:var(--text)}
+.card-company{font-size:11px;color:var(--text3);margin-bottom:6px;display:flex;align-items:center;gap:4px}
+.card-value{font-family:var(--head);font-size:14px;font-weight:700;color:var(--teal);margin-bottom:6px}
+.card-meta{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
 .card-assign{font-size:10px;color:var(--text3);display:flex;align-items:center;gap:4px}
-.card-days{font-size:10px;color:var(--amber)}
+.card-days{font-size:10px;color:var(--amber);background:rgba(245,158,11,.1);padding:2px 6px;border-radius:10px}
+.card-actions{display:flex;gap:6px;justify-content:flex-end;margin-top:10px;padding-top:8px;border-top:1px solid var(--border)}
 .chip{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600}
 .chip.blue{background:rgba(59,126,248,.1);color:var(--accent)}
 .chip.red{background:rgba(244,63,94,.1);color:var(--red)}
 .chip.green{background:rgba(16,185,129,.1);color:var(--green)}
 .chip.yellow{background:rgba(245,158,11,.1);color:var(--amber)}
+.chip.purple{background:rgba(139,92,246,.1);color:var(--purple)}
 
 /* Modal */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(4,9,26,.85);z-index:500;align-items:center;justify-content:center}
 .modal-overlay.open{display:flex}
-.modal{background:var(--surface);border:1px solid var(--border2);border-radius:16px;width:600px;max-width:95vw;padding:28px;position:relative}
-.modal-title{font-family:var(--head);font-size:18px;font-weight:700;margin-bottom:5px}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:16px;width:650px;max-width:95vw;padding:28px;position:relative;max-height:90vh;overflow-y:auto}
+.modal-title{font-family:var(--head);font-size:20px;font-weight:700;margin-bottom:5px}
 .modal-sub{font-size:13px;color:var(--text3);margin-bottom:22px}
-.modal-close{position:absolute;top:20px;right:20px;width:30px;height:30px;border-radius:8px;background:var(--surface2);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center}
-.form-group{margin-bottom:14px}
+.modal-close{position:absolute;top:20px;right:20px;width:32px;height:32px;border-radius:8px;background:var(--surface2);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .15s}
+.modal-close:hover{background:var(--surface3);color:var(--red)}
+.form-group{margin-bottom:16px}
 .form-label{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--text3);margin-bottom:6px;display:block}
-.form-input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 13px;font-family:var(--body);font-size:13px;color:var(--text);outline:none}
+.form-input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 13px;font-family:var(--body);font-size:13px;color:var(--text);outline:none;transition:border-color .15s}
 .form-input:focus{border-color:var(--accent)}
-.form-select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 13px;font-family:var(--body);font-size:13px;color:var(--text);outline:none}
-.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
-.form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:22px;padding-top:16px;border-top:1px solid var(--border)}
-.empty-state{text-align:center;padding:30px 20px;color:var(--text3);font-size:12px}
+.form-input::placeholder{color:var(--text3)}
+.form-select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 13px;font-family:var(--body);font-size:13px;color:var(--text);outline:none;cursor:pointer}
+.form-textarea{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 13px;font-family:var(--body);font-size:13px;color:var(--text);outline:none;resize:vertical;min-height:80px}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
+.form-actions{display:flex;gap:12px;justify-content:flex-end;margin-top:24px;padding-top:16px;border-top:1px solid var(--border)}
+.form-section{font-size:11px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;color:var(--text3);margin:20px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.empty-state{text-align:center;padding:40px 20px;color:var(--text3);font-size:12px}
+.empty-state-icon{font-size:32px;margin-bottom:12px;opacity:0.5}
+.drag-over{background:rgba(59,126,248,.1);border:2px dashed var(--accent)}
 </style>
 </head>
 <body>
 
+<!-- SIDEBAR -->
 <aside class="sidebar">
   <div class="logo-wrap">
     <div class="logo-icon">NC</div>
-    <div><div class="logo-text">Niche CRM</div><div class="logo-ver">Agency OS v1.0</div></div>
+    <div><div class="logo-text">CRM de niche</div><div class="logo-ver">Système d'exploitation de l'agence v1.0</div></div>
   </div>
   <nav class="nav">
-    <div><div class="nav-section">Main</div>
-      <a class="nav-item" href="index.html"><span class="nav-ic">⊞</span> Dashboard</a>
-      <a class="nav-item" href="people.html"><span class="nav-ic">👥</span> People</a>
+    <div>
+      <div class="nav-section">Principal</div>
+      <a class="nav-item" href="index.html"><span class="nav-ic">⊞</span> Tableau de bord</a>
+      <a class="nav-item" href="people.html"><span class="nav-ic">👥</span> Personnes</a>
       <a class="nav-item active" href="pipeline.html"><span class="nav-ic">⟶</span> Pipeline</a>
-      <a class="nav-item" href="projects.html"><span class="nav-ic">📁</span> Projects</a>
-      <a class="nav-item" href="analytics.html"><span class="nav-ic">📊</span> Analytics</a>
+      <a class="nav-item" href="projects.html"><span class="nav-ic">📁</span> Projets</a>
+      <a class="nav-item" href="analytics.html"><span class="nav-ic">📊</span> Analytique</a>
     </div>
-    <div><div class="nav-section">Client</div>
-      <a class="nav-item" href="client-portal.html"><span class="nav-ic">🌐</span> Client Portal</a>
+    <div>
+      <div class="nav-section">Client</div>
+      <a class="nav-item" href="client-portal.html"><span class="nav-ic">🌐</span> Portail client</a>
       <a class="nav-item" href="finance.html"><span class="nav-ic">💰</span> Finance</a>
+      <a class="nav-item" href="#"><span class="nav-ic">📄</span> Rapports</a>
     </div>
-    <div><div class="nav-section">System</div>
-      <a class="nav-item" href="#"><span class="nav-ic">⚙️</span> Settings</a>
+    <div>
+      <div class="nav-section">Système</div>
+      <a class="nav-item" href="#"><span class="nav-ic">🔔</span> Alertes</a>
+      <a class="nav-item" href="#"><span class="nav-ic">⚙️</span> Paramètres</a>
     </div>
   </nav>
   <div class="sidebar-footer">
-    <div class="profile-av">AN</div>
-    <div><div class="profile-name">Admin</div><div class="profile-role">Super Admin</div></div>
+    <div class="profile-av">UN</div>
+    <div><div class="profile-name">Administrateur</div><div class="profile-role">Super Administrateur</div></div>
     <div class="profile-menu">···</div>
   </div>
 </aside>
 
+<!-- MAIN -->
 <div class="main">
   <header class="topbar">
-    <div class="breadcrumb">Sales / <strong>Pipeline</strong></div>
-    <div class="search"><span>🔍</span><input type="text" id="search-input" placeholder="Search deals..."/><span class="kbd">⌘K</span></div>
+    <div class="breadcrumb">Ventes / <strong>Pipeline commercial</strong></div>
+    <div class="search">
+      <span>🔍</span>
+      <input type="text" id="search-input" placeholder="Rechercher une entreprise, un contact..."/>
+      <span class="kbd">⌘K</span>
+    </div>
     <div style="display:flex;gap:7px"><div class="tb-btn">🔔</div><div class="tb-btn">✉️</div></div>
-    <button class="btn-primary" onclick="openAddDeal()">+ New Deal</button>
+    <button class="btn-primary" onclick="openAddDeal()">+ Nouvelle opportunité</button>
   </header>
 
   <main class="content">
     <div class="page-header">
-      <div><div class="page-title">Sales Pipeline</div><div class="page-sub" id="page-sub">8 stages · Drag & drop to move deals</div></div>
-      <div><button class="btn-ghost btn-sm" onclick="exportCSV()">📥 Export CSV</button></div>
+      <div>
+        <div class="page-title">Pipeline commercial</div>
+        <div class="page-sub" id="page-sub">8 étapes · Glissez-déposez pour déplacer les opportunités</div>
+      </div>
+      <div>
+        <button class="btn-ghost btn-sm" onclick="exportCSV()">📥 Exporter CSV</button>
+        <button class="btn-ghost btn-sm" onclick="exportJSON()">📦 Exporter JSON</button>
+      </div>
     </div>
 
+    <!-- Stats -->
+    <div class="stats-row" id="stats-row"></div>
+
+    <!-- Kanban Board -->
     <div class="kanban-container">
       <div class="kanban-board" id="kanban-board"></div>
     </div>
   </main>
 </div>
 
-<!-- Modal -->
+<!-- MODAL AJOUT/MODIFICATION -->
 <div class="modal-overlay" id="deal-modal" onclick="if(event.target===this)closeModal()">
   <div class="modal">
     <div class="modal-close" onclick="closeModal()">✕</div>
-    <div class="modal-title" id="modal-title">New Deal</div>
-    <div class="modal-sub">Add a new lead or opportunity</div>
+    <div class="modal-title" id="modal-title">Nouvelle opportunité</div>
+    <div class="modal-sub" id="modal-sub">Ajoutez un prospect ou une opportunité commerciale</div>
     <input type="hidden" id="edit-id"/>
+    
     <div class="form-row-2">
-      <div class="form-group"><label class="form-label">Company Name *</label><input class="form-input" id="d-company"/></div>
-      <div class="form-group"><label class="form-label">Contact Name</label><input class="form-input" id="d-contact"/></div>
+      <div class="form-group"><label class="form-label">Nom de l'entreprise *</label><input class="form-input" id="d-company" placeholder="Ex: TechCorp SAS"/></div>
+      <div class="form-group"><label class="form-label">Nom du contact</label><input class="form-input" id="d-contact" placeholder="Ex: Jean Martin"/></div>
     </div>
     <div class="form-row-2">
-      <div class="form-group"><label class="form-label">Source</label><select class="form-select" id="d-source"><option>Cold Call</option><option>Email</option><option>Referral</option><option>LinkedIn</option></select></div>
-      <div class="form-group"><label class="form-label">Niche</label><input class="form-input" id="d-niche" placeholder="E-commerce/SaaS..."/></div>
+      <div class="form-group"><label class="form-label">Source</label><select class="form-select" id="d-source"><option value="Cold Call">📞 Cold Call</option><option value="Email">✉️ Email</option><option value="LinkedIn">🔗 LinkedIn</option><option value="Instagram">📸 Instagram</option><option value="Recommandation">⭐ Recommandation</option><option value="Site Web">🌐 Site Web</option></select></div>
+      <div class="form-group"><label class="form-label">Secteur d'activité</label><input class="form-input" id="d-niche" placeholder="E-commerce / SaaS / Immobilier..."/></div>
     </div>
     <div class="form-row-2">
-      <div class="form-group"><label class="form-label">Deal Value ($)</label><input class="form-input" id="d-value" type="number" placeholder="0"/></div>
-      <div class="form-group"><label class="form-label">Assigned To</label><input class="form-input" id="d-assigned" placeholder="Caller/Outreacher name"/></div>
+      <div class="form-group"><label class="form-label">Valeur estimée (€)</label><input class="form-input" id="d-value" type="number" placeholder="0"/></div>
+      <div class="form-group"><label class="form-label">Assigné à</label><input class="form-input" id="d-assigned" placeholder="Nom du commercial"/></div>
     </div>
-    <div class="form-group"><label class="form-label">Pain Notes / Next Action</label><textarea class="form-input" id="d-notes" rows="2" placeholder="Key pain points, next steps..."></textarea></div>
-    <div class="form-actions"><button class="btn-ghost" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="saveDeal()">Save Deal</button></div>
+    <div class="form-group"><label class="form-label">Notes / Points de douleur</label><textarea class="form-textarea" id="d-notes" rows="3" placeholder="Problèmes identifiés, besoins spécifiques, prochaines étapes..."></textarea></div>
+    <div class="form-row-2">
+      <div class="form-group"><label class="form-label">Prochain rendez-vous</label><input class="form-input" id="d-nextMeeting" type="datetime-local"/></div>
+      <div class="form-group"><label class="form-label">Étape actuelle</label><select class="form-select" id="d-stage"><option value="lead">1. LEAD</option><option value="contacted">2. CONTACTÉ</option><option value="meeting">3. RENDEZ-VOUS</option><option value="qualified">4. QUALIFIÉ</option><option value="proposal">5. PROPOSITION</option><option value="negotiating">6. NÉGOCIATION</option><option value="won">7. GAGNÉ ✅</option><option value="lost">8. PERDU ❌</option></select></div>
+    </div>
+    
+    <div class="form-actions">
+      <button class="btn-ghost" onclick="closeModal()">Annuler</button>
+      <button class="btn-primary" onclick="saveDeal()">Enregistrer</button>
+    </div>
   </div>
 </div>
 
 <script>
-const STAGES = [
-  { id: 'lead', name: '1. LEAD', color: '#3b7ef8' },
-  { id: 'contacted', name: '2. CONTACTED', color: '#5b9af9' },
-  { id: 'meeting', name: '3. MEETING BOOKED', color: '#22d3b8' },
-  { id: 'qualified', name: '4. QUALIFIED', color: '#8b5cf6' },
-  { id: 'proposal', name: '5. PROPOSAL SENT', color: '#f59e0b' },
-  { id: 'negotiating', name: '6. NEGOTIATING', color: '#f97316' },
-  { id: 'won', name: '7. CLOSED WON ✅', color: '#10b981' },
-  { id: 'lost', name: '8. CLOSED LOST ❌', color: '#f43f5e' }
-];
-
+// ============================================================
+// DONNÉES - STOCKAGE LOCALSTORAGE
+// ============================================================
 let deals = JSON.parse(localStorage.getItem('crm_deals') || '[]');
 let searchQuery = '';
 
-function saveDeals() { localStorage.setItem('crm_deals', JSON.stringify(deals)); }
+// Configuration des étapes (8 étapes)
+const STAGES = [
+  { id: 'lead',        name: '1. LEAD',               color: '#3b7ef8', icon: '🟡' },
+  { id: 'contacted',   name: '2. CONTACTÉ',           color: '#5b9af9', icon: '📞' },
+  { id: 'meeting',     name: '3. RENDEZ-VOUS',        color: '#22d3b8', icon: '📅' },
+  { id: 'qualified',   name: '4. QUALIFIÉ',           color: '#8b5cf6', icon: '✅' },
+  { id: 'proposal',    name: '5. PROPOSITION',        color: '#f59e0b', icon: '📄' },
+  { id: 'negotiating', name: '6. NÉGOCIATION',        color: '#f97316', icon: '🤝' },
+  { id: 'won',         name: '7. GAGNÉ ✅',           color: '#10b981', icon: '🏆' },
+  { id: 'lost',        name: '8. PERDU ❌',           color: '#f43f5e', icon: '💔' }
+];
 
-function getStageDeals(stageId) {
-  let filtered = deals.filter(d => d.stage === stageId);
-  if (searchQuery) {
-    const q = searchQuery.toLowerCase();
-    filtered = filtered.filter(d => d.company?.toLowerCase().includes(q) || d.contact?.toLowerCase().includes(q));
+// ============================================================
+// FONCTIONS UTILITAIRES
+// ============================================================
+function saveDealsToStorage() {
+  localStorage.setItem('crm_deals', JSON.stringify(deals));
+}
+
+function formatCurrency(amount) {
+  return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 }).format(amount || 0);
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return '—';
+  try {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
+  } catch(e) {
+    return dateStr;
   }
-  return filtered;
 }
 
 function daysInStage(createdAt) {
@@ -205,68 +274,211 @@ function daysInStage(createdAt) {
   return diff;
 }
 
+function getStageColor(stageId) {
+  const stage = STAGES.find(s => s.id === stageId);
+  return stage ? stage.color : '#3b7ef8';
+}
+
+function getStageName(stageId) {
+  const stage = STAGES.find(s => s.id === stageId);
+  return stage ? stage.name : stageId;
+}
+
+// ============================================================
+// FILTRAGE ET RECHERCHE
+// ============================================================
+function getFilteredDeals() {
+  if (!searchQuery) return deals;
+  const q = searchQuery.toLowerCase();
+  return deals.filter(d => 
+    d.company?.toLowerCase().includes(q) || 
+    d.contact?.toLowerCase().includes(q) ||
+    d.niche?.toLowerCase().includes(q) ||
+    d.assigned?.toLowerCase().includes(q)
+  );
+}
+
+function getStageDeals(stageId) {
+  const filtered = getFilteredDeals();
+  return filtered.filter(d => d.stage === stageId);
+}
+
+// ============================================================
+// STATISTIQUES
+// ============================================================
+function updateStats() {
+  const totalDeals = deals.length;
+  const wonDeals = deals.filter(d => d.stage === 'won').length;
+  const lostDeals = deals.filter(d => d.stage === 'lost').length;
+  const activeDeals = deals.filter(d => d.stage !== 'won' && d.stage !== 'lost').length;
+  const totalValue = deals.reduce((sum, d) => sum + (d.value || 0), 0);
+  
+  document.getElementById('stats-row').innerHTML = `
+    <div class="stat-card">
+      <div class="stat-label">Total opportunités</div>
+      <div class="stat-val">${totalDeals}</div>
+      <div class="stat-sub">Valeur totale: ${formatCurrency(totalValue)}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">En cours</div>
+      <div class="stat-val" style="color:var(--accent)">${activeDeals}</div>
+      <div class="stat-sub">Pipeline actif</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Gagnées ✅</div>
+      <div class="stat-val" style="color:var(--green)">${wonDeals}</div>
+      <div class="stat-sub">Taux conversion: ${totalDeals ? Math.round(wonDeals/totalDeals*100) : 0}%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Perdues ❌</div>
+      <div class="stat-val" style="color:var(--red)">${lostDeals}</div>
+      <div class="stat-sub">À analyser</div>
+    </div>
+  `;
+  
+  document.getElementById('page-sub').innerHTML = `${totalDeals} opportunités · ${activeDeals} en cours · Valeur pipeline: ${formatCurrency(totalValue)}`;
+}
+
+// ============================================================
+// RENDU KANBAN
+// ============================================================
 function renderKanban() {
   const board = document.getElementById('kanban-board');
   if (!board) return;
+  
   board.innerHTML = STAGES.map(stage => {
     const stageDeals = getStageDeals(stage.id);
     return `
       <div class="kanban-col" data-stage="${stage.id}">
-        <div class="kanban-header">
+        <div class="kanban-header" style="border-top: 3px solid ${stage.color}">
           <div class="kanban-title">
-            <span>${stage.name}</span>
+            <span>${stage.icon} ${stage.name}</span>
             <span class="kanban-count">${stageDeals.length}</span>
           </div>
         </div>
-        <div class="kanban-cards" data-stage="${stage.id}" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <div class="kanban-cards" data-stage="${stage.id}" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)">
           ${stageDeals.map(deal => `
             <div class="kanban-card" draggable="true" ondragstart="dragStart(event)" data-id="${deal.id}">
               <div class="card-title">${deal.company || '—'}</div>
-              <div class="card-company">👤 ${deal.contact || 'No contact'} · ${deal.niche || '—'}</div>
-              <div class="card-value">$${(deal.value || 0).toLocaleString()}</div>
+              <div class="card-company">👤 ${deal.contact || 'Sans contact'} · ${deal.niche || '—'}</div>
+              <div class="card-value">💰 ${formatCurrency(deal.value)}</div>
               <div class="card-meta">
-                <span class="card-assign">🎯 ${deal.assigned || 'Unassigned'}</span>
-                <span class="card-days">${daysInStage(deal.createdAt)} days</span>
+                <span class="card-assign">🎯 ${deal.assigned || 'Non assigné'}</span>
+                <span class="card-days">📅 ${daysInStage(deal.createdAt)} jours</span>
               </div>
-              <div style="margin-top:8px;display:flex;gap:6px;justify-content:flex-end">
-                <button class="btn-ghost btn-sm" style="padding:2px 8px;font-size:10px" onclick="event.stopPropagation();editDeal('${deal.id}')">✏️</button>
-                <button class="btn-ghost btn-sm" style="padding:2px 8px;font-size:10px;color:var(--red)" onclick="event.stopPropagation();deleteDeal('${deal.id}')">🗑</button>
+              <div class="card-actions">
+                <button class="btn-ghost btn-sm" style="padding:4px 8px;font-size:10px" onclick="event.stopPropagation();editDeal('${deal.id}')">✏️ Modifier</button>
+                <button class="btn-ghost btn-sm" style="padding:4px 8px;font-size:10px;color:var(--red)" onclick="event.stopPropagation();deleteDeal('${deal.id}')">🗑 Supprimer</button>
               </div>
             </div>
           `).join('')}
-          ${stageDeals.length === 0 ? '<div class="empty-state">Drop deals here</div>' : ''}
+          ${stageDeals.length === 0 ? '<div class="empty-state"><div class="empty-state-icon">📦</div><div>Déposez les opportunités ici</div></div>' : ''}
         </div>
       </div>
     `;
   }).join('');
-  const pageSub = document.getElementById('page-sub');
-  if (pageSub) pageSub.innerHTML = `${deals.length} total deals · ${deals.filter(d=>d.stage==='won').length} won this month`;
 }
 
+// ============================================================
+// DRAG & DROP
+// ============================================================
 let dragItemId = null;
-function dragStart(e) { 
+
+function dragStart(e) {
   const card = e.target.closest('.kanban-card');
-  if (card) dragItemId = card.getAttribute('data-id'); 
-  e.dataTransfer.setData('text/plain', dragItemId); 
+  if (card) {
+    dragItemId = card.getAttribute('data-id');
+    e.dataTransfer.setData('text/plain', dragItemId);
+    e.dataTransfer.effectAllowed = 'move';
+  }
 }
-function allowDrop(e) { e.preventDefault(); }
+
+function allowDrop(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  const targetCol = e.target.closest('.kanban-cards');
+  if (targetCol && !targetCol.classList.contains('drag-over')) {
+    targetCol.classList.add('drag-over');
+  }
+}
+
+function dragLeave(e) {
+  const targetCol = e.target.closest('.kanban-cards');
+  if (targetCol) {
+    targetCol.classList.remove('drag-over');
+  }
+}
+
 function drop(e) {
   e.preventDefault();
   const targetCol = e.target.closest('.kanban-cards');
+  if (targetCol) targetCol.classList.remove('drag-over');
+  
   if (!targetCol || !dragItemId) return;
+  
   const newStage = targetCol.getAttribute('data-stage');
   const dealIndex = deals.findIndex(d => d.id === dragItemId);
+  
   if (dealIndex !== -1 && deals[dealIndex].stage !== newStage) {
+    const oldStage = deals[dealIndex].stage;
     deals[dealIndex].stage = newStage;
     deals[dealIndex].updatedAt = new Date().toISOString();
-    saveDeals();
+    
+    // Ajouter un historique du mouvement
+    if (!deals[dealIndex].history) deals[dealIndex].history = [];
+    deals[dealIndex].history.push({
+      from: oldStage,
+      to: newStage,
+      date: new Date().toISOString(),
+      user: 'Administrateur'
+    });
+    
+    saveDealsToStorage();
+    updateStats();
     renderKanban();
+    
+    // Notification visuelle
+    showToast(`Opportunité déplacée vers ${getStageName(newStage)}`);
   }
   dragItemId = null;
 }
 
+// ============================================================
+// TOAST NOTIFICATION
+// ============================================================
+function showToast(message) {
+  let toast = document.getElementById('toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'toast';
+    toast.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--green);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    `;
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.style.opacity = '1';
+  setTimeout(() => { toast.style.opacity = '0'; }, 2000);
+}
+
+// ============================================================
+// CRUD OPPORTUNITÉS
+// ============================================================
 function openAddDeal() {
-  document.getElementById('modal-title').innerText = 'New Deal';
+  document.getElementById('modal-title').innerText = 'Nouvelle opportunité';
+  document.getElementById('modal-sub').innerText = 'Ajoutez un prospect ou une opportunité commerciale';
   document.getElementById('edit-id').value = '';
   document.getElementById('d-company').value = '';
   document.getElementById('d-contact').value = '';
@@ -275,13 +487,17 @@ function openAddDeal() {
   document.getElementById('d-value').value = '';
   document.getElementById('d-assigned').value = '';
   document.getElementById('d-notes').value = '';
+  document.getElementById('d-nextMeeting').value = '';
+  document.getElementById('d-stage').value = 'lead';
   document.getElementById('deal-modal').classList.add('open');
 }
 
 function editDeal(id) {
   const deal = deals.find(d => d.id === id);
   if (!deal) return;
-  document.getElementById('modal-title').innerText = 'Edit Deal';
+  
+  document.getElementById('modal-title').innerText = 'Modifier l\'opportunité';
+  document.getElementById('modal-sub').innerText = 'Modifiez les informations du deal';
   document.getElementById('edit-id').value = id;
   document.getElementById('d-company').value = deal.company || '';
   document.getElementById('d-contact').value = deal.contact || '';
@@ -290,13 +506,20 @@ function editDeal(id) {
   document.getElementById('d-value').value = deal.value || '';
   document.getElementById('d-assigned').value = deal.assigned || '';
   document.getElementById('d-notes').value = deal.notes || '';
+  document.getElementById('d-nextMeeting').value = deal.nextMeeting || '';
+  document.getElementById('d-stage').value = deal.stage || 'lead';
   document.getElementById('deal-modal').classList.add('open');
 }
 
 function saveDeal() {
   const id = document.getElementById('edit-id').value;
   const company = document.getElementById('d-company').value.trim();
-  if (!company) return alert('Company name is required');
+  
+  if (!company) {
+    alert('Le nom de l\'entreprise est requis');
+    return;
+  }
+  
   const dealData = {
     company: company,
     contact: document.getElementById('d-contact').value,
@@ -305,43 +528,132 @@ function saveDeal() {
     value: parseFloat(document.getElementById('d-value').value) || 0,
     assigned: document.getElementById('d-assigned').value,
     notes: document.getElementById('d-notes').value,
+    nextMeeting: document.getElementById('d-nextMeeting').value,
+    stage: document.getElementById('d-stage').value,
     updatedAt: new Date().toISOString()
   };
+  
   if (id) {
+    // Modification
     const index = deals.findIndex(d => d.id === id);
-    if (index !== -1) deals[index] = { ...deals[index], ...dealData };
+    if (index !== -1) {
+      deals[index] = { ...deals[index], ...dealData };
+      showToast('Opportunité modifiée avec succès');
+    }
   } else {
-    deals.push({ id: Date.now().toString(), stage: 'lead', createdAt: new Date().toISOString(), ...dealData });
+    // Création
+    const newDeal = {
+      id: Date.now().toString(),
+      createdAt: new Date().toISOString(),
+      history: [{ action: 'Créé', date: new Date().toISOString() }],
+      ...dealData
+    };
+    deals.push(newDeal);
+    showToast('Nouvelle opportunité ajoutée');
   }
-  saveDeals();
+  
+  saveDealsToStorage();
   closeModal();
+  updateStats();
   renderKanban();
 }
 
 function deleteDeal(id) {
-  if (confirm('Delete this deal?')) {
+  if (confirm('Supprimer définitivement cette opportunité ?')) {
     deals = deals.filter(d => d.id !== id);
-    saveDeals();
+    saveDealsToStorage();
+    updateStats();
     renderKanban();
+    showToast('Opportunité supprimée');
   }
 }
 
-function handleSearch(val) { searchQuery = val; renderKanban(); }
-function closeModal() { document.getElementById('deal-modal').classList.remove('open'); }
+// ============================================================
+// EXPORT
+// ============================================================
 function exportCSV() {
-  if (!deals.length) return alert('No deals to export');
-  const headers = ['Company','Contact','Stage','Value','Source','Niche','Assigned','Created'];
-  const rows = deals.map(d => [d.company, d.contact, STAGES.find(s=>s.id===d.stage)?.name || d.stage, d.value, d.source, d.niche, d.assigned, new Date(d.createdAt).toLocaleDateString()]);
-  const csv = [headers, ...rows].map(r => r.map(c => `"${(c||'').toString().replace(/"/g,'""')}"`).join(',')).join('\n');
-  const a = document.createElement('a');
-  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
-  a.download = `pipeline_${new Date().toISOString().split('T')[0]}.csv`;
-  a.click();
+  if (deals.length === 0) {
+    alert('Aucune opportunité à exporter');
+    return;
+  }
+  
+  const headers = ['ID', 'Entreprise', 'Contact', 'Étape', 'Valeur (€)', 'Source', 'Secteur', 'Assigné à', 'Notes', 'Créé le', 'Modifié le'];
+  const rows = deals.map(d => [
+    d.id,
+    d.company || '',
+    d.contact || '',
+    getStageName(d.stage),
+    d.value || 0,
+    d.source || '',
+    d.niche || '',
+    d.assigned || '',
+    d.notes || '',
+    formatDate(d.createdAt),
+    formatDate(d.updatedAt)
+  ]);
+  
+  const csvContent = [headers, ...rows].map(row => 
+    row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')
+  ).join('\n');
+  
+  const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  const url = URL.createObjectURL(blob);
+  link.href = url;
+  link.setAttribute('download', `pipeline_${new Date().toISOString().split('T')[0]}.csv`);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
 }
 
-// Initialize
-const searchInput = document.getElementById('search-input');
-if (searchInput) searchInput.addEventListener('input', e => handleSearch(e.target.value));
+function exportJSON() {
+  if (deals.length === 0) {
+    alert('Aucune opportunité à exporter');
+    return;
+  }
+  
+  const exportData = {
+    exportedAt: new Date().toISOString(),
+    totalDeals: deals.length,
+    deals: deals
+  };
+  
+  const json = JSON.stringify(exportData, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const link = document.createElement('a');
+  const url = URL.createObjectURL(blob);
+  link.href = url;
+  link.setAttribute('download', `pipeline_${new Date().toISOString().split('T')[0]}.json`);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
+// ============================================================
+// RECHERCHE
+// ============================================================
+function handleSearch(value) {
+  searchQuery = value;
+  updateStats();
+  renderKanban();
+}
+
+// ============================================================
+// MODAL
+// ============================================================
+function closeModal() {
+  document.getElementById('deal-modal').classList.remove('open');
+}
+
+// ============================================================
+// INITIALISATION
+// ============================================================
+document.getElementById('search-input')?.addEventListener('input', (e) => handleSearch(e.target.value));
+
+// Démarrer avec des données vides (aucune donnée fake)
+updateStats();
 renderKanban();
 </script>
 </body>
