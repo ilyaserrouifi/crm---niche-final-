@@ -1,1 +1,56 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Niche CRM — Client Portal</title>
+<link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%233b7ef8'/%3E%3Ctext x='50' y='68' font-size='48' text-anchor='middle' fill='white' font-weight='bold' font-family='Arial'%3ENC%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04091a;--bg2:#070f24;--surface:#0b152e;--surface2:#111d3f;--border:#1c2d55;--accent:#3b7ef8;--teal:#22d3b8;--green:#10b981;--red:#f43f5e;--text:#e2e8f8;--text2:#8da0c4;--text3:#4e637a;--head:'Space Grotesk',sans-serif;--body:'Plus Jakarta Sans',sans-serif;--sw:240px;--radius:12px}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:14px;min-height:100vh;display:flex}
+.sidebar{width:var(--sw);min-height:100vh;background:linear-gradient(180deg,var(--surface) 0%,var(--bg2) 100%);border-right:1px solid var(--border);position:fixed;top:0;left:0}
+.logo-wrap{padding:22px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--teal));display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff}
+.logo-text{font-family:var(--head);font-weight:700;font-size:17px}
+.nav{padding:20px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px;border-radius:8px;color:var(--text2);text-decoration:none;margin-bottom:4px}
+.nav-item.active{background:rgba(59,126,248,.1);color:var(--accent);font-weight:600}
+.main{margin-left:var(--sw);flex:1}
+.topbar{height:60px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px}
+.content{padding:24px 28px}
+.page-title{font-family:var(--head);font-size:22px;font-weight:700;margin-bottom:4px}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:20px 0}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+.stat-val{font-family:var(--head);font-size:28px;font-weight:700;color:var(--teal)}
+.stat-label{font-size:12px;color:var(--text3);margin-top:4px}
+.project-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px}
+.progress-bar{height:6px;background:var(--surface2);border-radius:3px;margin:12px 0;overflow:hidden}
+.progress-fill{height:100%;background:var(--accent);border-radius:3px}
+.chip{display:inline-flex;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
+.chip.green{background:rgba(16,185,129,.1);color:var(--green)}
+.chip.blue{background:rgba(59,126,248,.1);color:var(--accent)}
+.chip.yellow{background:rgba(245,158,11,.1);color:#f59e0b}
+.invoice-item{display:flex;justify-content:space-between;padding:12px;border-bottom:1px solid var(--border)}
+</style>
+</head>
+<body>
+<aside class="sidebar"><div class="logo-wrap"><div class="logo-icon">NC</div><div class="logo-text">Niche CRM</div></div>
+<div class="nav"><a class="nav-item active" href="#">📊 Dashboard</a><a class="nav-item" href="#">📁 Projects</a><a class="nav-item" href="#">💬 Messages</a><a class="nav-item" href="#">💰 Invoices</a><a class="nav-item" href="#">⚙️ Settings</a></div></aside>
+<div class="main"><header class="topbar"><div><strong>Client Portal</strong> · Acme Corp</div><div style="display:flex;gap:12px"><span>🔔</span><span>👤 John Doe</span></div></header>
+<main class="content"><div><div class="page-title">Your Growth Dashboard</div><div style="color:var(--text3)">Welcome back, John</div></div>
+<div class="stats-grid"><div class="stat-card"><div class="stat-val">+47%</div><div class="stat-label">Leads Generated</div></div>
+<div class="stat-card"><div class="stat-val">$23.4k</div><div class="stat-label">Revenue Added</div></div>
+<div class="stat-card"><div class="stat-val">3.2x</div><div class="stat-label">Current ROAS</div></div>
+<div class="stat-card"><div class="stat-val">Active</div><div class="stat-label">Project Status</div></div></div>
+<h3 style="margin:20px 0 12px">📁 Active Projects</h3>
+<div class="project-card"><div style="display:flex;justify-content:space-between"><strong>Ad Campaign</strong><span class="chip green">Live</span></div><div>ROAS: 3.2x · Budget: $5,000</div><div class="progress-bar"><div class="progress-fill" style="width:75%"></div></div><div style="font-size:12px;color:var(--text3)">75% complete · Next review: May 25</div></div>
+<div class="project-card"><div style="display:flex;justify-content:space-between"><strong>Landing Page Redesign</strong><span class="chip blue">In Progress</span></div><div>Design phase · Due: Jun 10</div><div class="progress-bar"><div class="progress-fill" style="width:40%"></div></div></div>
+<h3 style="margin:20px 0 12px">👥 Your Team</h3><div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px"><div>Account Manager: <strong>Karim Moussaoui</strong></div><div>Designer: <strong>Sara Bencheikh</strong></div><div>Ads Manager: <strong>Youssef Alaoui</strong></div></div>
+<h3 style="margin:20px 0 12px">💰 Invoices</h3><div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)"><div class="invoice-item"><span>March 2026</span><span>$3,000</span><span class="chip green">Paid</span></div><div class="invoice-item"><span>April 2026</span><span>$3,000</span><span class="chip yellow">Pending</span><button class="btn-primary" style="padding:4px 12px;font-size:11px">Pay</button></div></div>
+<div style="margin-top:20px;padding:16px;background:var(--surface2);border-radius:var(--radius);text-align:center"><button class="btn-primary">📞 Book Strategy Call</button> <button class="btn-ghost">💬 Message Team</button></div>
+</main></div>
+<style>.btn-primary{background:var(--accent);color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer}.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text2);padding:8px 16px;border-radius:8px;cursor:pointer}</style>
+</body>
+</html>
