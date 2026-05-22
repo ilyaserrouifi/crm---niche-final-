@@ -1,741 +1,1270 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Niche CRM — Tableau de bord</title>
-<link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%233b7ef8'/%3E%3Ctext x='50' y='68' font-size='48' text-anchor='middle' fill='white' font-weight='bold' font-family='Arial'%3ENC%3C/text%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#04091a;--bg2:#070f24;--surface:#0b152e;--surface2:#111d3f;--surface3:#162248;
-  --border:#1c2d55;--border2:#243460;
-  --accent:#3b7ef8;--teal:#22d3b8;--amber:#f59e0b;--red:#f43f5e;--green:#10b981;--purple:#8b5cf6;--orange:#f97316;
-  --text:#e2e8f8;--text2:#8da0c4;--text3:#4e637a;
-  --head:'Space Grotesk',sans-serif;--body:'Plus Jakarta Sans',sans-serif;
-  --sw:240px;--radius:12px;--radius-sm:8px;
-}
-body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:14px;min-height:100vh;display:flex;overflow-x:hidden}
-::-webkit-scrollbar{width:4px;height:4px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
-a{text-decoration:none;color:inherit}
-button{cursor:pointer;font-family:var(--body)}
-
-/* Sidebar */
-.sidebar{width:var(--sw);min-height:100vh;background:linear-gradient(180deg,var(--surface) 0%,var(--bg2) 100%);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:200}
-.logo-wrap{padding:22px 20px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--teal));display:flex;align-items:center;justify-content:center;font-family:var(--head);font-weight:700;font-size:14px;color:#fff;flex-shrink:0}
-.logo-text{font-family:var(--head);font-weight:700;font-size:17px;letter-spacing:-.3px}
-.logo-ver{font-size:10px;color:var(--text3);margin-top:1px}
-.nav{flex:1;overflow-y:auto;padding:12px 0}
-.nav-section{font-size:10px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--text3);padding:10px 20px 5px}
-.nav-item{display:flex;align-items:center;gap:9px;padding:9px 14px 9px 18px;margin:1px 8px;border-radius:var(--radius-sm);font-size:13.5px;font-weight:500;color:var(--text2);transition:all .15s;position:relative}
-.nav-item:hover{background:var(--surface2);color:var(--text)}
-.nav-item.active{background:linear-gradient(90deg,rgba(59,126,248,.18),rgba(59,126,248,.06));color:var(--accent);font-weight:600}
-.nav-item.active::before{content:'';position:absolute;left:0;top:22%;height:56%;width:2.5px;background:var(--accent);border-radius:0 2px 2px 0}
-.nav-ic{font-size:15px;width:18px;text-align:center;flex-shrink:0}
-.nav-badge{margin-left:auto;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:rgba(244,63,94,.18);color:var(--red)}
-.nav-badge.blue{background:rgba(59,126,248,.15);color:var(--accent)}
-.nav-badge.teal{background:rgba(34,211,184,.12);color:var(--teal)}
-.sidebar-footer{padding:14px 16px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.profile-av{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#3b7ef8,#22d3b8);display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
-.profile-name{font-size:13px;font-weight:600}
-.profile-role{font-size:11px;color:var(--text3)}
-.profile-menu{margin-left:auto;width:26px;height:26px;border-radius:6px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;color:var(--text2)}
-
-/* Main */
-.main{margin-left:var(--sw);flex:1;display:flex;flex-direction:column;min-height:100vh}
-.topbar{height:60px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 28px;gap:14px;position:sticky;top:0;z-index:100}
-.breadcrumb{flex:1;font-size:13px;color:var(--text2)}
-.breadcrumb strong{color:var(--text);font-weight:600}
-.search{display:flex;align-items:center;gap:7px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 13px;width:230px;transition:border-color .15s}
-.search:focus-within{border-color:var(--accent)}
-.search input{background:none;border:none;outline:none;font-family:var(--body);font-size:13px;color:var(--text);width:100%}
-.search input::placeholder{color:var(--text3)}
-.kbd{font-size:11px;background:var(--surface3);border:1px solid var(--border);padding:1px 6px;border-radius:4px;flex-shrink:0;color:var(--text3)}
-.tb-btn{width:36px;height:36px;border-radius:var(--radius-sm);background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;color:var(--text2);transition:background .15s}
-.tb-btn:hover{background:var(--surface3)}
-.btn-primary{display:flex;align-items:center;gap:6px;background:var(--accent);color:#fff;border:none;padding:9px 16px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;transition:opacity .15s;white-space:nowrap}
-.btn-primary:hover{opacity:.88}
-.btn-ghost{display:flex;align-items:center;gap:6px;background:var(--surface2);color:var(--text2);border:1px solid var(--border);padding:8px 14px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;white-space:nowrap}
-.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
-.btn-sm{padding:6px 12px;font-size:12px}
-.content{padding:26px 28px;flex:1}
-
-/* Page Header */
-.page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
-.page-title{font-family:var(--head);font-size:22px;font-weight:700;display:flex;align-items:center;gap:8px}
-.page-date{font-size:12px;color:var(--text3);margin-top:4px}
-.live-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);color:var(--green);font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px}
-.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.85)}}
-
-/* Banners */
-.banner{display:flex;align-items:center;gap:12px;border-radius:10px;padding:12px 18px;margin-bottom:22px}
-.banner.info{background:rgba(59,126,248,.08);border:1px solid rgba(59,126,248,.2)}
-.banner.warning{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25)}
-.banner-icon{font-size:16px;flex-shrink:0}
-.banner-body{flex:1}
-.banner-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
-.banner-sub{font-size:12px;color:var(--text2)}
-.banner.warning .banner-title{color:var(--amber)}
-.banner.warning .banner-sub{color:var(--amber);opacity:.8}
-
-/* Stats Cards */
-.stats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:20px}
-.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;transition:all .2s}
-.stat:hover{border-color:var(--accent);transform:translateY(-2px)}
-.stat-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
-.stat-ic{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
-.stat-ic.blue{background:rgba(59,126,248,.14)}
-.stat-ic.teal{background:rgba(34,211,184,.12)}
-.stat-ic.amber{background:rgba(245,158,11,.12)}
-.stat-ic.red{background:rgba(244,63,94,.12)}
-.stat-ic.green{background:rgba(16,185,129,.12)}
-.stat-val{font-family:var(--head);font-size:27px;font-weight:700;margin-bottom:3px}
-.stat-val.empty{color:var(--text3)}
-.stat-lbl{font-size:12px;color:var(--text2)}
-.stat-sub{font-size:11px;color:var(--text3);margin-top:5px}
-.stat-no-data{font-size:11px;color:var(--text3);background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:3px 8px;margin-top:6px;display:inline-block}
-
-/* Cards */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
-.card-hd{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 12px;border-bottom:1px solid var(--border)}
-.card-title{font-family:var(--head);font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:7px}
-.card-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.card-action{font-size:12px;color:var(--accent);cursor:pointer;font-weight:500}
-.card-action:hover{text-decoration:underline}
-.card-bd{padding:18px}
-
-/* Grid layouts */
-.grid-3{display:grid;grid-template-columns:1fr 1fr 320px;gap:18px;margin-bottom:18px}
-.grid-2{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-bottom:18px}
-
-/* Funnel */
-.funnel-row{display:flex;align-items:center;gap:10px;margin-bottom:9px}
-.funnel-label{font-size:12px;color:var(--text2);width:74px;flex-shrink:0}
-.funnel-track{flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
-.funnel-fill{height:100%;border-radius:3px;transition:width 1.2s ease}
-.funnel-num{font-size:12px;font-weight:600;width:48px;text-align:right;flex-shrink:0}
-.funnel-pct{font-size:10px;color:var(--text3);width:38px;text-align:right;flex-shrink:0}
-
-/* Pipeline value */
-.pv-row{display:flex;gap:0;margin-top:16px;padding-top:14px;border-top:1px solid var(--border)}
-.pv-item{flex:1;padding:0 14px;border-right:1px solid var(--border)}
-.pv-item:first-child{padding-left:0}
-.pv-item:last-child{border-right:none}
-.pv-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}
-.pv-val{font-family:var(--head);font-size:15px;font-weight:700}
-.pv-val.empty{color:var(--text3)}
-
-/* Today KPI */
-.today-kpi-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
-.tk{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px}
-.tk-lbl{font-size:11px;color:var(--text3);margin-bottom:4px}
-.tk-val{font-family:var(--head);font-size:22px;font-weight:700}
-.tk-target{font-size:10px;color:var(--text3);margin-top:2px}
-.tk-bar{height:3px;background:var(--surface3);border-radius:2px;margin-top:7px;overflow:hidden}
-.tk-bar-fill{height:100%;border-radius:2px;transition:width 1.2s ease}
-
-/* Table */
-.tbl{width:100%;border-collapse:collapse}
-.tbl th{font-size:10.5px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;color:var(--text3);padding:8px 14px;text-align:left;border-bottom:1px solid var(--border)}
-.tbl td{padding:12px 14px;font-size:13px;border-bottom:1px solid rgba(28,45,85,.5)}
-.tbl tr:last-child td{border-bottom:none}
-.tbl tr.clickable:hover td{background:rgba(59,126,248,.03);cursor:pointer}
-
-/* Progress */
-.prog-wrap{display:flex;align-items:center;gap:8px}
-.prog-bar{flex:1;height:4px;background:var(--surface2);border-radius:2px;overflow:hidden}
-.prog-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--teal))}
-.prog-pct{font-size:11px;color:var(--text2);width:28px;text-align:right}
-
-/* Avatars */
-.avs{display:flex}
-.av{width:25px;height:25px;border-radius:50%;border:2px solid var(--surface);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;margin-left:-5px;flex-shrink:0}
-.av:first-child{margin-left:0}
-
-/* MRR rows */
-.mrr-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
-.mrr-row:last-child{border-bottom:none}
-.mrr-lbl{font-size:13px;color:var(--text2)}
-.mrr-val{font-family:var(--head);font-size:14px;font-weight:700}
-
-/* Alerts */
-.alert-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
-.alert-item:last-child{border-bottom:none}
-.al-ic{width:30px;height:30px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px}
-.al-title{font-size:13px;font-weight:600;margin-bottom:3px}
-.al-desc{font-size:12px;color:var(--text2);line-height:1.45}
-.al-time{font-size:10px;color:var(--text3);margin-top:4px}
-
-/* Leaderboard */
-.lb-item{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--border)}
-.lb-item:last-child{border-bottom:none}
-.lb-rank{font-family:var(--head);font-size:14px;font-weight:800;color:var(--text3);width:22px;text-align:center}
-.lb-av{width:32px;height:32px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff}
-.lb-name{font-size:13px;font-weight:600}
-.lb-role{font-size:11px;color:var(--text3)}
-.lb-rev{font-family:var(--head);font-size:13px;font-weight:700;color:var(--teal)}
-.lb-meta{font-size:10px;color:var(--text3);margin-top:2px}
-
-/* Niche */
-.niche-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
-.niche-item:last-child{border-bottom:none}
-.niche-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.niche-label{font-size:13px;flex:1}
-.niche-bar-wrap{width:80px;height:4px;background:var(--surface2);border-radius:2px;flex-shrink:0;overflow:hidden}
-.niche-bar-fill{height:100%;border-radius:2px}
-.niche-val{font-size:12px;font-weight:600;width:52px;text-align:right}
-
-/* Upcoming */
-.upcoming-item{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)}
-.upcoming-item:last-child{border-bottom:none}
-.upcoming-time{font-family:var(--head);font-size:12px;font-weight:700;color:var(--accent);width:38px;flex-shrink:0;padding-top:2px}
-.upcoming-title{font-size:13px;font-weight:600;margin-bottom:3px}
-.upcoming-sub{font-size:11px;color:var(--text3)}
-
-/* Empty state */
-.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:36px 20px;text-align:center}
-.empty-icon{width:48px;height:48px;border-radius:14px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
-.empty-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px}
-.empty-sub{font-size:12px;color:var(--text3);max-width:220px;line-height:1.55;margin-bottom:14px}
-.empty-action{background:var(--accent);color:#fff;border:none;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer}
-.empty-action-ghost{background:transparent;color:var(--text3);border:1px solid var(--border);padding:6px 14px;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer}
-
-/* Chip */
-.chip{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600}
-.chip.green{background:rgba(16,185,129,.1);color:var(--green)}
-.chip.blue{background:rgba(59,126,248,.1);color:var(--accent)}
-.chip.yellow{background:rgba(245,158,11,.1);color:var(--amber)}
-.chip.red{background:rgba(244,63,94,.1);color:var(--red)}
-.chip.purple{background:rgba(139,92,246,.1);color:var(--purple)}
-.chip.teal{background:rgba(34,211,184,.1);color:var(--teal)}
-.chip.gray{background:var(--surface2);color:var(--text2)}
-.chip.xs{font-size:10px;padding:2px 7px}
-
-.sec-lbl{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
-</style>
+    <!-- ========================================
+         META & SEO
+    ========================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0a192f">
+    <meta name="description" content="Niche CRM — Enterprise Agency Operating System. Plateforme de gestion complète pour agences et entreprises.">
+    <meta name="keywords" content="CRM, Agency OS, Pipeline, Projects, Finance, Analytics, SaaS">
+    <meta name="author" content="Niche CRM">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Niche CRM — Enterprise Agency OS">
+    <meta property="og:description" content="Plateforme de gestion complète pour agences et entreprises">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2364ffda'/%3E%3Ctext x='50' y='68' font-size='48' text-anchor='middle' fill='%230a192f' font-weight='bold' font-family='Arial'%3ENC%3C/text%3E%3C/svg%3E">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2364ffda'/%3E%3Ctext x='50' y='68' font-size='48' text-anchor='middle' fill='%230a192f' font-weight='bold' font-family='Arial'%3ENC%3C/text%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2364ffda'/%3E%3Ctext x='50' y='68' font-size='48' text-anchor='middle' fill='%230a192f' font-weight='bold' font-family='Arial'%3ENC%3C/text%3E%3C/svg%3E">
+    
+    <title>Niche CRM — Enterprise Agency OS</title>
+    
+    <!-- ========================================
+         PREMIUM FONTS
+    ========================================== -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================
+             RESET & BASE
+        ========================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* ========================================
+             THEME ENGINE — ROOT VARIABLES
+        ========================================== */
+        :root {
+            /* Dark Blue Enterprise Theme */
+            --bg-deep: #0a0c15;
+            --bg-primary: #0f111a;
+            --bg-secondary: #151821;
+            --bg-tertiary: #1a1d2b;
+            --bg-card: #1e2130;
+            --bg-card-hover: #252a3d;
+            --bg-sidebar: #0a0c15;
+            --bg-header: rgba(15, 17, 26, 0.85);
+            
+            /* Borders */
+            --border-light: rgba(42, 47, 69, 0.4);
+            --border-medium: #2a2f45;
+            --border-heavy: #353b55;
+            
+            /* Accent Colors — Futuristic Cyan/Green */
+            --accent-primary: #64ffda;
+            --accent-secondary: #00d2b8;
+            --accent-glow: rgba(100, 255, 218, 0.08);
+            --accent-gradient: linear-gradient(135deg, #64ffda, #00b4d8);
+            --accent-gradient-glow: linear-gradient(135deg, rgba(100, 255, 218, 0.2), rgba(0, 180, 216, 0.2));
+            
+            /* Status Colors */
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --purple: #8b5cf6;
+            
+            /* Text Colors */
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-tertiary: #64748b;
+            --text-disabled: #475569;
+            
+            /* Shadows & Effects */
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+            --shadow-xl: 0 12px 40px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 30px rgba(100, 255, 218, 0.15);
+            --shadow-glow-strong: 0 0 40px rgba(100, 255, 218, 0.25);
+            
+            /* Glassmorphism */
+            --glass-bg: rgba(26, 29, 43, 0.7);
+            --glass-border: rgba(100, 255, 218, 0.1);
+            
+            /* Layout Dimensions */
+            --sidebar-width: 280px;
+            --sidebar-collapsed: 88px;
+            --header-height: 70px;
+            
+            /* Animation */
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Border Radius */
+            --radius-xs: 4px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            --radius-2xl: 28px;
+        }
+        
+        /* ========================================
+             GLOBAL STYLES
+        ========================================== */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Typography Hierarchy */
+        h1, h2, h3, h4, h5, h6, .heading, .logo-text {
+            font-family: 'Space Grotesk', monospace;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        
+        /* Custom Scrollbar — Premium */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-heavy);
+            border-radius: 10px;
+            transition: background var(--transition-fast);
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-primary);
+        }
+        
+        /* Selection Color */
+        ::selection {
+            background: var(--accent-primary);
+            color: var(--bg-deep);
+        }
+        
+        /* ========================================
+             LOADING SCREEN — PREMIUM
+        ========================================== */
+        #loading-screen {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-deep);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
+        }
+        
+        #loading-screen.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loading-container {
+            text-align: center;
+            animation: fadeInUp 0.8s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .loading-logo {
+            width: 100px;
+            height: 100px;
+            background: var(--accent-gradient);
+            border-radius: var(--radius-2xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 28px;
+            animation: logoPulse 2s ease-in-out infinite;
+            box-shadow: var(--shadow-glow);
+        }
+        
+        @keyframes logoPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(100, 255, 218, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 20px rgba(100, 255, 218, 0);
+            }
+        }
+        
+        .loading-logo span {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--bg-deep);
+            font-family: 'Space Grotesk', monospace;
+        }
+        
+        .loading-title {
+            font-size: 24px;
+            font-weight: 700;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 8px;
+        }
+        
+        .loading-sub {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            letter-spacing: 1px;
+            margin-bottom: 32px;
+        }
+        
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--border-medium);
+            border-top-color: var(--accent-primary);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-progress {
+            width: 280px;
+            height: 3px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .loading-progress-bar {
+            width: 0%;
+            height: 100%;
+            background: var(--accent-gradient);
+            border-radius: 4px;
+            transition: width 0.3s ease-out;
+        }
+        
+        .loading-status {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-top: 16px;
+            font-family: monospace;
+        }
+        
+        /* ========================================
+             APP ROOT CONTAINER
+        ========================================== */
+        #root {
+            min-height: 100vh;
+            display: flex;
+            position: relative;
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+        }
+        
+        #root.loaded {
+            opacity: 1;
+        }
+        
+        /* ========================================
+             SIDEBAR — MODERN ENTERPRISE
+        ========================================== */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(180deg, var(--bg-sidebar) 0%, var(--bg-primary) 100%);
+            border-right: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 100;
+            transition: width var(--transition-normal);
+            backdrop-filter: blur(20px);
+        }
+        
+        .sidebar.collapsed {
+            width: var(--sidebar-collapsed);
+        }
+        
+        /* Sidebar Header */
+        .sidebar-header {
+            padding: 28px 20px;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .sidebar-logo {
+            width: 44px;
+            height: 44px;
+            background: var(--accent-gradient);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all var(--transition-fast);
+        }
+        
+        .sidebar-logo span {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--bg-deep);
+        }
+        
+        .sidebar-logo-text {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+        
+        .sidebar-logo-version {
+            font-size: 9px;
+            color: var(--text-tertiary);
+            margin-top: 2px;
+        }
+        
+        /* Navigation */
+        .sidebar-nav {
+            flex: 1;
+            padding: 24px 12px;
+            overflow-y: auto;
+        }
+        
+        .nav-section {
+            margin-bottom: 28px;
+        }
+        
+        .nav-section-title {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            padding: 0 14px 10px;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 10px 14px;
+            margin: 2px 0;
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+        }
+        
+        .nav-item:hover {
+            background: var(--accent-glow);
+            color: var(--accent-primary);
+            transform: translateX(4px);
+        }
+        
+        .nav-item.active {
+            background: var(--accent-glow);
+            color: var(--accent-primary);
+        }
+        
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 3px;
+            height: 28px;
+            background: var(--accent-primary);
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 0 8px var(--accent-primary);
+        }
+        
+        .nav-icon {
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .nav-label {
+            font-size: 13px;
+            font-weight: 500;
+            flex: 1;
+        }
+        
+        .nav-badge {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+        
+        /* Sidebar Footer / User Profile */
+        .sidebar-footer {
+            padding: 16px;
+            border-top: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .user-avatar {
+            width: 44px;
+            height: 44px;
+            background: var(--accent-gradient);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            flex-shrink: 0;
+            color: var(--bg-deep);
+        }
+        
+        .user-info {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .user-role {
+            font-size: 10px;
+            color: var(--text-tertiary);
+        }
+        
+        .logout-btn {
+            width: 32px;
+            height: 32px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .logout-btn:hover {
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+        
+        /* ========================================
+             MAIN CONTENT AREA
+        ========================================== */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+            transition: margin-left var(--transition-normal);
+        }
+        
+        .sidebar.collapsed ~ .main-content {
+            margin-left: var(--sidebar-collapsed);
+        }
+        
+        /* Header — Premium Glassmorphism */
+        .app-header {
+            height: var(--header-height);
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            position: sticky;
+            top: 0;
+            z-index: 90;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .menu-toggle {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .menu-toggle:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            transform: scale(1.02);
+        }
+        
+        .breadcrumb {
+            font-size: 13px;
+            color: var(--text-tertiary);
+        }
+        
+        .breadcrumb strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        /* Search Bar */
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: 8px 16px;
+            width: 280px;
+            transition: all var(--transition-fast);
+        }
+        
+        .search-bar:focus-within {
+            border-color: var(--accent-primary);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .search-bar input {
+            background: none;
+            border: none;
+            outline: none;
+            color: var(--text-primary);
+            font-size: 13px;
+            width: 100%;
+        }
+        
+        .search-bar input::placeholder {
+            color: var(--text-tertiary);
+        }
+        
+        .search-kbd {
+            font-size: 11px;
+            background: var(--bg-secondary);
+            padding: 2px 8px;
+            border-radius: 6px;
+            color: var(--text-tertiary);
+            font-family: monospace;
+        }
+        
+        /* Header Actions */
+        .header-action {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            position: relative;
+        }
+        
+        .header-action:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+        
+        .notification-dot {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 8px;
+            height: 8px;
+            background: var(--danger);
+            border-radius: 50%;
+            box-shadow: 0 0 6px var(--danger);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.9); }
+        }
+        
+        /* Page Container */
+        .page-container {
+            padding: 28px 32px;
+            min-height: calc(100vh - var(--header-height));
+        }
+        
+        /* ========================================
+             NOTIFICATION SYSTEM
+        ========================================== */
+        .notification-container {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .notification {
+            background: var(--bg-card);
+            border: 1px solid var(--border-medium);
+            border-radius: var(--radius-md);
+            padding: 14px 18px;
+            min-width: 300px;
+            max-width: 400px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(10px);
+            animation: slideInRight 0.3s var(--transition-normal);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .notification:hover {
+            transform: translateX(-4px);
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .notification-icon {
+            font-size: 20px;
+        }
+        
+        .notification-content {
+            flex: 1;
+        }
+        
+        .notification-title {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .notification-message {
+            font-size: 11px;
+            color: var(--text-tertiary);
+        }
+        
+        .notification-close {
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--text-tertiary);
+            transition: color var(--transition-fast);
+        }
+        
+        .notification-close:hover {
+            color: var(--text-primary);
+        }
+        
+        /* Notification Types */
+        .notification.success { border-left: 3px solid var(--success); }
+        .notification.warning { border-left: 3px solid var(--warning); }
+        .notification.error { border-left: 3px solid var(--danger); }
+        .notification.info { border-left: 3px solid var(--accent-primary); }
+        
+        /* ========================================
+             RESPONSIVE DESIGN
+        ========================================== */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform var(--transition-normal);
+                z-index: 200;
+            }
+            
+            .sidebar.mobile-open {
+                transform: translateX(0);
+            }
+            
+            .sidebar-overlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(10, 12, 21, 0.8);
+                backdrop-filter: blur(4px);
+                z-index: 150;
+                display: none;
+            }
+            
+            .sidebar-overlay.active {
+                display: block;
+            }
+            
+            .main-content {
+                margin-left: 0 !important;
+            }
+            
+            .search-bar {
+                display: none;
+            }
+            
+            .page-container {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .app-header {
+                padding: 0 16px;
+            }
+            
+            .breadcrumb {
+                display: none;
+            }
+            
+            .header-action {
+                width: 36px;
+                height: 36px;
+            }
+        }
+        
+        /* ========================================
+             UTILITY CLASSES
+        ========================================== */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+        }
+        
+        .hover-glow:hover {
+            box-shadow: var(--shadow-glow);
+            border-color: var(--accent-primary);
+        }
+        
+        .transition-all {
+            transition: all var(--transition-normal);
+        }
+        
+        /* Loading Spinner Utility */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border-medium);
+            border-top-color: var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
 
-<!-- SIDEBAR -->
-<aside class="sidebar">
-  <div class="logo-wrap">
-    <div class="logo-icon">NC</div>
-    <div><div class="logo-text">Niche CRM</div><div class="logo-ver">Agency OS v1.0</div></div>
-  </div>
-  <nav class="nav">
-    <div>
-      <div class="nav-section">Principal</div>
-      <a class="nav-item active" href="index.html"><span class="nav-ic">⊞</span> Tableau de bord</a>
-      <a class="nav-item" href="people.html"><span class="nav-ic">👥</span> Personnes</a>
-      <a class="nav-item" href="pipeline.html"><span class="nav-ic">⟶</span> Pipeline</a>
-      <a class="nav-item" href="projects.html"><span class="nav-ic">📁</span> Projets</a>
-      <a class="nav-item" href="analytics.html"><span class="nav-ic">📊</span> Analytique</a>
-    </div>
-    <div>
-      <div class="nav-section">Client</div>
-      <a class="nav-item" href="client-portal.html"><span class="nav-ic">🌐</span> Portail client</a>
-      <a class="nav-item" href="finance.html"><span class="nav-ic">💰</span> Finance</a>
-      <a class="nav-item" href="#"><span class="nav-ic">📄</span> Rapports</a>
-      <a class="nav-item" href="#"><span class="nav-ic">🤝</span> Gérer les clients</a>
-    </div>
-    <div>
-      <div class="nav-section">Système</div>
-      <a class="nav-item" href="#"><span class="nav-ic">🔔</span> Alertes</a>
-      <a class="nav-item" href="#"><span class="nav-ic">⚙️</span> Paramètres</a>
-    </div>
-  </nav>
-  <div class="sidebar-footer">
-    <div class="profile-av">AN</div>
-    <div><div class="profile-name">Admin</div><div class="profile-role">Super Administrateur</div></div>
-    <div class="profile-menu">···</div>
-  </div>
-</aside>
-
-<!-- MAIN -->
-<div class="main">
-  <header class="topbar">
-    <div class="breadcrumb">Accueil / <strong>Tableau de bord</strong></div>
-    <div class="search">
-      <span>🔍</span>
-      <input type="text" id="search-input" placeholder="Rechercher des clients, des transactions..."/>
-      <span class="kbd">⌘K</span>
-    </div>
-    <div style="display:flex;gap:7px"><div class="tb-btn">🔔</div><div class="tb-btn">✉️</div><div class="tb-btn">📅</div></div>
-    <button class="btn-primary" onclick="window.location.href='pipeline.html'">+ Nouvel accord</button>
-  </header>
-
-  <main class="content">
-    <div class="page-header">
-      <div>
-        <div class="page-title">Tableau de bord <span class="live-badge"><span class="live-dot"></span>En direct</span></div>
-        <div class="page-date" id="page-date">Chargement...</div>
-      </div>
-      <div style="display:flex;gap:8px">
-        <button class="btn-ghost" onclick="exportAllData()">📥 Export</button>
-        <button class="btn-primary" onclick="window.location.href='people.html'">+ Ajouter un client</button>
-      </div>
-    </div>
-
-    <!-- Stats Cards -->
-    <div class="stats-grid" id="stats-grid"></div>
-
-    <!-- 3-COL GRID -->
-    <div class="grid-3">
-      <div class="card">
-        <div class="card-hd"><div class="card-title"><span class="card-dot" style="background:var(--accent)"></span>Aperçu du pipeline</div><span class="card-action" onclick="window.location.href='pipeline.html'">Kanban →</span></div>
-        <div class="card-bd" id="pipeline-body"></div>
-      </div>
-      <div class="card">
-        <div class="card-hd"><div class="card-title"><span class="card-dot" style="background:var(--teal)"></span>Chiffres du jour</div><span class="live-badge"><span class="live-dot"></span>Live</span></div>
-        <div class="card-bd" id="today-body"></div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:18px">
-        <div class="card">
-          <div class="card-hd"><div class="card-title"><span class="card-dot" style="background:var(--red)"></span>Alertes actives</div><span class="chip green" id="alerts-chip">0 alertes</span></div>
-          <div style="padding:8px 20px" id="alerts-body"></div>
+    <!-- ========================================
+         PREMIUM LOADING SCREEN
+    ========================================== -->
+    <div id="loading-screen">
+        <div class="loading-container">
+            <div class="loading-logo">
+                <span>NC</span>
+            </div>
+            <div class="loading-title">Niche CRM</div>
+            <div class="loading-sub">ENTERPRISE AGENCY OS</div>
+            <div class="loading-spinner"></div>
+            <div class="loading-progress">
+                <div class="loading-progress-bar" id="loading-progress-bar"></div>
+            </div>
+            <div class="loading-status" id="loading-status">Initialisation...</div>
         </div>
-        <div class="card">
-          <div class="card-hd"><div class="card-title"><span class="card-dot" style="background:var(--amber)"></span>MRR Snapshot</div><span class="card-action" onclick="window.location.href='finance.html'">Finance →</span></div>
-          <div style="padding:8px 20px" id="mrr-body"></div>
-        </div>
-      </div>
     </div>
 
-    <!-- Active Projects -->
-    <div class="card" style="margin-bottom:18px">
-      <div class="card-hd"><div class="card-title"><span class="card-dot" style="background:var(--purple)"></span>Projets actifs</div><span class="card-action" onclick="window.location.href='projects.html'">Voir tout →</span></div>
-      <div id="projects-body"></div>
-    </div>
+    <!-- ========================================
+         NOTIFICATION CONTAINER
+    ========================================== -->
+    <div id="notification-container" class="notification-container"></div>
 
-    <!-- Leaderboard + Niche -->
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-hd"><div class="card-title"><span class="card-dot" style="background:var(--amber)"></span>Classement — <span id="lb-month">Ce mois</span></div><span class="card-action" onclick="window.location.href='analytics.html'">Analytique →</span></div>
-        <div style="padding:8px 20px" id="lb-body"></div>
-      </div>
-      <div class="card">
-        <div class="card-hd"><div class="card-title"><span class="card-dot" style="background:var(--teal)"></span>Revenus par niche</div></div>
-        <div style="padding:8px 20px" id="niche-body"></div>
-      </div>
-    </div>
-  </main>
-</div>
+    <!-- ========================================
+         APP ROOT — DYNAMIC CONTENT
+    ========================================== -->
+    <div id="root"></div>
 
-<script>
-// ============================================================
-// DATA STORAGE KEYS (toutes les données sont réelles stockées localStorage)
-// ============================================================
-// deals: pipeline deals
-// projects: projets
-// tasks: tâches
-// callers, outreachers, freelancers: personnes
-// invoices: factures
-// transactions: revenus
-// expenses: dépenses
+    <!-- ========================================
+         MOBILE SIDEBAR OVERLAY
+    ========================================== -->
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
-// ============================================================
-// FONCTIONS UTILITAIRES
-// ============================================================
-function getDeals() { return JSON.parse(localStorage.getItem('crm_deals') || '[]'); }
-function getProjects() { return JSON.parse(localStorage.getItem('crm_projects') || '[]'); }
-function getTasks() { return JSON.parse(localStorage.getItem('crm_tasks') || '[]'); }
-function getCallers() { return JSON.parse(localStorage.getItem('crm_callers') || '[]'); }
-function getOutreachers() { return JSON.parse(localStorage.getItem('crm_outreachers') || '[]'); }
-function getFreelancers() { return JSON.parse(localStorage.getItem('crm_freelancers') || '[]'); }
-function getInvoices() { return JSON.parse(localStorage.getItem('crm_invoices') || '[]'); }
-function getTransactions() { return JSON.parse(localStorage.getItem('crm_transactions') || '[]'); }
-function getExpenses() { return JSON.parse(localStorage.getItem('crm_expenses') || '[]'); }
-
-function saveDeals(data) { localStorage.setItem('crm_deals', JSON.stringify(data)); }
-function saveProjects(data) { localStorage.setItem('crm_projects', JSON.stringify(data)); }
-function saveTasks(data) { localStorage.setItem('crm_tasks', JSON.stringify(data)); }
-
-function formatNumber(n) { return n ? n.toLocaleString() : '0'; }
-function formatCurrency(n) { return n ? '$' + n.toLocaleString() : '$0'; }
-function formatDateShort(d) { if(!d) return '—'; try { return new Date(d).toLocaleDateString('fr-FR', {day:'numeric',month:'short'}); } catch(e) { return d; } }
-
-// ============================================================
-// STATS PRINCIPALES
-// ============================================================
-function updateStats() {
-  const deals = getDeals();
-  const projects = getProjects();
-  const callers = getCallers();
-  const outreachers = getOutreachers();
-  const freelancers = getFreelancers();
-  const totalPeople = callers.length + outreachers.length + freelancers.length;
-  
-  // Calcul MRR total depuis les transactions récurrentes
-  const transactions = getTransactions();
-  const mrrTotal = transactions.filter(t => t.recurring === true).reduce((sum, t) => sum + (t.amount || 0), 0);
-  
-  // Deals conclus ce mois
-  const now = new Date();
-  const currentMonth = now.getMonth();
-  const currentYear = now.getFullYear();
-  const wonDealsThisMonth = deals.filter(d => {
-    if(d.stage !== 'won') return false;
-    const date = new Date(d.createdAt);
-    return date.getMonth() === currentMonth && date.getFullYear() === currentYear;
-  }).length;
-  
-  // Appels aujourd'hui (depuis callers KPI)
-  let todayCalls = 0;
-  callers.forEach(c => { if(c.dailyKPI && c.dailyKPI.calls) todayCalls += c.dailyKPI.calls; });
-  
-  const stats = [
-    { icon:'👥', label:'Total Clients', value: totalPeople, sub: `${deals.filter(d=>d.stage==='won').length} clients actifs`, color:'blue' },
-    { icon:'📅', label:'Réunions', value: deals.filter(d => d.stage === 'meeting').length, sub: 'ce mois', color:'teal' },
-    { icon:'💵', label:'MRR', value: formatCurrency(mrrTotal), sub: 'revenu mensuel récurrent', color:'amber' },
-    { icon:'🏆', label:'Transactions', value: wonDealsThisMonth, sub: 'conclues ce mois', color:'red' },
-    { icon:'📞', label:'Appels', value: todayCalls, sub: "aujourd'hui", color:'green' }
-  ];
-  
-  const container = document.getElementById('stats-grid');
-  if(!container) return;
-  container.innerHTML = stats.map(s => `
-    <div class="stat">
-      <div class="stat-top"><div class="stat-ic ${s.color}">${s.icon}</div></div>
-      <div class="stat-val">${s.value}</div>
-      <div class="stat-lbl">${s.label}</div>
-      <div class="stat-sub">${s.sub}</div>
-    </div>
-  `).join('');
-  
-  // Mise à jour badges sidebar
-  const badgePeople = document.getElementById('badge-people');
-  if(badgePeople) badgePeople.textContent = totalPeople;
-  const badgePipeline = document.getElementById('badge-pipeline');
-  if(badgePipeline) badgePipeline.textContent = deals.length;
-}
-
-// ============================================================
-// PIPELINE OVERVIEW
-// ============================================================
-function renderPipeline() {
-  const deals = getDeals();
-  const container = document.getElementById('pipeline-body');
-  if(!container) return;
-  
-  if(deals.length === 0) {
-    container.innerHTML = `
-      <div class="empty-state"><div class="empty-icon">⟶</div>
-      <div class="empty-title">Aucune piste</div>
-      <div class="empty-sub">Ajoutez votre premier prospect pour commencer.</div>
-      <button class="empty-action" onclick="window.location.href='pipeline.html'">+ Ajouter</button></div>`;
-    return;
-  }
-  
-  const stages = [
-    { id:'lead', name:'Leads', count: deals.filter(d=>d.stage==='lead').length },
-    { id:'contacted', name:'Contacté', count: deals.filter(d=>d.stage==='contacted').length },
-    { id:'meeting', name:'Rendez-vous', count: deals.filter(d=>d.stage==='meeting').length },
-    { id:'proposal', name:'Proposition', count: deals.filter(d=>d.stage==='proposal').length },
-    { id:'won', name:'Gagné ✅', count: deals.filter(d=>d.stage==='won').length }
-  ];
-  
-  const totalLeads = deals.length;
-  const totalValue = deals.reduce((sum, d) => sum + (d.value || 0), 0);
-  const wonValue = deals.filter(d=>d.stage==='won').reduce((sum, d) => sum + (d.value || 0), 0);
-  
-  container.innerHTML = `
-    <div class="sec-lbl">Entonnoir de conversion</div>
-    ${stages.map(s => {
-      const pct = totalLeads ? Math.round(s.count / totalLeads * 100) : 0;
-      return `<div class="funnel-row">
-        <div class="funnel-label">${s.name}</div>
-        <div class="funnel-track"><div class="funnel-fill" style="width:${pct}%;background:var(--accent)"></div></div>
-        <div class="funnel-num">${s.count}</div>
-        <div class="funnel-pct">${pct}%</div>
-      </div>`;
-    }).join('')}
-    <div class="pv-row">
-      <div class="pv-item"><div class="pv-label">Valeur totale</div><div class="pv-val">${formatCurrency(totalValue)}</div></div>
-      <div class="pv-item"><div class="pv-label">Gagné</div><div class="pv-val" style="color:var(--green)">${formatCurrency(wonValue)}</div></div>
-    </div>`;
-}
-
-// ============================================================
-// TODAY'S NUMBERS
-// ============================================================
-function renderToday() {
-  const callers = getCallers();
-  const deals = getDeals();
-  const container = document.getElementById('today-body');
-  if(!container) return;
-  
-  let todayCalls = 0;
-  let todayMeetings = 0;
-  let todayRevenue = 0;
-  
-  callers.forEach(c => {
-    if(c.dailyKPI) {
-      todayCalls += c.dailyKPI.calls || 0;
-      todayMeetings += c.dailyKPI.meetings || 0;
-    }
-  });
-  
-  // Revenue aujourd'hui (depuis transactions)
-  const today = new Date().toISOString().split('T')[0];
-  const transactions = getTransactions();
-  todayRevenue = transactions.filter(t => t.date === today).reduce((sum, t) => sum + (t.amount || 0), 0);
-  
-  const callsTarget = 1500;
-  const meetingsTarget = 30;
-  const revenueTarget = 20000;
-  
-  container.innerHTML = `
-    <div class="today-kpi-grid">
-      <div class="tk"><div class="tk-lbl">Appels</div><div class="tk-val" style="color:var(--accent)">${todayCalls}</div><div class="tk-target">/ ${callsTarget}</div><div class="tk-bar"><div class="tk-bar-fill" style="width:${Math.min(100, todayCalls/callsTarget*100)}%;background:var(--accent)"></div></div></div>
-      <div class="tk"><div class="tk-lbl">Rendez-vous</div><div class="tk-val" style="color:var(--teal)">${todayMeetings}</div><div class="tk-target">/ ${meetingsTarget}</div><div class="tk-bar"><div class="tk-bar-fill" style="width:${Math.min(100, todayMeetings/meetingsTarget*100)}%;background:var(--teal)"></div></div></div>
-      <div class="tk"><div class="tk-lbl">Transactions</div><div class="tk-val" style="color:var(--amber)">${deals.filter(d=>d.stage==='won' && new Date(d.updatedAt).toISOString().split('T')[0] === today).length}</div><div class="tk-target">/ 6</div></div>
-    </div>
-    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:16px">
-      <div class="tk-lbl">Revenus aujourd'hui</div>
-      <div style="font-family:var(--head);font-size:28px;font-weight:700;color:var(--green);margin:4px 0">${formatCurrency(todayRevenue)}</div>
-      <div style="font-size:11px;color:var(--text3)">Objectif: ${formatCurrency(revenueTarget)}</div>
-      <div class="tk-bar" style="height:4px;margin-top:8px"><div class="tk-bar-fill" style="width:${Math.min(100, todayRevenue/revenueTarget*100)}%;background:var(--green)"></div></div>
-    </div>
-    <div class="sec-lbl">Appels à venir</div>
-    <div class="upcoming-item"><div class="upcoming-time">10:00</div><div><div class="upcoming-title">Découverte — Nouveau client</div><div class="upcoming-sub">Karim M. · Zoom</div></div></div>
-    <div class="upcoming-item"><div class="upcoming-time">14:30</div><div><div class="upcoming-title">Revue proposition</div><div class="upcoming-sub">Équipe interne</div></div></div>`;
-}
-
-// ============================================================
-// ALERTS
-// ============================================================
-function renderAlerts() {
-  const deals = getDeals();
-  const projects = getProjects();
-  const container = document.getElementById('alerts-body');
-  const chip = document.getElementById('alerts-chip');
-  if(!container) return;
-  
-  const alerts = [];
-  
-  // Propositions sans réponse depuis 5+ jours
-  deals.forEach(d => {
-    if(d.stage === 'proposal' && d.updatedAt) {
-      const daysSince = Math.floor((new Date() - new Date(d.updatedAt)) / (86400000));
-      if(daysSince >= 5) alerts.push({ icon:'📄', title:`Proposition sans réponse`, desc:`${d.company} - ${daysSince} jours`, priority:'high' });
-    }
-  });
-  
-  // Projets en retard
-  projects.forEach(p => {
-    if(p.due && p.status !== 'Completed') {
-      const dueDate = new Date(p.due);
-      if(dueDate < new Date()) alerts.push({ icon:'⚠️', title:`Projet en retard`, desc:`${p.name} - dépassé`, priority:'medium' });
-    }
-  });
-  
-  const alertCount = alerts.length;
-  if(alertCount === 0) {
-    chip.className = 'chip green';
-    chip.textContent = 'Tout est clair';
-    container.innerHTML = `<div class="empty-state"><div class="empty-icon">✅</div><div class="empty-title">Aucune alerte</div><div class="empty-sub">Tout est sous contrôle.</div></div>`;
-    return;
-  }
-  
-  chip.className = 'chip red';
-  chip.textContent = alertCount + ' alerte(s)';
-  container.innerHTML = alerts.slice(0,4).map(a => `
-    <div class="alert-item"><div class="al-ic" style="background:rgba(244,63,94,.14)">${a.icon}</div>
-    <div><div class="al-title">${a.title}</div><div class="al-desc">${a.desc}</div><div class="al-time" style="color:var(--red)">${a.priority === 'high' ? 'Haute priorité' : 'Moyenne'}</div></div></div>
-  `).join('');
-}
-
-// ============================================================
-// MRR
-// ============================================================
-function renderMRR() {
-  const transactions = getTransactions();
-  const container = document.getElementById('mrr-body');
-  if(!container) return;
-  
-  const mrrTotal = transactions.filter(t => t.recurring === true).reduce((sum, t) => sum + (t.amount || 0), 0);
-  const oneTimeTotal = transactions.filter(t => t.recurring !== true).reduce((sum, t) => sum + (t.amount || 0), 0);
-  const expenses = getExpenses().reduce((sum, e) => sum + (e.amount || 0), 0);
-  const profit = mrrTotal + oneTimeTotal - expenses;
-  
-  container.innerHTML = `
-    <div class="mrr-row"><div class="mrr-lbl">MRR mensuel</div><div class="mrr-val" style="color:var(--teal)">${formatCurrency(mrrTotal)}</div></div>
-    <div class="mrr-row"><div class="mrr-lbl">Paiements uniques</div><div class="mrr-val" style="color:var(--accent)">${formatCurrency(oneTimeTotal)}</div></div>
-    <div class="mrr-row"><div class="mrr-lbl">Dépenses</div><div class="mrr-val" style="color:var(--red)">-${formatCurrency(expenses)}</div></div>
-    <div class="mrr-row" style="border-bottom:none;padding-top:12px"><div class="mrr-lbl" style="font-weight:700">Bénéfice net</div><div style="font-family:var(--head);font-size:20px;font-weight:700;color:var(--green)">${formatCurrency(profit)}</div></div>`;
-}
-
-// ============================================================
-// PROJECTS
-// ============================================================
-function renderProjects() {
-  const projects = getProjects();
-  const container = document.getElementById('projects-body');
-  if(!container) return;
-  
-  if(projects.length === 0) {
-    container.innerHTML = `<div class="empty-state"><div class="empty-icon">📁</div><div class="empty-title">Aucun projet</div><div class="empty-sub">Créez votre premier projet.</div><button class="empty-action" onclick="window.location.href='projects.html'">+ Nouveau projet</button></div>`;
-    return;
-  }
-  
-  const tasks = getTasks();
-  const activeProjects = projects.filter(p => p.status === 'Active').slice(0,5);
-  
-  container.innerHTML = `<table class="tbl"><thead><tr><th>Projet</th><th>Client</th><th>Progression</th><th>Échéance</th><th>Statut</th></tr></thead><tbody>
-    ${activeProjects.map(p => {
-      const projectTasks = tasks.filter(t => t.projectId === p.id);
-      const done = projectTasks.filter(t => t.status === 'Done').length;
-      const pct = projectTasks.length ? Math.round(done / projectTasks.length * 100) : 0;
-      const statusClass = p.status === 'Active' ? 'blue' : (p.status === 'Completed' ? 'green' : 'yellow');
-      return `<tr class="clickable" onclick="window.location.href='projects.html'">
-        <td style="font-weight:600">${p.name}</td><td style="color:var(--text2)">${p.client || '—'}</td>
-        <td><div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:${pct}%"></div></div><div class="prog-pct">${pct}%</div></div></td>
-        <td style="font-size:12px">${p.due ? formatDateShort(p.due) : '—'}</td>
-        <td><span class="chip ${statusClass}">${p.status}</span></td>
-      </tr>`;
-    }).join('')}
-  </tbody></table>`;
-}
-
-// ============================================================
-// LEADERBOARD
-// ============================================================
-function renderLeaderboard() {
-  const callers = getCallers();
-  const outreachers = getOutreachers();
-  const freelancers = getFreelancers();
-  const container = document.getElementById('lb-body');
-  if(!container) return;
-  
-  const allPeople = [
-    ...callers.map(c => ({ name: c.name, role: 'Cold Caller', revenue: (c.dailyKPI?.closes || 0) * 1000, initials: c.name?.charAt(0) || 'C' })),
-    ...outreachers.map(o => ({ name: o.name, role: 'Outreacher', revenue: (o.dailyKPI?.meetings || 0) * 800, initials: o.name?.charAt(0) || 'O' })),
-    ...freelancers.map(f => ({ name: f.name, role: 'Freelancer', revenue: (f.workHistory?.projects || 0) * 500, initials: f.name?.charAt(0) || 'F' }))
-  ];
-  
-  const sorted = allPeople.sort((a,b) => b.revenue - a.revenue).slice(0,5);
-  
-  if(sorted.length === 0) {
-    container.innerHTML = `<div class="empty-state"><div class="empty-icon">🏆</div><div class="empty-title">Aucune donnée</div><div class="empty-sub">Ajoutez des membres d'équipe.</div></div>`;
-    return;
-  }
-  
-  const colors = ['var(--amber)','var(--text2)','#b87333'];
-  container.innerHTML = sorted.map((p,i) => `
-    <div class="lb-item"><div class="lb-rank" style="color:${colors[i]||'var(--text3)'}">#${i+1}</div>
-    <div class="lb-av" style="background:linear-gradient(135deg,var(--accent),var(--teal))">${p.initials}</div>
-    <div style="flex:1"><div class="lb-name">${p.name}</div><div class="lb-role">${p.role}</div></div>
-    <div class="lb-rev">${formatCurrency(p.revenue)}</div></div>
-  `).join('');
-}
-
-// ============================================================
-// NICHE REVENUE
-// ============================================================
-function renderNiche() {
-  const deals = getDeals();
-  const container = document.getElementById('niche-body');
-  if(!container) return;
-  
-  const wonDeals = deals.filter(d => d.stage === 'won');
-  const nicheMap = new Map();
-  wonDeals.forEach(d => {
-    if(d.niche) {
-      nicheMap.set(d.niche, (nicheMap.get(d.niche) || 0) + (d.value || 0));
-    }
-  });
-  
-  const niches = Array.from(nicheMap.entries()).map(([name, value]) => ({ name, value })).sort((a,b) => b.value - a.value).slice(0,5);
-  const maxValue = niches[0]?.value || 1;
-  
-  if(niches.length === 0) {
-    container.innerHTML = `<div class="empty-state"><div class="empty-icon">📊</div><div class="empty-title">Aucune donnée</div><div class="empty-sub">Les revenus par niche apparaîtront ici.</div></div>`;
-    return;
-  }
-  
-  container.innerHTML = niches.map(n => {
-    const pct = Math.round(n.value / maxValue * 100);
-    return `<div class="niche-item"><div class="niche-dot" style="background:var(--accent)"></div>
-    <div class="niche-label">${n.name}</div><div class="niche-bar-wrap"><div class="niche-bar-fill" style="width:${pct}%;background:var(--accent)"></div></div>
-    <div class="niche-val">${formatCurrency(n.value)}</div></div>`;
-  }).join('');
-}
-
-// ============================================================
-// DATE
-// ============================================================
-function renderDate() {
-  const now = new Date();
-  const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-  const time = now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
-  const dateEl = document.getElementById('page-date');
-  if(dateEl) dateEl.textContent = now.toLocaleDateString('fr-FR', options) + ' · ' + time;
-  
-  const months = ['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Aoû','Sep','Oct','Nov','Déc'];
-  const lbMonth = document.getElementById('lb-month');
-  if(lbMonth) lbMonth.textContent = months[now.getMonth()] + ' ' + now.getFullYear();
-}
-
-// ============================================================
-// EXPORT
-// ============================================================
-function exportAllData() {
-  const data = {
-    deals: getDeals(),
-    projects: getProjects(),
-    tasks: getTasks(),
-    callers: getCallers(),
-    outreachers: getOutreachers(),
-    freelancers: getFreelancers(),
-    transactions: getTransactions(),
-    expenses: getExpenses(),
-    exportedAt: new Date().toISOString()
-  };
-  const json = JSON.stringify(data, null, 2);
-  const blob = new Blob([json], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `niche_crm_export_${new Date().toISOString().split('T')[0]}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
-}
-
-// ============================================================
-// INITIALISATION
-// ============================================================
-function initDemoData() {
-  // Ajouter des exemples si localStorage est vide
-  if(getDeals().length === 0) {
-    saveDeals([
-      { id: '1', company: 'TechCorp', contact: 'Jean Martin', stage: 'lead', value: 5000, niche: 'SaaS', assigned: 'Karim', createdAt: new Date().toISOString() },
-      { id: '2', company: 'GreenOps', contact: 'Marie Claire', stage: 'meeting', value: 8000, niche: 'E-commerce', assigned: 'Sara', createdAt: new Date().toISOString() }
-    ]);
-  }
-  if(getProjects().length === 0) {
-    saveProjects([
-      { id: '1', name: 'Site Web TechCorp', client: 'TechCorp', status: 'Active', due: new Date(Date.now() + 30*86400000).toISOString().split('T')[0], budget: 5000 },
-      { id: '2', name: 'Campagne Ads', client: 'GreenOps', status: 'Active', due: new Date(Date.now() + 15*86400000).toISOString().split('T')[0], budget: 3000 }
-    ]);
-  }
-}
-
-initDemoData();
-renderDate();
-updateStats();
-renderPipeline();
-renderToday();
-renderAlerts();
-renderMRR();
-renderProjects();
-renderLeaderboard();
-renderNiche();
-setInterval(renderDate, 60000);
-</script>
+    <script>
+        // ========================================
+        // APP CORE — STATE MANAGEMENT
+        // ========================================
+        
+        const AppCore = {
+            // State
+            state: {
+                currentRoute: '/dashboard',
+                isSidebarCollapsed: false,
+                isMobileMenuOpen: false,
+                isLoading: true,
+                user: null,
+                notifications: [],
+                modules: {}
+            },
+            
+            // Routes Configuration
+            routes: {
+                '/dashboard': { title: 'Tableau de bord', icon: '📊', module: 'dashboard', permissions: ['admin', 'manager', 'viewer'] },
+                '/people': { title: 'Personnes', icon: '👥', module: 'people', permissions: ['admin', 'manager'] },
+                '/pipeline': { title: 'Pipeline', icon: '⟶', module: 'pipeline', permissions: ['admin', 'manager', 'viewer'] },
+                '/projects': { title: 'Projets', icon: '📁', module: 'projects', permissions: ['admin', 'manager', 'viewer'] },
+                '/finance': { title: 'Finance', icon: '💰', module: 'finance', permissions: ['admin', 'manager'] },
+                '/analytics': { title: 'Analytique', icon: '📈', module: 'analytics', permissions: ['admin', 'manager'] },
+                '/client-portal': { title: 'Portail client', icon: '🌐', module: 'client-portal', permissions: ['admin', 'client'] },
+                '/settings': { title: 'Paramètres', icon: '⚙️', module: 'settings', permissions: ['admin'] }
+            },
+            
+            // Navigation Items
+            navigationItems: [
+                { section: 'PRINCIPAL', items: ['/dashboard', '/people', '/pipeline', '/projects', '/analytics'] },
+                { section: 'CLIENT', items: ['/client-portal', '/finance'] },
+                { section: 'SYSTÈME', items: ['/settings'] }
+            ],
+            
+            // User Session
+            session: null,
+            
+            // ========================================
+            // INITIALIZATION
+            // ========================================
+            async init() {
+                // Load session
+                this.loadSession();
+                
+                // Setup event listeners
+                this.setupEventListeners();
+                
+                // Start loading animation
+                this.simulateLoading();
+                
+                // Render initial UI
+                await this.render();
+                
+                // Handle initial route
+                this.handleRoute();
+                
+                // Setup hash change listener
+                window.addEventListener('hashchange', () => this.handleRoute());
+                
+                // Setup resize listener for responsive
+                window.addEventListener('resize', () => this.handleResize());
+            },
+            
+            // ========================================
+            // SESSION MANAGEMENT
+            // ========================================
+            loadSession() {
+                const savedSession = localStorage.getItem('crm_session');
+                if (savedSession) {
+                    try {
+                        this.session = JSON.parse(savedSession);
+                    } catch(e) {
+                        console.error('Invalid session');
+                    }
+                }
+                
+                // Demo session if none exists
+                if (!this.session) {
+                    this.session = {
+                        id: 'admin_1',
+                        name: 'Administrateur',
+                        email: 'admin@niche-crm.com',
+                        role: 'admin',
+                        roleLabel: 'Super Administrateur',
+                        avatar: 'AD',
+                        permissions: ['admin', 'manager', 'viewer']
+                    };
+                    localStorage.setItem('crm_session', JSON.stringify(this.session));
+                }
+            },
+            
+            // ========================================
+            // LOADING SIMULATION
+            // ========================================
+            simulateLoading() {
+                let progress = 0;
+                const statusMessages = [
+                    'Chargement du noyau...',
+                    'Initialisation des modules...',
+                    'Connexion à la base...',
+                    'Préparation de l\'interface...',
+                    'Finalisation...'
+                ];
+                let msgIndex = 0;
+                
+                const interval = setInterval(() => {
+                    progress += Math.random() * 15;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        
+                        const loadingScreen = document.getElementById('loading-screen');
+                        const root = document.getElementById('root');
+                        
+                        loadingScreen.classList.add('hide');
+                        root.classList.add('loaded');
+                        
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none';
+                        }, 600);
+                        
+                        // Show welcome notification
+                        this.showNotification('Bienvenue sur Niche CRM — Enterprise Agency OS', 'success');
+                    }
+                    
+                    const progressBar = document.getElementById('loading-progress-bar');
+                    if (progressBar) {
+                        progressBar.style.width = Math.min(progress, 100) + '%';
+                    }
+                    
+                    if (progress > (msgIndex + 1) * 20 && msgIndex < statusMessages.length - 1) {
+                        msgIndex++;
+                        const statusEl = document.getElementById('loading-status');
+                        if (statusEl) statusEl.textContent = statusMessages[msgIndex];
+                    }
+                }, 250);
+            },
+            
+            // ========================================
+            // NOTIFICATION SYSTEM
+            // ========================================
+            showNotification(message, type = 'info', title = null) {
+                const container = document.getElementById('notification-container');
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                
+                const icons = {
+                    success: '✅',
+                    warning: '⚠️',
+                    error: '❌',
+                    info: 'ℹ️'
+                };
+                
+                const titles = {
+                    success: 'Succès',
+                    warning: 'Attention',
+                    error: 'Erreur',
+                    info: 'Information'
+                };
+                
+                notification.innerHTML = `
+                    <div class="notification-icon">${icons[type] || 'ℹ️'}</div>
+                    <div class="notification-content">
+                        <div class="notification-title">${title || titles[type]}</div>
+                        <div class="notification-message">${message}</div>
+                    </div>
+                    <div class="notification-close" onclick="this.parentElement.remove()">✕</div>
+                `;
+                
+                container.appendChild(notification);
+                
+                // Auto remove after 5 seconds
+                setTimeout(() => {
+                    if (notification.parentElement) notification.remove();
+                }, 5000);
+                
+                return notification;
+            },
+            
+            // ========================================
+            // RENDER UI
+            // ========================================
+            async render() {
+                const root = document.getElementById('root');
+                if (!root) return;
+                
+                // Build sidebar HTML
+                const sidebarHtml = this.buildSidebar();
+                const headerHtml = this.buildHeader();
+                
+                root.innerHTML = `
+                    ${sidebarHtml}
+                    <main class="main-content">
+                        ${headerHtml}
+                        <div class="page-container" id="page-container">
+                            <div class="spinner" style="margin: 100px auto;"></div>
+                        </div>
+                    </main>
+                `;
+                
+                // Setup sidebar toggle
+                const menuToggle = document.getElementById('menu-toggle');
+                if (menuToggle) {
+                    menuToggle.addEventListener('click', () => this.toggleSidebar());
+                }
+                
+                // Setup search
+                const searchInput = document.getElementById('global-search');
+                if (searchInput) {
+                    searchInput.addEventListener('keydown', (e) => {
+                        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                            e.preventDefault();
+                            this.showNotification('Recherche globale — Fonctionnalité à venir', 'info');
+                        }
+                    });
+                }
+                
+                // Setup notification bell
+                const notifBtn = document.getElementById('notifications-btn');
+                if (notifBtn) {
+                    notifBtn.addEventListener('click', () => {
+                        this.showNotification('3 nouvelles notifications non lues', 'info', 'Notifications');
+                    });
+                }
+            },
+            
+            // ========================================
+            // BUILD SIDEBAR
+            // ========================================
+            buildSidebar() {
+                const currentPath = window.location.hash.slice(1) || '/dashboard';
+                const isCollapsed = this.state.isSidebarCollapsed;
+                
+                let sidebarHtml = `
+                    <aside class="sidebar ${isCollapsed ? 'collapsed' : ''}" id="sidebar">
+                        <div class="sidebar-header">
+                            <div class="sidebar-logo">
+                                <span>NC</span>
+                            </div>
+                            ${!isCollapsed ? `
+                                <div>
+                                    <div class="sidebar-logo-text">Niche CRM</div>
+                                    <div class="sidebar-logo-version">Enterprise OS v2.0</div>
+                                </div>
+                            ` : ''}
+                        </div>
+                        <nav class="sidebar-nav">
+                `;
+                
+                for (const section of this.navigationItems) {
+                    sidebarHtml += `
+                        <div class="nav-section">
+                            ${!isCollapsed ? `<div class="nav-section-title">${section.section}</div>` : ''}
+                    `;
+                    
+                    for (const path of section.items) {
+                        const route = this.routes[path];
+                        if (!route) continue;
+                        
+                        const isActive = currentPath === path;
+                        sidebarHtml += `
+                            <a href="#${path}" class="nav-item ${isActive ? 'active' : ''}">
+                                <span class="nav-icon">${route.icon}</span>
+                                ${!isCollapsed ? `<span class="nav-label">${route.title}</span>` : ''}
+                            </a>
+                        `;
+                    }
+                    
+                    sidebarHtml += `</div>`;
+                }
+                
+                sidebarHtml += `
+                        </nav>
+                        <div class="sidebar-footer">
+                            <div class="user-avatar">${this.session.avatar || this.session.name?.charAt(0) || 'U'}</div>
+                            ${!isCollapsed ? `
+                                <div class="user-info">
+                                    <div class="user-name">${this.session.name}</div>
+                                    <div class="user-role">${this.session.roleLabel}</div>
+                                </div>
+                                <div class="logout-btn" onclick="AppCore.logout()">🚪</div>
+                            ` : ''}
+                        </div>
+                    </aside>
+                `;
+                
+                return sidebarHtml;
+            },
+            
+            // ========================================
+            // BUILD HEADER
+            // ========================================
+            buildHeader() {
+                const currentPath = window.location.hash.slice(1) || '/dashboard';
+                const currentRoute = this.routes[currentPath] || this.routes['/dashboard'];
+                
+                return `
+                    <header class="app-header">
+                        <div class="header-left">
+                            <div class="menu-toggle" id="menu-toggle">
+                                <span>☰</span>
+                            </div>
+                            <div class="breadcrumb">
+                                Navigation / <strong>${currentRoute.title}</strong>
+                            </div>
+                        </div>
+                        <div class="header-right">
+                            <div class="search-bar">
+                                <span>🔍</span>
+                                <input type="text" id="global-search" placeholder="Rechercher...">
+                                <span class="search-kbd">⌘K</span>
+                            </div>
+                            <div class="header-action" id="notifications-btn">
+                                <span>🔔</span>
+                                <span class="notification-dot"></span>
+                            </div>
+                        </div>
+                    </header>
+                `;
+            },
+            
+            // ========================================
+            // ROUTE HANDLER
+            // ========================================
+            async handleRoute() {
+                const hash = window.location.hash.slice(1) || '/dashboard';
+                const route = this.routes[hash] || this.routes['/dashboard'];
+                const container = document.getElementById('page-container');
+                
+                if (!container) return;
+                
+                // Update breadcrumb
+                const breadcrumb = document.querySelector('.breadcrumb strong');
+                if (breadcrumb) breadcrumb.textContent = route.title;
+                
+                // Update active nav item
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    const href = item.getAttribute('href');
+                    if (href === `#${hash}`) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+                
+                // Show loading in page container
+                container.innerHTML = `
+                    <div style="display: flex; align-items: center; justify-content: center; min-height: 400px;">
+                        <div class="spinner"></div>
+                    </div>
+                `;
+                
+                // Simulate module loading
+                setTimeout(() => {
+                    container.innerHTML = `
+                        <div style="text-align: center; padding: 80px 20px;">
+                            <div style="font-size: 64px; margin-bottom: 24px;">${route.icon}</div>
+                            <div style="font-size: 28px; font-weight: 700; margin-bottom: 12px; font-family: 'Space Grotesk';">${route.title}</div>
+                            <div style="color: var(--text-tertiary); margin-bottom: 24px;">Module en cours de développement</div>
+                            <div class="glass-card" style="max-width: 500px; margin: 0 auto; padding: 24px;">
+                                <div style="font-size: 14px; color: var(--text-secondary);">
+                                    Ce module sera bientôt disponible avec toutes les fonctionnalités dynamiques.
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }, 500);
+            },
+            
+            // ========================================
+            // SIDEBAR TOGGLE
+            // ========================================
+            toggleSidebar() {
+                this.state.isSidebarCollapsed = !this.state.isSidebarCollapsed;
+                const sidebar = document.getElementById('sidebar');
+                if (sidebar) {
+                    sidebar.classList.toggle('collapsed', this.state.isSidebarCollapsed);
+                }
+                localStorage.setItem('sidebar_collapsed', this.state.isSidebarCollapsed);
+            },
+            
+            // ========================================
+            // RESPONSIVE HANDLER
+            // ========================================
+            handleResize() {
+                if (window.innerWidth > 1024) {
+                    const sidebar = document.getElementById('sidebar');
+                    const overlay = document.getElementById('sidebar-overlay');
+                    if (sidebar) sidebar.classList.remove('mobile-open');
+                    if (overlay) overlay.classList.remove('active');
+                    this.state.isMobileMenuOpen = false;
+                }
+            },
+            
+            // ========================================
+            // LOGOUT
+            // ========================================
+            logout() {
+                localStorage.removeItem('crm_session');
+                this.showNotification('Déconnexion réussie', 'success');
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1000);
+            },
+            
+            // ========================================
+            // MOBILE SIDEBAR TOGGLE
+            // ========================================
+            toggleMobileSidebar() {
+                this.state.isMobileMenuOpen = !this.state.isMobileMenuOpen;
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('sidebar-overlay');
+                
+                if (sidebar) sidebar.classList.toggle('mobile-open', this.state.isMobileMenuOpen);
+                if (overlay) overlay.classList.toggle('active', this.state.isMobileMenuOpen);
+            }
+        };
+        
+        // Expose AppCore globally
+        window.AppCore = AppCore;
+        
+        // Start the application
+        AppCore.init();
+    </script>
 </body>
 </html>
