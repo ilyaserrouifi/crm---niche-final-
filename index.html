@@ -1,40 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Niche CRM — Dashboard</title>
+<title>Niche CRM — Tableau de bord</title>
 <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%233b7ef8'/%3E%3Ctext x='50' y='68' font-size='48' text-anchor='middle' fill='white' font-weight='bold' font-family='Arial'%3ENC%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#04091a;
-  --bg2:#070f24;
-  --surface:#0b152e;
-  --surface2:#111d3f;
-  --surface3:#162248;
-  --border:#1c2d55;
-  --border2:#243460;
-  --accent:#3b7ef8;
-  --accent-glow:rgba(59,126,248,0.18);
-  --teal:#22d3b8;
-  --teal-glow:rgba(34,211,184,0.14);
-  --amber:#f59e0b;
-  --amber-glow:rgba(245,158,11,0.14);
-  --red:#f43f5e;
-  --red-glow:rgba(244,63,94,0.14);
-  --green:#10b981;
-  --green-glow:rgba(16,185,129,0.14);
-  --purple:#8b5cf6;
-  --text:#e2e8f8;
-  --text2:#8da0c4;
-  --text3:#4e637a;
-  --head:'Space Grotesk',sans-serif;
-  --body:'Plus Jakarta Sans',sans-serif;
-  --sw:240px;
-  --r:12px;
-  --rsm:8px;
+  --bg:#04091a;--bg2:#070f24;--surface:#0b152e;--surface2:#111d3f;--surface3:#162248;
+  --border:#1c2d55;--border2:#243460;
+  --accent:#3b7ef8;--teal:#22d3b8;--amber:#f59e0b;--red:#f43f5e;--green:#10b981;--purple:#8b5cf6;--orange:#f97316;
+  --text:#e2e8f8;--text2:#8da0c4;--text3:#4e637a;
+  --head:'Space Grotesk',sans-serif;--body:'Plus Jakarta Sans',sans-serif;
+  --sw:240px;--radius:12px;--radius-sm:8px;
 }
 body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:14px;min-height:100vh;display:flex;overflow-x:hidden}
 ::-webkit-scrollbar{width:4px;height:4px}
@@ -42,239 +22,190 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:14
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
 a{text-decoration:none;color:inherit}
 button{cursor:pointer;font-family:var(--body)}
-select{font-family:var(--body)}
 
-/* ──── SIDEBAR ──── */
-.sidebar{
-  width:var(--sw);min-height:100vh;
-  background:linear-gradient(180deg,var(--surface) 0%,var(--bg2) 100%);
-  border-right:1px solid var(--border);
-  display:flex;flex-direction:column;
-  position:fixed;top:0;left:0;z-index:200;
-}
+/* Sidebar */
+.sidebar{width:var(--sw);min-height:100vh;background:linear-gradient(180deg,var(--surface) 0%,var(--bg2) 100%);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:200}
 .logo-wrap{padding:22px 20px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.logo-icon{
-  width:36px;height:36px;border-radius:10px;
-  background:linear-gradient(135deg,var(--accent),var(--teal));
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--head);font-weight:700;font-size:14px;color:#fff;flex-shrink:0;
-}
+.logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--teal));display:flex;align-items:center;justify-content:center;font-family:var(--head);font-weight:700;font-size:14px;color:#fff;flex-shrink:0}
 .logo-text{font-family:var(--head);font-weight:700;font-size:17px;letter-spacing:-.3px}
 .logo-ver{font-size:10px;color:var(--text3);margin-top:1px}
 .nav{flex:1;overflow-y:auto;padding:12px 0}
 .nav-section{font-size:10px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--text3);padding:10px 20px 5px}
-.nav-item{
-  display:flex;align-items:center;gap:9px;
-  padding:9px 14px 9px 18px;margin:1px 8px;
-  border-radius:var(--rsm);font-size:13.5px;font-weight:500;
-  color:var(--text2);transition:all .15s;position:relative;
-}
+.nav-item{display:flex;align-items:center;gap:9px;padding:9px 14px 9px 18px;margin:1px 8px;border-radius:var(--radius-sm);font-size:13.5px;font-weight:500;color:var(--text2);transition:all .15s;position:relative}
 .nav-item:hover{background:var(--surface2);color:var(--text)}
-.nav-item.active{
-  background:linear-gradient(90deg,rgba(59,126,248,.18),rgba(59,126,248,.06));
-  color:var(--accent);font-weight:600;
-}
-.nav-item.active::before{
-  content:'';position:absolute;left:0;top:22%;height:56%;
-  width:2.5px;background:var(--accent);border-radius:0 2px 2px 0;
-}
+.nav-item.active{background:linear-gradient(90deg,rgba(59,126,248,.18),rgba(59,126,248,.06));color:var(--accent);font-weight:600}
+.nav-item.active::before{content:'';position:absolute;left:0;top:22%;height:56%;width:2.5px;background:var(--accent);border-radius:0 2px 2px 0}
 .nav-ic{font-size:15px;width:18px;text-align:center;flex-shrink:0}
-.nav-badge{
-  margin-left:auto;padding:2px 7px;border-radius:20px;
-  font-size:10px;font-weight:700;
-  background:rgba(244,63,94,.18);color:var(--red);
-}
+.nav-badge{margin-left:auto;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:rgba(244,63,94,.18);color:var(--red)}
 .nav-badge.blue{background:rgba(59,126,248,.15);color:var(--accent)}
 .nav-badge.teal{background:rgba(34,211,184,.12);color:var(--teal)}
 .sidebar-footer{padding:14px 16px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.profile-av{
-  width:36px;height:36px;border-radius:10px;
-  background:linear-gradient(135deg,#3b7ef8,#22d3b8);
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--head);font-size:13px;font-weight:700;color:#fff;flex-shrink:0;
-}
+.profile-av{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#3b7ef8,#22d3b8);display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
 .profile-name{font-size:13px;font-weight:600}
 .profile-role{font-size:11px;color:var(--text3)}
-.profile-menu{
-  margin-left:auto;width:26px;height:26px;border-radius:6px;
-  background:var(--surface2);border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;font-size:12px;color:var(--text2);
-}
+.profile-menu{margin-left:auto;width:26px;height:26px;border-radius:6px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;color:var(--text2)}
 
-/* ──── MAIN ──── */
+/* Main */
 .main{margin-left:var(--sw);flex:1;display:flex;flex-direction:column;min-height:100vh}
-
-/* ──── TOPBAR ──── */
-.topbar{
-  height:60px;background:var(--surface);border-bottom:1px solid var(--border);
-  display:flex;align-items:center;padding:0 28px;gap:14px;
-  position:sticky;top:0;z-index:100;
-}
+.topbar{height:60px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 28px;gap:14px;position:sticky;top:0;z-index:100}
 .breadcrumb{flex:1;font-size:13px;color:var(--text2)}
 .breadcrumb strong{color:var(--text);font-weight:600}
-.search{
-  display:flex;align-items:center;gap:7px;
-  background:var(--surface2);border:1px solid var(--border);
-  border-radius:var(--rsm);padding:8px 13px;width:230px;
-  transition:border-color .15s;
-}
+.search{display:flex;align-items:center;gap:7px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 13px;width:230px;transition:border-color .15s}
 .search:focus-within{border-color:var(--accent)}
-.search input{
-  background:none;border:none;outline:none;
-  font-family:var(--body);font-size:13px;color:var(--text);width:100%;
-}
+.search input{background:none;border:none;outline:none;font-family:var(--body);font-size:13px;color:var(--text);width:100%}
 .search input::placeholder{color:var(--text3)}
-.kbd{
-  font-size:11px;background:var(--surface3);
-  border:1px solid var(--border);padding:1px 6px;
-  border-radius:4px;flex-shrink:0;color:var(--text3);
-}
-.tb-btn{
-  width:36px;height:36px;border-radius:var(--rsm);
-  background:var(--surface2);border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;font-size:15px;color:var(--text2);
-  transition:background .15s;
-}
+.kbd{font-size:11px;background:var(--surface3);border:1px solid var(--border);padding:1px 6px;border-radius:4px;flex-shrink:0;color:var(--text3)}
+.tb-btn{width:36px;height:36px;border-radius:var(--radius-sm);background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;color:var(--text2);transition:background .15s}
 .tb-btn:hover{background:var(--surface3)}
-.btn-primary{
-  display:flex;align-items:center;gap:6px;
-  background:var(--accent);color:#fff;border:none;
-  padding:9px 16px;border-radius:var(--rsm);
-  font-size:13px;font-weight:600;
-  cursor:pointer;transition:opacity .15s;white-space:nowrap;
-}
+.btn-primary{display:flex;align-items:center;gap:6px;background:var(--accent);color:#fff;border:none;padding:9px 16px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;transition:opacity .15s;white-space:nowrap}
 .btn-primary:hover{opacity:.88}
-.btn-ghost{
-  display:flex;align-items:center;gap:6px;
-  background:var(--surface2);color:var(--text2);
-  border:1px solid var(--border);
-  padding:8px 14px;border-radius:var(--rsm);
-  font-size:13px;font-weight:500;
-  cursor:pointer;transition:all .15s;white-space:nowrap;
-}
+.btn-ghost{display:flex;align-items:center;gap:6px;background:var(--surface2);color:var(--text2);border:1px solid var(--border);padding:8px 14px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;white-space:nowrap}
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
-
-/* ──── CONTENT ──── */
+.btn-sm{padding:6px 12px;font-size:12px}
 .content{padding:26px 28px;flex:1}
 
-/* ──── BANNERS ──── */
-.banner{
-  display:flex;align-items:center;gap:12px;
-  border-radius:10px;padding:12px 18px;margin-bottom:22px;
-}
+/* Page Header */
+.page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.page-title{font-family:var(--head);font-size:22px;font-weight:700;display:flex;align-items:center;gap:8px}
+.page-date{font-size:12px;color:var(--text3);margin-top:4px}
+.live-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);color:var(--green);font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.85)}}
+
+/* Banners */
+.banner{display:flex;align-items:center;gap:12px;border-radius:10px;padding:12px 18px;margin-bottom:22px}
 .banner.info{background:rgba(59,126,248,.08);border:1px solid rgba(59,126,248,.2)}
 .banner.warning{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25)}
 .banner-icon{font-size:16px;flex-shrink:0}
 .banner-body{flex:1}
 .banner-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
 .banner-sub{font-size:12px;color:var(--text2)}
-.banner.info .banner-title{color:var(--text)}
 .banner.warning .banner-title{color:var(--amber)}
 .banner.warning .banner-sub{color:var(--amber);opacity:.8}
 
-/* ──── PAGE HEADER ──── */
-.page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
-.page-title{
-  font-family:var(--head);font-size:22px;font-weight:700;
-  display:flex;align-items:center;gap:8px;
-}
-.page-date{font-size:12px;color:var(--text3);margin-top:4px}
-.live-badge{
-  display:inline-flex;align-items:center;gap:5px;
-  background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);
-  color:var(--green);font-size:11px;font-weight:600;
-  padding:4px 10px;border-radius:20px;
-}
-.live-dot{
-  width:6px;height:6px;border-radius:50%;
-  background:var(--green);animation:pulse 2s infinite;
-}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.85)}}
-
-/* ──── STAT CARDS ──── */
+/* Stats Cards */
 .stats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:20px}
-.stat{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);padding:18px;
-  cursor:pointer;transition:all .2s;
-  animation:fadeUp .4s ease both;
-}
-.stat:nth-child(1){animation-delay:.04s}
-.stat:nth-child(2){animation-delay:.08s}
-.stat:nth-child(3){animation-delay:.12s}
-.stat:nth-child(4){animation-delay:.16s}
-.stat:nth-child(5){animation-delay:.20s}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;transition:all .2s}
 .stat:hover{border-color:var(--accent);transform:translateY(-2px)}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .stat-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
-.stat-ic{
-  width:40px;height:40px;border-radius:10px;
-  display:flex;align-items:center;justify-content:center;font-size:18px;
-}
+.stat-ic{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
 .stat-ic.blue{background:rgba(59,126,248,.14)}
 .stat-ic.teal{background:rgba(34,211,184,.12)}
 .stat-ic.amber{background:rgba(245,158,11,.12)}
 .stat-ic.red{background:rgba(244,63,94,.12)}
 .stat-ic.green{background:rgba(16,185,129,.12)}
-.stat-empty-val{
-  font-family:var(--head);font-size:27px;font-weight:700;
-  color:var(--text3);margin-bottom:3px;letter-spacing:-.5px;
-}
 .stat-val{font-family:var(--head);font-size:27px;font-weight:700;margin-bottom:3px}
+.stat-val.empty{color:var(--text3)}
 .stat-lbl{font-size:12px;color:var(--text2)}
 .stat-sub{font-size:11px;color:var(--text3);margin-top:5px}
-.stat-no-data{
-  font-size:11px;color:var(--text3);
-  background:var(--surface2);border:1px solid var(--border);
-  border-radius:6px;padding:3px 8px;margin-top:6px;display:inline-block;
-}
+.stat-no-data{font-size:11px;color:var(--text3);background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:3px 8px;margin-top:6px;display:inline-block}
 
-/* ──── CARD ──── */
-.card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);overflow:hidden;
-  animation:fadeUp .4s ease .2s both;
-}
-.card-hd{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:16px 20px 12px;border-bottom:1px solid var(--border);
-}
-.card-title{
-  font-family:var(--head);font-size:13.5px;font-weight:700;
-  display:flex;align-items:center;gap:7px;
-}
+/* Cards */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.card-hd{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 12px;border-bottom:1px solid var(--border)}
+.card-title{font-family:var(--head);font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:7px}
 .card-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 .card-action{font-size:12px;color:var(--accent);cursor:pointer;font-weight:500}
 .card-action:hover{text-decoration:underline}
 .card-bd{padding:18px}
 
-/* ──── EMPTY STATE ──── */
-.empty-state{
-  display:flex;flex-direction:column;align-items:center;
-  justify-content:center;padding:36px 20px;text-align:center;
-}
-.empty-icon{
-  width:48px;height:48px;border-radius:14px;
-  background:var(--surface2);border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:22px;margin-bottom:14px;
-}
+/* Grid layouts */
+.grid-3{display:grid;grid-template-columns:1fr 1fr 320px;gap:18px;margin-bottom:18px}
+.grid-2{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-bottom:18px}
+
+/* Funnel */
+.funnel-row{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.funnel-label{font-size:12px;color:var(--text2);width:74px;flex-shrink:0}
+.funnel-track{flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.funnel-fill{height:100%;border-radius:3px;transition:width 1.2s ease}
+.funnel-num{font-size:12px;font-weight:600;width:48px;text-align:right;flex-shrink:0}
+.funnel-pct{font-size:10px;color:var(--text3);width:38px;text-align:right;flex-shrink:0}
+
+/* Pipeline value */
+.pv-row{display:flex;gap:0;margin-top:16px;padding-top:14px;border-top:1px solid var(--border)}
+.pv-item{flex:1;padding:0 14px;border-right:1px solid var(--border)}
+.pv-item:first-child{padding-left:0}
+.pv-item:last-child{border-right:none}
+.pv-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}
+.pv-val{font-family:var(--head);font-size:15px;font-weight:700}
+.pv-val.empty{color:var(--text3)}
+
+/* Today KPI */
+.today-kpi-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
+.tk{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px}
+.tk-lbl{font-size:11px;color:var(--text3);margin-bottom:4px}
+.tk-val{font-family:var(--head);font-size:22px;font-weight:700}
+.tk-target{font-size:10px;color:var(--text3);margin-top:2px}
+.tk-bar{height:3px;background:var(--surface3);border-radius:2px;margin-top:7px;overflow:hidden}
+.tk-bar-fill{height:100%;border-radius:2px;transition:width 1.2s ease}
+
+/* Table */
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{font-size:10.5px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;color:var(--text3);padding:8px 14px;text-align:left;border-bottom:1px solid var(--border)}
+.tbl td{padding:12px 14px;font-size:13px;border-bottom:1px solid rgba(28,45,85,.5)}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr.clickable:hover td{background:rgba(59,126,248,.03);cursor:pointer}
+
+/* Progress */
+.prog-wrap{display:flex;align-items:center;gap:8px}
+.prog-bar{flex:1;height:4px;background:var(--surface2);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--teal))}
+.prog-pct{font-size:11px;color:var(--text2);width:28px;text-align:right}
+
+/* Avatars */
+.avs{display:flex}
+.av{width:25px;height:25px;border-radius:50%;border:2px solid var(--surface);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;margin-left:-5px;flex-shrink:0}
+.av:first-child{margin-left:0}
+
+/* MRR rows */
+.mrr-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
+.mrr-row:last-child{border-bottom:none}
+.mrr-lbl{font-size:13px;color:var(--text2)}
+.mrr-val{font-family:var(--head);font-size:14px;font-weight:700}
+
+/* Alerts */
+.alert-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.alert-item:last-child{border-bottom:none}
+.al-ic{width:30px;height:30px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px}
+.al-title{font-size:13px;font-weight:600;margin-bottom:3px}
+.al-desc{font-size:12px;color:var(--text2);line-height:1.45}
+.al-time{font-size:10px;color:var(--text3);margin-top:4px}
+
+/* Leaderboard */
+.lb-item{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--border)}
+.lb-item:last-child{border-bottom:none}
+.lb-rank{font-family:var(--head);font-size:14px;font-weight:800;color:var(--text3);width:22px;text-align:center}
+.lb-av{width:32px;height:32px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff}
+.lb-name{font-size:13px;font-weight:600}
+.lb-role{font-size:11px;color:var(--text3)}
+.lb-rev{font-family:var(--head);font-size:13px;font-weight:700;color:var(--teal)}
+.lb-meta{font-size:10px;color:var(--text3);margin-top:2px}
+
+/* Niche */
+.niche-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+.niche-item:last-child{border-bottom:none}
+.niche-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.niche-label{font-size:13px;flex:1}
+.niche-bar-wrap{width:80px;height:4px;background:var(--surface2);border-radius:2px;flex-shrink:0;overflow:hidden}
+.niche-bar-fill{height:100%;border-radius:2px}
+.niche-val{font-size:12px;font-weight:600;width:52px;text-align:right}
+
+/* Upcoming */
+.upcoming-item{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)}
+.upcoming-item:last-child{border-bottom:none}
+.upcoming-time{font-family:var(--head);font-size:12px;font-weight:700;color:var(--accent);width:38px;flex-shrink:0;padding-top:2px}
+.upcoming-title{font-size:13px;font-weight:600;margin-bottom:3px}
+.upcoming-sub{font-size:11px;color:var(--text3)}
+
+/* Empty state */
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:36px 20px;text-align:center}
+.empty-icon{width:48px;height:48px;border-radius:14px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
 .empty-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px}
 .empty-sub{font-size:12px;color:var(--text3);max-width:220px;line-height:1.55;margin-bottom:14px}
-.empty-action{
-  background:var(--accent);color:#fff;border:none;
-  padding:8px 16px;border-radius:8px;
-  font-size:12px;font-weight:600;cursor:pointer;
-}
-.empty-action-ghost{
-  background:transparent;color:var(--text3);border:1px solid var(--border);
-  padding:6px 14px;border-radius:8px;
-  font-size:12px;font-weight:500;cursor:pointer;
-}
+.empty-action{background:var(--accent);color:#fff;border:none;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer}
+.empty-action-ghost{background:transparent;color:var(--text3);border:1px solid var(--border);padding:6px 14px;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer}
 
-/* ──── CHIPS ──── */
+/* Chip */
 .chip{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600}
 .chip.green{background:rgba(16,185,129,.1);color:var(--green)}
 .chip.blue{background:rgba(59,126,248,.1);color:var(--accent)}
@@ -285,836 +216,525 @@ select{font-family:var(--body)}
 .chip.gray{background:var(--surface2);color:var(--text2)}
 .chip.xs{font-size:10px;padding:2px 7px}
 
-/* ──── 3-COL GRID ──── */
-.grid-3{display:grid;grid-template-columns:1fr 1fr 320px;gap:18px;margin-bottom:18px}
-.grid-2{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-bottom:18px}
-
-/* ──── FUNNEL ──── */
-.funnel-row{display:flex;align-items:center;gap:10px;margin-bottom:9px}
-.funnel-label{font-size:12px;color:var(--text2);width:74px;flex-shrink:0}
-.funnel-track{flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
-.funnel-fill{height:100%;border-radius:3px;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
-.funnel-num{font-size:12px;font-weight:600;width:38px;text-align:right;flex-shrink:0}
-.funnel-pct{font-size:10px;color:var(--text3);width:34px;text-align:right;flex-shrink:0}
-
-/* ──── PIPELINE VALUE ROW ──── */
-.pv-row{display:flex;gap:0;margin-top:16px;padding-top:14px;border-top:1px solid var(--border)}
-.pv-item{flex:1;padding:0 14px;border-right:1px solid var(--border)}
-.pv-item:first-child{padding-left:0}
-.pv-item:last-child{border-right:none}
-.pv-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}
-.pv-val{font-family:var(--head);font-size:15px;font-weight:700}
-.pv-val.empty{color:var(--text3)}
-
-/* ──── TABLE ──── */
-.tbl{width:100%;border-collapse:collapse}
-.tbl th{
-  font-size:10.5px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;
-  color:var(--text3);padding:8px 14px;text-align:left;
-  border-bottom:1px solid var(--border);
-}
-.tbl td{
-  padding:12px 14px;font-size:13px;
-  border-bottom:1px solid rgba(28,45,85,.5);
-}
-.tbl tr:last-child td{border-bottom:none}
-.tbl tr.clickable:hover td{background:rgba(59,126,248,.03);cursor:pointer}
-
-/* ──── PROGRESS ──── */
-.prog-wrap{display:flex;align-items:center;gap:8px}
-.prog-bar{flex:1;height:4px;background:var(--surface2);border-radius:2px;overflow:hidden}
-.prog-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--teal))}
-.prog-fill.done{background:var(--green)}
-.prog-pct{font-size:11px;color:var(--text2);width:28px;text-align:right}
-.prog-pct.done{color:var(--green)}
-
-/* ──── AVATARS ──── */
-.avs{display:flex}
-.av{
-  width:25px;height:25px;border-radius:50%;
-  border:2px solid var(--surface);
-  display:flex;align-items:center;justify-content:center;
-  font-size:9px;font-weight:700;color:#fff;
-  margin-left:-5px;flex-shrink:0;
-}
-.av:first-child{margin-left:0}
-
-/* ──── MRR ROWS ──── */
-.mrr-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
-.mrr-row:last-child{border-bottom:none}
-.mrr-lbl{font-size:13px;color:var(--text2)}
-.mrr-val{font-family:var(--head);font-size:14px;font-weight:700}
-
-/* ──── ALERTS ──── */
-.alert-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
-.alert-item:last-child{border-bottom:none}
-.al-ic{width:30px;height:30px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px}
-.al-title{font-size:13px;font-weight:600;margin-bottom:3px}
-.al-desc{font-size:12px;color:var(--text2);line-height:1.45}
-.al-time{font-size:10px;color:var(--text3);margin-top:4px}
-
-/* ──── LEADERBOARD ──── */
-.lb-item{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--border)}
-.lb-item:last-child{border-bottom:none}
-.lb-rank{font-family:var(--head);font-size:14px;font-weight:800;color:var(--text3);width:22px;text-align:center}
-.lb-av{width:32px;height:32px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff}
-.lb-name{font-size:13px;font-weight:600}
-.lb-role{font-size:11px;color:var(--text3)}
-.lb-rev{font-family:var(--head);font-size:13px;font-weight:700;color:var(--teal)}
-.lb-meta{font-size:10px;color:var(--text3);margin-top:2px}
-
-/* ──── NICHE BARS ──── */
-.niche-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
-.niche-item:last-child{border-bottom:none}
-.niche-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.niche-label{font-size:13px;flex:1}
-.niche-bar-wrap{width:80px;height:4px;background:var(--surface2);border-radius:2px;flex-shrink:0;overflow:hidden}
-.niche-bar-fill{height:100%;border-radius:2px}
-.niche-val{font-size:12px;font-weight:600;width:52px;text-align:right}
-
-/* ──── TODAY GRID ──── */
-.today-kpi-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
-.tk{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px}
-.tk-lbl{font-size:11px;color:var(--text3);margin-bottom:4px}
-.tk-val{font-family:var(--head);font-size:22px;font-weight:700}
-.tk-target{font-size:10px;color:var(--text3);margin-top:2px}
-.tk-bar{height:3px;background:var(--surface3);border-radius:2px;margin-top:7px;overflow:hidden}
-.tk-bar-fill{height:100%;border-radius:2px;transition:width 1.2s ease}
-
-/* ──── UPCOMING ──── */
-.upcoming-item{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)}
-.upcoming-item:last-child{border-bottom:none}
-.upcoming-time{font-family:var(--head);font-size:12px;font-weight:700;color:var(--accent);width:38px;flex-shrink:0;padding-top:2px}
-.upcoming-title{font-size:13px;font-weight:600;margin-bottom:3px}
-.upcoming-sub{font-size:11px;color:var(--text3)}
-
-/* ──── SECTION LABEL ──── */
 .sec-lbl{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
-
-/* ──── DEMO TOGGLE ──── */
-#demo-toggle-btn{transition:all .2s}
-
-/* ──── LOGO ADDITIONAL ──── */
-.favicon-placeholder{display:none}
 </style>
 </head>
 <body>
 
-<!-- ══════════ SIDEBAR ══════════ -->
+<!-- SIDEBAR -->
 <aside class="sidebar">
   <div class="logo-wrap">
     <div class="logo-icon">NC</div>
-    <div>
-      <div class="logo-text">Niche CRM</div>
-      <div class="logo-ver">Agency OS v1.0</div>
-    </div>
+    <div><div class="logo-text">Niche CRM</div><div class="logo-ver">Agency OS v1.0</div></div>
   </div>
   <nav class="nav">
     <div>
-      <div class="nav-section">Main</div>
-      <a class="nav-item active" href="index.html">
-        <span class="nav-ic">⊞</span> Dashboard
-      </a>
-      <a class="nav-item" href="people.html">
-        <span class="nav-ic">👥</span> People
-        <span class="nav-badge blue" id="badge-people">0</span>
-      </a>
-      <a class="nav-item" href="pipeline.html">
-        <span class="nav-ic">⟶</span> Pipeline
-        <span class="nav-badge teal" id="badge-pipeline">0</span>
-      </a>
-      <a class="nav-item" href="projects.html">
-        <span class="nav-ic">📁</span> Projects
-      </a>
-      <a class="nav-item" href="analytics.html">
-        <span class="nav-ic">📊</span> Analytics
-      </a>
+      <div class="nav-section">Principal</div>
+      <a class="nav-item active" href="index.html"><span class="nav-ic">⊞</span> Tableau de bord</a>
+      <a class="nav-item" href="people.html"><span class="nav-ic">👥</span> Personnes</a>
+      <a class="nav-item" href="pipeline.html"><span class="nav-ic">⟶</span> Pipeline</a>
+      <a class="nav-item" href="projects.html"><span class="nav-ic">📁</span> Projets</a>
+      <a class="nav-item" href="analytics.html"><span class="nav-ic">📊</span> Analytique</a>
     </div>
     <div>
       <div class="nav-section">Client</div>
-      <a class="nav-item" href="client-portal.html">
-        <span class="nav-ic">🌐</span> Client Portal
-      </a>
-      <a class="nav-item" href="finance.html">
-        <span class="nav-ic">💰</span> Finance
-      </a>
-      <a class="nav-item" href="#">
-        <span class="nav-ic">📄</span> Reports
-      </a>
-      <a class="nav-item" href="#">
-        <span class="nav-ic">🤝</span> Manage Clients
-      </a>
+      <a class="nav-item" href="client-portal.html"><span class="nav-ic">🌐</span> Portail client</a>
+      <a class="nav-item" href="finance.html"><span class="nav-ic">💰</span> Finance</a>
+      <a class="nav-item" href="#"><span class="nav-ic">📄</span> Rapports</a>
+      <a class="nav-item" href="#"><span class="nav-ic">🤝</span> Gérer les clients</a>
     </div>
     <div>
-      <div class="nav-section">System</div>
-      <a class="nav-item" href="#">
-        <span class="nav-ic">🔔</span> Alerts
-        <span class="nav-badge" id="badge-alerts">0</span>
-      </a>
-      <a class="nav-item" href="#">
-        <span class="nav-ic">⚙️</span> Settings
-      </a>
+      <div class="nav-section">Système</div>
+      <a class="nav-item" href="#"><span class="nav-ic">🔔</span> Alertes</a>
+      <a class="nav-item" href="#"><span class="nav-ic">⚙️</span> Paramètres</a>
     </div>
   </nav>
   <div class="sidebar-footer">
     <div class="profile-av">AN</div>
-    <div>
-      <div class="profile-name">Admin</div>
-      <div class="profile-role">Super Admin</div>
-    </div>
+    <div><div class="profile-name">Admin</div><div class="profile-role">Super Administrateur</div></div>
     <div class="profile-menu">···</div>
   </div>
 </aside>
 
-<!-- ══════════ MAIN ══════════ -->
+<!-- MAIN -->
 <div class="main">
-
-  <!-- TOPBAR -->
   <header class="topbar">
-    <div class="breadcrumb">Home / <strong>Dashboard</strong></div>
+    <div class="breadcrumb">Accueil / <strong>Tableau de bord</strong></div>
     <div class="search">
-      <span style="color:var(--text3);font-size:13px">🔍</span>
-      <input type="text" placeholder="Search clients, deals, people…"/>
+      <span>🔍</span>
+      <input type="text" id="search-input" placeholder="Rechercher des clients, des transactions..."/>
       <span class="kbd">⌘K</span>
     </div>
-    <div style="display:flex;gap:7px">
-      <div class="tb-btn">🔔</div>
-      <div class="tb-btn">✉️</div>
-      <div class="tb-btn">📅</div>
-    </div>
-    <button class="btn-primary">+ New Deal</button>
+    <div style="display:flex;gap:7px"><div class="tb-btn">🔔</div><div class="tb-btn">✉️</div><div class="tb-btn">📅</div></div>
+    <button class="btn-primary" onclick="window.location.href='pipeline.html'">+ Nouvel accord</button>
   </header>
 
-  <!-- CONTENT -->
   <main class="content">
-
-    <!-- PAGE HEADER -->
     <div class="page-header">
       <div>
-        <div class="page-title">
-          Dashboard
-          <span class="live-badge"><span class="live-dot"></span>Live</span>
-        </div>
-        <div class="page-date" id="page-date">Loading…</div>
+        <div class="page-title">Tableau de bord <span class="live-badge"><span class="live-dot"></span>En direct</span></div>
+        <div class="page-date" id="page-date">Chargement...</div>
       </div>
-      <div style="display:flex;gap:8px;align-items:center">
-        <button id="demo-toggle-btn" class="btn-ghost" onclick="toggleDemo()">▶ Preview Demo</button>
-        <button class="btn-ghost">📥 Export</button>
-        <button class="btn-primary">+ Add Client</button>
+      <div style="display:flex;gap:8px">
+        <button class="btn-ghost" onclick="exportAllData()">📥 Export</button>
+        <button class="btn-primary" onclick="window.location.href='people.html'">+ Ajouter un client</button>
       </div>
     </div>
 
-    <!-- CONNECTION BANNER (real mode) -->
-    <div class="banner info" id="banner-connect">
-      <span class="banner-icon">🔌</span>
-      <div class="banner-body">
-        <div class="banner-title">Backend not connected</div>
-        <div class="banner-sub">This dashboard is ready for your database. Connect a backend to start seeing real data populate automatically.</div>
-      </div>
-      <button class="btn-primary" style="flex-shrink:0">Connect Database</button>
-    </div>
+    <!-- Stats Cards -->
+    <div class="stats-grid" id="stats-grid"></div>
 
-    <!-- DEMO BANNER (demo mode only, hidden by default) -->
-    <div class="banner warning" id="banner-demo" style="display:none">
-      <span class="banner-icon">⚠️</span>
-      <div class="banner-body">
-        <div class="banner-title">Demo mode active</div>
-        <div class="banner-sub">Displaying sample data for presentation purposes only. This is not real client data.</div>
-      </div>
-    </div>
-
-    <!-- ══ STAT CARDS ══ -->
-    <div class="stats-grid" id="stats-grid">
-      <!-- Rendered by JS -->
-    </div>
-
-    <!-- ══ MAIN 3-COL GRID ══ -->
+    <!-- 3-COL GRID -->
     <div class="grid-3">
-
-      <!-- Pipeline -->
       <div class="card">
-        <div class="card-hd">
-          <div class="card-title">
-            <span class="card-dot" style="background:var(--accent)"></span>
-            Pipeline Overview
-          </div>
-          <div style="display:flex;gap:6px;align-items:center">
-            <span class="chip blue">This month</span>
-            <span class="card-action" onclick="window.location='pipeline.html'">Kanban →</span>
-          </div>
-        </div>
-        <div class="card-bd" id="pipeline-body">
-          <!-- Rendered by JS -->
-        </div>
+        <div class="card-hd"><div class="card-title"><span class="card-dot" style="background:var(--accent)"></span>Aperçu du pipeline</div><span class="card-action" onclick="window.location.href='pipeline.html'">Kanban →</span></div>
+        <div class="card-bd" id="pipeline-body"></div>
       </div>
-
-      <!-- Today's Numbers -->
       <div class="card">
-        <div class="card-hd">
-          <div class="card-title">
-            <span class="card-dot" style="background:var(--teal)"></span>
-            Today's Numbers
-          </div>
-          <span class="live-badge"><span class="live-dot"></span>Live</span>
-        </div>
-        <div class="card-bd" id="today-body">
-          <!-- Rendered by JS -->
-        </div>
+        <div class="card-hd"><div class="card-title"><span class="card-dot" style="background:var(--teal)"></span>Chiffres du jour</div><span class="live-badge"><span class="live-dot"></span>Live</span></div>
+        <div class="card-bd" id="today-body"></div>
       </div>
-
-      <!-- Right col: Alerts + MRR -->
       <div style="display:flex;flex-direction:column;gap:18px">
         <div class="card">
-          <div class="card-hd">
-            <div class="card-title">
-              <span class="card-dot" style="background:var(--red)"></span>
-              Active Alerts
-            </div>
-            <span class="chip red" id="alerts-chip">0 alerts</span>
-          </div>
-          <div style="padding:8px 20px" id="alerts-body">
-            <!-- Rendered by JS -->
-          </div>
+          <div class="card-hd"><div class="card-title"><span class="card-dot" style="background:var(--red)"></span>Alertes actives</div><span class="chip green" id="alerts-chip">0 alertes</span></div>
+          <div style="padding:8px 20px" id="alerts-body"></div>
         </div>
-
         <div class="card">
-          <div class="card-hd">
-            <div class="card-title">
-              <span class="card-dot" style="background:var(--amber)"></span>
-              MRR Snapshot
-            </div>
-            <span class="card-action" onclick="window.location='finance.html'">Finance →</span>
-          </div>
-          <div style="padding:8px 20px" id="mrr-body">
-            <!-- Rendered by JS -->
-          </div>
+          <div class="card-hd"><div class="card-title"><span class="card-dot" style="background:var(--amber)"></span>MRR Snapshot</div><span class="card-action" onclick="window.location.href='finance.html'">Finance →</span></div>
+          <div style="padding:8px 20px" id="mrr-body"></div>
         </div>
       </div>
     </div>
 
-    <!-- ══ PROJECTS TABLE ══ -->
+    <!-- Active Projects -->
     <div class="card" style="margin-bottom:18px">
-      <div class="card-hd">
-        <div class="card-title">
-          <span class="card-dot" style="background:var(--purple)"></span>
-          Active Projects
-        </div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <span class="chip blue" id="projects-count-chip">0 active</span>
-          <span class="card-action" onclick="window.location='projects.html'">See all →</span>
-        </div>
-      </div>
-      <div id="projects-body">
-        <!-- Rendered by JS -->
-      </div>
+      <div class="card-hd"><div class="card-title"><span class="card-dot" style="background:var(--purple)"></span>Projets actifs</div><span class="card-action" onclick="window.location.href='projects.html'">Voir tout →</span></div>
+      <div id="projects-body"></div>
     </div>
 
-    <!-- ══ LEADERBOARD + NICHE ══ -->
+    <!-- Leaderboard + Niche -->
     <div class="grid-2">
       <div class="card">
-        <div class="card-hd">
-          <div class="card-title">
-            <span class="card-dot" style="background:var(--amber)"></span>
-            Team Leaderboard — <span id="lb-month">This Month</span>
-          </div>
-          <span class="card-action" onclick="window.location='analytics.html'">Full Analytics →</span>
-        </div>
-        <div style="padding:8px 20px" id="lb-body">
-          <!-- Rendered by JS -->
-        </div>
+        <div class="card-hd"><div class="card-title"><span class="card-dot" style="background:var(--amber)"></span>Classement — <span id="lb-month">Ce mois</span></div><span class="card-action" onclick="window.location.href='analytics.html'">Analytique →</span></div>
+        <div style="padding:8px 20px" id="lb-body"></div>
       </div>
-
       <div class="card">
-        <div class="card-hd">
-          <div class="card-title">
-            <span class="card-dot" style="background:var(--teal)"></span>
-            Revenue by Niche
-          </div>
-        </div>
-        <div style="padding:8px 20px" id="niche-body">
-          <!-- Rendered by JS -->
-        </div>
+        <div class="card-hd"><div class="card-title"><span class="card-dot" style="background:var(--teal)"></span>Revenus par niche</div></div>
+        <div style="padding:8px 20px" id="niche-body"></div>
       </div>
     </div>
-
   </main>
 </div>
 
 <script>
-// ────────────────────────────────────────────────
-// DATA LAYER
-// In production: replace these with fetch() calls
-// e.g. const data = await fetch('/api/dashboard').then(r => r.json())
-// ────────────────────────────────────────────────
+// ============================================================
+// DATA STORAGE KEYS (toutes les données sont réelles stockées localStorage)
+// ============================================================
+// deals: pipeline deals
+// projects: projets
+// tasks: tâches
+// callers, outreachers, freelancers: personnes
+// invoices: factures
+// transactions: revenus
+// expenses: dépenses
 
-const REAL_DATA = {
-  stats: {
-    clients:  null,
-    meetings: null,
-    mrr:      null,
-    deals:    null,
-    calls:    null,
-  },
-  today: {
-    calls: null, callsTarget: 1500,
-    meetings: null, meetingsTarget: 30,
-    deals: null, dealsTarget: 6,
-    revenue: null, revenueTarget: 20000,
-  },
-  pipeline: null,    // null = no leads yet
-  alerts:   [],
-  mrr:      null,
-  projects: [],
-  leaderboard: [],
-  niches:   [],
-  upcoming: [],
-};
+// ============================================================
+// FONCTIONS UTILITAIRES
+// ============================================================
+function getDeals() { return JSON.parse(localStorage.getItem('crm_deals') || '[]'); }
+function getProjects() { return JSON.parse(localStorage.getItem('crm_projects') || '[]'); }
+function getTasks() { return JSON.parse(localStorage.getItem('crm_tasks') || '[]'); }
+function getCallers() { return JSON.parse(localStorage.getItem('crm_callers') || '[]'); }
+function getOutreachers() { return JSON.parse(localStorage.getItem('crm_outreachers') || '[]'); }
+function getFreelancers() { return JSON.parse(localStorage.getItem('crm_freelancers') || '[]'); }
+function getInvoices() { return JSON.parse(localStorage.getItem('crm_invoices') || '[]'); }
+function getTransactions() { return JSON.parse(localStorage.getItem('crm_transactions') || '[]'); }
+function getExpenses() { return JSON.parse(localStorage.getItem('crm_expenses') || '[]'); }
 
-const DEMO_DATA = {
-  stats: {
-    clients:  { value:'847', sub:'542 active · 305 inactive', delta:'7.5%', up:true  },
-    meetings: { value:'18',  sub:'6 today · 4 no-show',       delta:'2.1%', up:true  },
-    mrr:      { value:'$8,400', sub:'Net profit $4,910 · 58% margin', delta:'5.7%', up:true },
-    deals:    { value:'4',   sub:'$12,400 total value',        delta:'0.8%', up:false },
-    calls:    { value:'342', sub:'Target 1,500 · 22.8% done',  delta:'12.3%',up:true  },
-  },
-  today: {
-    calls:342, callsTarget:1500,
-    meetings:6, meetingsTarget:30,
-    deals:1, dealsTarget:6,
-    revenue:3400, revenueTarget:20000,
-  },
-  pipeline: {
-    totalValue:12721, forecast:42000, atRisk:2000,
-    funnel:[
-      {label:'Lead',      count:1500, pct:100,  color:'var(--accent)'},
-      {label:'Contacted', count:800,  pct:53,   color:'#5b9af9'},
-      {label:'Meeting',   count:30,   pct:3.75, color:'var(--teal)'},
-      {label:'Proposal',  count:15,   pct:1.875,color:'var(--amber)'},
-      {label:'Closed ✅', count:6,    pct:0.6,  color:'var(--green)'},
-    ],
-  },
-  alerts:[
-    {icon:'🚨',iconBg:'rgba(244,63,94,.14)',title:'3 Proposals Overdue',desc:'NexFlow, BlueSoft, CloudGo exceed 7 days without response',time:'2 min ago',priority:'High Priority',pc:'var(--red)'},
-    {icon:'⚠️',iconBg:'rgba(245,158,11,.14)',title:'Low Caller Activity',desc:'Mehdi R. — 12 calls today, target is 50',time:'1 hr ago',priority:'Medium',pc:'var(--amber)'},
-    {icon:'💳',iconBg:'rgba(59,126,248,.18)',title:'Invoice Unpaid — GreenOps',desc:'April invoice $3,000 — due in 2 days',time:'3 hr ago',priority:'Medium',pc:'var(--amber)'},
-    {icon:'📁',iconBg:'rgba(139,92,246,.12)',title:'Project Behind Schedule',desc:'BatCo Website — 5 days behind deadline',time:'5 hr ago',priority:'Low',pc:'var(--text3)'},
-  ],
-  mrr:{net:8400,newMRR:1200,churned:300,expansion:500,growth:'+7.5%',expenses:3490,profit:4910},
-  projects:[
-    {id:1,name:'NexFlow CRM',      client:'Omar Naj',   progress:53,  team:['O','S','M'],  service:'Dev',    svc:'blue',   status:'In Progress',    st:'blue',   due:'09 Sep 2026',  dc:'var(--text3)',  flag:''},
-    {id:2,name:'BatCo Website',    client:'Sara Ben',   progress:78,  team:['S','A'],       service:'Design', svc:'purple', status:'Pending Review', st:'yellow', due:'12 Jun 2026',  dc:'var(--amber)',  flag:'⚠ '},
-    {id:3,name:'Lunar Analytics',  client:'Youssef A.', progress:100, team:['Y','M','A','K'],service:'SEO',   svc:'green',  status:'Completed ✓',    st:'green',  due:'08 May 2026',  dc:'var(--text3)',  flag:''},
-    {id:4,name:'NexGen Platform',  client:'Mehdi R.',   progress:30,  team:['M','O'],       service:'Ads',    svc:'yellow', status:'In Progress',    st:'blue',   due:'06 Jul 2026',  dc:'var(--text3)',  flag:''},
-    {id:5,name:'GreenOps App',     client:'Aminé K.',   progress:65,  team:['A','S','Y'],   service:'Dev',    svc:'blue',   status:'At Risk !',      st:'red',    due:'01 Jun 2026',  dc:'var(--red)',    flag:'🔴 '},
-  ],
-  leaderboard:[
-    {initials:'KM',bg:'linear-gradient(135deg,#f59e0b,#f97316)',name:'Karim Moussaoui',role:'Cold Caller · E-commerce',revenue:12000,sub:'8 meetings · 3 closes',grade:'A+',gc:'yellow'},
-    {initials:'SB',bg:'linear-gradient(135deg,#8b5cf6,#3b7ef8)',name:'Sara Bencheikh',  role:'Cold Outreach · SaaS',      revenue:8000, sub:'6 meetings · 2 closes',grade:'A', gc:'blue'},
-    {initials:'YA',bg:'linear-gradient(135deg,#22d3b8,#3b7ef8)',name:'Youssef Alaoui',  role:'Cold Caller · Real Estate',  revenue:4000, sub:'4 meetings · 1 close', grade:'A', gc:'blue'},
-    {initials:'MR',bg:'linear-gradient(135deg,#10b981,#22d3b8)',name:'Mehdi Rachidi',   role:'Freelancer · Dev / Web',     revenue:3200, sub:'5 projects · 4.8★',    grade:'B', gc:'yellow'},
-    {initials:'AK',bg:'linear-gradient(135deg,#f43f5e,#f59e0b)',name:'Aminé Kachour',   role:'Freelancer · Design / Ads',  revenue:2700, sub:'4 projects · 4.6★',    grade:'B', gc:'yellow'},
-  ],
-  niches:[
-    {label:'E-commerce', color:'var(--accent)', pct:78, value:3250},
-    {label:'SaaS',        color:'var(--teal)',   pct:62, value:2600},
-    {label:'Real Estate', color:'var(--amber)',  pct:38, value:1580},
-    {label:'Agencies',    color:'var(--purple)', pct:24, value:980},
-    {label:'Coaches',     color:'var(--green)',  pct:14, value:590},
-  ],
-  nicheSummary:{best:'E-commerce ↑ 14%',ltv:'$18,400',churn:'2.3%'},
-  upcoming:[
-    {time:'10:00',title:'Discovery — NexFlow',    sub:'Karim M. · Zoom 30min',       type:'Zoom',     tc:'blue'},
-    {time:'14:30',title:'Proposal Review — BatCo',sub:'Sara B. · Internal',          type:'Internal', tc:'purple'},
-    {time:'16:00',title:'Close Call — Lunar Ltd.',sub:'Youssef A. · Google Meet',    type:'Meet',     tc:'green'},
-  ],
-};
+function saveDeals(data) { localStorage.setItem('crm_deals', JSON.stringify(data)); }
+function saveProjects(data) { localStorage.setItem('crm_projects', JSON.stringify(data)); }
+function saveTasks(data) { localStorage.setItem('crm_tasks', JSON.stringify(data)); }
 
-// ────────────────────────────────────────────────
-// STATE
-// ────────────────────────────────────────────────
-let isDemo = false;
-function getData(){ return isDemo ? DEMO_DATA : REAL_DATA; }
+function formatNumber(n) { return n ? n.toLocaleString() : '0'; }
+function formatCurrency(n) { return n ? '$' + n.toLocaleString() : '$0'; }
+function formatDateShort(d) { if(!d) return '—'; try { return new Date(d).toLocaleDateString('fr-FR', {day:'numeric',month:'short'}); } catch(e) { return d; } }
 
-// ────────────────────────────────────────────────
-// TOGGLE
-// ────────────────────────────────────────────────
-function toggleDemo(){
-  isDemo = !isDemo;
-  const btn = document.getElementById('demo-toggle-btn');
-  const bc  = document.getElementById('banner-connect');
-  const bd  = document.getElementById('banner-demo');
-  if(isDemo){
-    btn.textContent='🔴 Demo Mode ON';
-    btn.style.background='rgba(245,158,11,.15)';
-    btn.style.border='1px solid var(--amber)';
-    btn.style.color='var(--amber)';
-    bc.style.display='none';
-    bd.style.display='flex';
-  } else {
-    btn.textContent='▶ Preview Demo';
-    btn.style.background='';
-    btn.style.border='';
-    btn.style.color='';
-    bc.style.display='flex';
-    bd.style.display='none';
+// ============================================================
+// STATS PRINCIPALES
+// ============================================================
+function updateStats() {
+  const deals = getDeals();
+  const projects = getProjects();
+  const callers = getCallers();
+  const outreachers = getOutreachers();
+  const freelancers = getFreelancers();
+  const totalPeople = callers.length + outreachers.length + freelancers.length;
+  
+  // Calcul MRR total depuis les transactions récurrentes
+  const transactions = getTransactions();
+  const mrrTotal = transactions.filter(t => t.recurring === true).reduce((sum, t) => sum + (t.amount || 0), 0);
+  
+  // Deals conclus ce mois
+  const now = new Date();
+  const currentMonth = now.getMonth();
+  const currentYear = now.getFullYear();
+  const wonDealsThisMonth = deals.filter(d => {
+    if(d.stage !== 'won') return false;
+    const date = new Date(d.createdAt);
+    return date.getMonth() === currentMonth && date.getFullYear() === currentYear;
+  }).length;
+  
+  // Appels aujourd'hui (depuis callers KPI)
+  let todayCalls = 0;
+  callers.forEach(c => { if(c.dailyKPI && c.dailyKPI.calls) todayCalls += c.dailyKPI.calls; });
+  
+  const stats = [
+    { icon:'👥', label:'Total Clients', value: totalPeople, sub: `${deals.filter(d=>d.stage==='won').length} clients actifs`, color:'blue' },
+    { icon:'📅', label:'Réunions', value: deals.filter(d => d.stage === 'meeting').length, sub: 'ce mois', color:'teal' },
+    { icon:'💵', label:'MRR', value: formatCurrency(mrrTotal), sub: 'revenu mensuel récurrent', color:'amber' },
+    { icon:'🏆', label:'Transactions', value: wonDealsThisMonth, sub: 'conclues ce mois', color:'red' },
+    { icon:'📞', label:'Appels', value: todayCalls, sub: "aujourd'hui", color:'green' }
+  ];
+  
+  const container = document.getElementById('stats-grid');
+  if(!container) return;
+  container.innerHTML = stats.map(s => `
+    <div class="stat">
+      <div class="stat-top"><div class="stat-ic ${s.color}">${s.icon}</div></div>
+      <div class="stat-val">${s.value}</div>
+      <div class="stat-lbl">${s.label}</div>
+      <div class="stat-sub">${s.sub}</div>
+    </div>
+  `).join('');
+  
+  // Mise à jour badges sidebar
+  const badgePeople = document.getElementById('badge-people');
+  if(badgePeople) badgePeople.textContent = totalPeople;
+  const badgePipeline = document.getElementById('badge-pipeline');
+  if(badgePipeline) badgePipeline.textContent = deals.length;
+}
+
+// ============================================================
+// PIPELINE OVERVIEW
+// ============================================================
+function renderPipeline() {
+  const deals = getDeals();
+  const container = document.getElementById('pipeline-body');
+  if(!container) return;
+  
+  if(deals.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state"><div class="empty-icon">⟶</div>
+      <div class="empty-title">Aucune piste</div>
+      <div class="empty-sub">Ajoutez votre premier prospect pour commencer.</div>
+      <button class="empty-action" onclick="window.location.href='pipeline.html'">+ Ajouter</button></div>`;
+    return;
   }
-  renderAll();
-}
-
-// ────────────────────────────────────────────────
-// HELPERS
-// ────────────────────────────────────────────────
-function chip(text, color, xs){
-  const s = xs ? ' xs' : '';
-  return `<span class="chip ${color}${s}">${text}</span>`;
-}
-function emptyState(icon, title, sub, action){
-  const btn = action
-    ? `<button class="empty-action">${action}</button>`
-    : `<button class="empty-action-ghost">No data yet</button>`;
-  return `
-    <div class="empty-state">
-      <div class="empty-icon">${icon}</div>
-      <div class="empty-title">${title}</div>
-      <div class="empty-sub">${sub}</div>
-      ${btn}
+  
+  const stages = [
+    { id:'lead', name:'Leads', count: deals.filter(d=>d.stage==='lead').length },
+    { id:'contacted', name:'Contacté', count: deals.filter(d=>d.stage==='contacted').length },
+    { id:'meeting', name:'Rendez-vous', count: deals.filter(d=>d.stage==='meeting').length },
+    { id:'proposal', name:'Proposition', count: deals.filter(d=>d.stage==='proposal').length },
+    { id:'won', name:'Gagné ✅', count: deals.filter(d=>d.stage==='won').length }
+  ];
+  
+  const totalLeads = deals.length;
+  const totalValue = deals.reduce((sum, d) => sum + (d.value || 0), 0);
+  const wonValue = deals.filter(d=>d.stage==='won').reduce((sum, d) => sum + (d.value || 0), 0);
+  
+  container.innerHTML = `
+    <div class="sec-lbl">Entonnoir de conversion</div>
+    ${stages.map(s => {
+      const pct = totalLeads ? Math.round(s.count / totalLeads * 100) : 0;
+      return `<div class="funnel-row">
+        <div class="funnel-label">${s.name}</div>
+        <div class="funnel-track"><div class="funnel-fill" style="width:${pct}%;background:var(--accent)"></div></div>
+        <div class="funnel-num">${s.count}</div>
+        <div class="funnel-pct">${pct}%</div>
+      </div>`;
+    }).join('')}
+    <div class="pv-row">
+      <div class="pv-item"><div class="pv-label">Valeur totale</div><div class="pv-val">${formatCurrency(totalValue)}</div></div>
+      <div class="pv-item"><div class="pv-label">Gagné</div><div class="pv-val" style="color:var(--green)">${formatCurrency(wonValue)}</div></div>
     </div>`;
 }
-function pct(val, target){ return Math.min(Math.round((val||0)/target*100), 100); }
-function fmt(n){ return n!=null ? n.toLocaleString() : '—'; }
-function avatarBg(i){
-  const bgs = [
-    'linear-gradient(135deg,#3b7ef8,#22d3b8)',
-    'linear-gradient(135deg,#8b5cf6,#3b7ef8)',
-    'linear-gradient(135deg,#f59e0b,#f43f5e)',
-    'linear-gradient(135deg,#10b981,#22d3b8)',
-  ];
-  return bgs[i % bgs.length];
-}
 
-// ────────────────────────────────────────────────
-// RENDER STATS
-// ────────────────────────────────────────────────
-function renderStats(){
-  const d = getData();
-  const defs = [
-    {icon:'👥',label:'Total Clients',  key:'clients',  cls:'blue'},
-    {icon:'📅',label:'Meetings Booked',key:'meetings', cls:'teal'},
-    {icon:'💵',label:'MRR',            key:'mrr',      cls:'amber'},
-    {icon:'🏆',label:'Deals Closed',   key:'deals',    cls:'red'},
-    {icon:'📞',label:'Calls Today',    key:'calls',    cls:'green'},
-  ];
-  let html = '';
-  defs.forEach(def => {
-    const s = d.stats[def.key];
-    if(!s){
-      html += `
-        <div class="stat">
-          <div class="stat-top">
-            <div class="stat-ic ${def.cls}">${def.icon}</div>
-          </div>
-          <div class="stat-empty-val">—</div>
-          <div class="stat-lbl">${def.label}</div>
-          <span class="stat-no-data">No data yet</span>
-        </div>`;
-    } else {
-      const deltaHtml = s.delta ? `
-        <span style="
-          display:inline-flex;align-items:center;gap:3px;
-          font-size:11px;font-weight:600;padding:3px 8px;border-radius:20px;
-          background:${s.up?'rgba(16,185,129,.12)':'rgba(244,63,94,.12)'};
-          color:${s.up?'var(--green)':'var(--red)'};
-        ">${s.up?'↑':'↓'} ${s.delta}</span>` : '';
-      html += `
-        <div class="stat">
-          <div class="stat-top">
-            <div class="stat-ic ${def.cls}">${def.icon}</div>
-            ${deltaHtml}
-          </div>
-          <div class="stat-val">${s.value}</div>
-          <div class="stat-lbl">${def.label}</div>
-          ${s.sub ? `<div class="stat-sub">${s.sub}</div>` : ''}
-        </div>`;
+// ============================================================
+// TODAY'S NUMBERS
+// ============================================================
+function renderToday() {
+  const callers = getCallers();
+  const deals = getDeals();
+  const container = document.getElementById('today-body');
+  if(!container) return;
+  
+  let todayCalls = 0;
+  let todayMeetings = 0;
+  let todayRevenue = 0;
+  
+  callers.forEach(c => {
+    if(c.dailyKPI) {
+      todayCalls += c.dailyKPI.calls || 0;
+      todayMeetings += c.dailyKPI.meetings || 0;
     }
   });
-  document.getElementById('stats-grid').innerHTML = html;
-  // update sidebar badges
-  if(d.stats.clients) document.getElementById('badge-people').textContent = d.stats.clients.value;
-  else document.getElementById('badge-people').textContent = '0';
-  if(d.pipeline) document.getElementById('badge-pipeline').textContent = d.pipeline.funnel[0]?.count || '0';
-  else document.getElementById('badge-pipeline').textContent = '0';
-  document.getElementById('badge-alerts').textContent = d.alerts.length;
-}
-
-// ────────────────────────────────────────────────
-// RENDER PIPELINE
-// ────────────────────────────────────────────────
-function renderPipeline(){
-  const d = getData();
-  const el = document.getElementById('pipeline-body');
-  if(!d.pipeline || !d.pipeline.totalValue){
-    el.innerHTML = emptyState('⟶','No leads in pipeline','Add your first lead to start tracking deals through the pipeline.','+ Add Lead');
-    return;
-  }
-  const p = d.pipeline;
-  let funnelHtml = p.funnel.map(f => `
-    <div class="funnel-row">
-      <div class="funnel-label">${f.label}</div>
-      <div class="funnel-track"><div class="funnel-fill" style="width:${f.pct}%;background:${f.color}"></div></div>
-      <div class="funnel-num">${f.count.toLocaleString()}</div>
-      <div class="funnel-pct" style="color:${f.color}">${f.pct}%</div>
-    </div>`).join('');
-  el.innerHTML = `
-    <div class="sec-lbl">Conversion Funnel</div>
-    ${funnelHtml}
-    <div class="pv-row">
-      <div class="pv-item"><div class="pv-label">Total Pipeline</div><div class="pv-val">$${p.totalValue.toLocaleString()}</div></div>
-      <div class="pv-item"><div class="pv-label">Forecast 3M</div><div class="pv-val" style="color:var(--teal)">${p.forecast ? '$'+p.forecast.toLocaleString() : '—'}</div></div>
-      <div class="pv-item"><div class="pv-label">At Risk</div><div class="pv-val" style="color:var(--red)">${p.atRisk ? '$'+p.atRisk.toLocaleString() : '—'}</div></div>
-    </div>`;
-}
-
-// ────────────────────────────────────────────────
-// RENDER TODAY
-// ────────────────────────────────────────────────
-function renderToday(){
-  const d = getData();
-  const t = d.today;
-  const el = document.getElementById('today-body');
-  const hasAny = t.calls != null || t.meetings != null || t.deals != null;
-  if(!hasAny){
-    el.innerHTML = emptyState('📊','No activity today yet','KPIs will populate once team members start logging calls and meetings.','');
-    return;
-  }
-  const kpis = [
-    {lbl:'Calls Made', val:t.calls, target:t.callsTarget, color:'var(--accent)'},
-    {lbl:'Meetings',   val:t.meetings, target:t.meetingsTarget, color:'var(--teal)'},
-    {lbl:'Deals',      val:t.deals, target:t.dealsTarget, color:'var(--amber)'},
-  ];
-  let kpiHtml = kpis.map(k => `
-    <div class="tk">
-      <div class="tk-lbl">${k.lbl}</div>
-      <div class="tk-val" style="color:${k.color}">${k.val ?? '—'}</div>
-      <div class="tk-target">/ ${k.target.toLocaleString()}</div>
-      <div class="tk-bar"><div class="tk-bar-fill" style="width:${pct(k.val,k.target)}%;background:${k.color}"></div></div>
-    </div>`).join('');
-  const revPct = t.revenue ? pct(t.revenue, t.revenueTarget) : 0;
-  let upcomingHtml = '';
-  if(d.upcoming && d.upcoming.length){
-    upcomingHtml = `
-      <div class="sec-lbl">Upcoming Calls</div>
-      ${d.upcoming.map(u => `
-        <div class="upcoming-item">
-          <div class="upcoming-time">${u.time}</div>
-          <div style="flex:1">
-            <div class="upcoming-title">${u.title}</div>
-            <div class="upcoming-sub">${u.sub}</div>
-          </div>
-          <div style="margin-left:auto">${chip(u.type, u.tc)}</div>
-        </div>`).join('')}`;
-  } else {
-    upcomingHtml = `
-      <div class="sec-lbl">Upcoming Calls</div>
-      <div style="font-size:12px;color:var(--text3);text-align:center;padding:16px 0">No calls scheduled today</div>`;
-  }
-  el.innerHTML = `
-    <div class="today-kpi-grid">${kpiHtml}</div>
+  
+  // Revenue aujourd'hui (depuis transactions)
+  const today = new Date().toISOString().split('T')[0];
+  const transactions = getTransactions();
+  todayRevenue = transactions.filter(t => t.date === today).reduce((sum, t) => sum + (t.amount || 0), 0);
+  
+  const callsTarget = 1500;
+  const meetingsTarget = 30;
+  const revenueTarget = 20000;
+  
+  container.innerHTML = `
+    <div class="today-kpi-grid">
+      <div class="tk"><div class="tk-lbl">Appels</div><div class="tk-val" style="color:var(--accent)">${todayCalls}</div><div class="tk-target">/ ${callsTarget}</div><div class="tk-bar"><div class="tk-bar-fill" style="width:${Math.min(100, todayCalls/callsTarget*100)}%;background:var(--accent)"></div></div></div>
+      <div class="tk"><div class="tk-lbl">Rendez-vous</div><div class="tk-val" style="color:var(--teal)">${todayMeetings}</div><div class="tk-target">/ ${meetingsTarget}</div><div class="tk-bar"><div class="tk-bar-fill" style="width:${Math.min(100, todayMeetings/meetingsTarget*100)}%;background:var(--teal)"></div></div></div>
+      <div class="tk"><div class="tk-lbl">Transactions</div><div class="tk-val" style="color:var(--amber)">${deals.filter(d=>d.stage==='won' && new Date(d.updatedAt).toISOString().split('T')[0] === today).length}</div><div class="tk-target">/ 6</div></div>
+    </div>
     <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:16px">
-      <div class="tk-lbl">Revenue Today</div>
-      <div style="font-family:var(--head);font-size:28px;font-weight:700;color:${t.revenue ? 'var(--green)' : 'var(--text3)'};margin:4px 0">
-        ${t.revenue ? '$'+t.revenue.toLocaleString() : '$0.00'}
-      </div>
-      <div style="font-size:11px;color:var(--text3)">Target: $${t.revenueTarget.toLocaleString()} · ${t.revenue ? revPct+'% achieved' : 'Awaiting transactions'}</div>
-      <div class="tk-bar" style="height:4px;margin-top:8px">
-        <div class="tk-bar-fill" style="width:${revPct}%;background:var(--green)"></div>
-      </div>
+      <div class="tk-lbl">Revenus aujourd'hui</div>
+      <div style="font-family:var(--head);font-size:28px;font-weight:700;color:var(--green);margin:4px 0">${formatCurrency(todayRevenue)}</div>
+      <div style="font-size:11px;color:var(--text3)">Objectif: ${formatCurrency(revenueTarget)}</div>
+      <div class="tk-bar" style="height:4px;margin-top:8px"><div class="tk-bar-fill" style="width:${Math.min(100, todayRevenue/revenueTarget*100)}%;background:var(--green)"></div></div>
     </div>
-    ${upcomingHtml}`;
+    <div class="sec-lbl">Appels à venir</div>
+    <div class="upcoming-item"><div class="upcoming-time">10:00</div><div><div class="upcoming-title">Découverte — Nouveau client</div><div class="upcoming-sub">Karim M. · Zoom</div></div></div>
+    <div class="upcoming-item"><div class="upcoming-time">14:30</div><div><div class="upcoming-title">Revue proposition</div><div class="upcoming-sub">Équipe interne</div></div></div>`;
 }
 
-// ────────────────────────────────────────────────
-// RENDER ALERTS
-// ────────────────────────────────────────────────
-function renderAlerts(){
-  const d = getData();
-  const el = document.getElementById('alerts-body');
-  const chip_el = document.getElementById('alerts-chip');
-  if(!d.alerts.length){
-    chip_el.className = 'chip green';
-    chip_el.textContent = 'All clear';
-    el.innerHTML = emptyState('✅','No active alerts','The system will surface alerts here when action is needed.','');
+// ============================================================
+// ALERTS
+// ============================================================
+function renderAlerts() {
+  const deals = getDeals();
+  const projects = getProjects();
+  const container = document.getElementById('alerts-body');
+  const chip = document.getElementById('alerts-chip');
+  if(!container) return;
+  
+  const alerts = [];
+  
+  // Propositions sans réponse depuis 5+ jours
+  deals.forEach(d => {
+    if(d.stage === 'proposal' && d.updatedAt) {
+      const daysSince = Math.floor((new Date() - new Date(d.updatedAt)) / (86400000));
+      if(daysSince >= 5) alerts.push({ icon:'📄', title:`Proposition sans réponse`, desc:`${d.company} - ${daysSince} jours`, priority:'high' });
+    }
+  });
+  
+  // Projets en retard
+  projects.forEach(p => {
+    if(p.due && p.status !== 'Completed') {
+      const dueDate = new Date(p.due);
+      if(dueDate < new Date()) alerts.push({ icon:'⚠️', title:`Projet en retard`, desc:`${p.name} - dépassé`, priority:'medium' });
+    }
+  });
+  
+  const alertCount = alerts.length;
+  if(alertCount === 0) {
+    chip.className = 'chip green';
+    chip.textContent = 'Tout est clair';
+    container.innerHTML = `<div class="empty-state"><div class="empty-icon">✅</div><div class="empty-title">Aucune alerte</div><div class="empty-sub">Tout est sous contrôle.</div></div>`;
     return;
   }
-  chip_el.className = 'chip red';
-  chip_el.textContent = d.alerts.length + ' urgent';
-  el.innerHTML = d.alerts.map(a => `
-    <div class="alert-item">
-      <div class="al-ic" style="background:${a.iconBg}">${a.icon}</div>
-      <div>
-        <div class="al-title">${a.title}</div>
-        <div class="al-desc">${a.desc}</div>
-        <div class="al-time">${a.time} · <span style="color:${a.pc}">${a.priority}</span></div>
-      </div>
-    </div>`).join('');
+  
+  chip.className = 'chip red';
+  chip.textContent = alertCount + ' alerte(s)';
+  container.innerHTML = alerts.slice(0,4).map(a => `
+    <div class="alert-item"><div class="al-ic" style="background:rgba(244,63,94,.14)">${a.icon}</div>
+    <div><div class="al-title">${a.title}</div><div class="al-desc">${a.desc}</div><div class="al-time" style="color:var(--red)">${a.priority === 'high' ? 'Haute priorité' : 'Moyenne'}</div></div></div>
+  `).join('');
 }
 
-// ────────────────────────────────────────────────
-// RENDER MRR
-// ────────────────────────────────────────────────
-function renderMRR(){
-  const d = getData();
-  const el = document.getElementById('mrr-body');
-  if(!d.mrr || !d.mrr.net){
-    el.innerHTML = emptyState('💰','No revenue data','Connect your billing system to track MRR automatically.','Connect Stripe');
-    return;
-  }
-  const m = d.mrr;
-  el.innerHTML = `
-    <div class="mrr-row"><div class="mrr-lbl">New MRR</div><div class="mrr-val" style="color:var(--green)">+ $${fmt(m.newMRR)}</div></div>
-    <div class="mrr-row"><div class="mrr-lbl">Churned MRR</div><div class="mrr-val" style="color:var(--red)">− $${fmt(m.churned)}</div></div>
-    <div class="mrr-row"><div class="mrr-lbl">Expansion MRR</div><div class="mrr-val" style="color:var(--teal)">+ $${fmt(m.expansion)}</div></div>
-    <div class="mrr-row" style="padding-top:12px;border-top:1px solid var(--border);border-bottom:none">
-      <div class="mrr-lbl" style="font-weight:700;color:var(--text)">Net MRR</div>
-      <div style="font-family:var(--head);font-size:20px;font-weight:700;color:var(--teal)">$${fmt(m.net)}</div>
-    </div>
-    <div style="margin:12px 0;padding:10px;background:var(--surface2);border-radius:var(--rsm);display:flex;justify-content:space-between">
-      <div><div style="font-size:11px;color:var(--text3)">MoM Growth</div><div style="font-family:var(--head);font-size:16px;font-weight:700;color:var(--green)">${m.growth ?? '—'}</div></div>
-      <div><div style="font-size:11px;color:var(--text3)">Expenses</div><div style="font-family:var(--head);font-size:16px;font-weight:700;color:var(--red)">$${fmt(m.expenses)}</div></div>
-      <div><div style="font-size:11px;color:var(--text3)">Net Profit</div><div style="font-family:var(--head);font-size:16px;font-weight:700;color:var(--green)">$${fmt(m.profit)}</div></div>
-    </div>`;
+// ============================================================
+// MRR
+// ============================================================
+function renderMRR() {
+  const transactions = getTransactions();
+  const container = document.getElementById('mrr-body');
+  if(!container) return;
+  
+  const mrrTotal = transactions.filter(t => t.recurring === true).reduce((sum, t) => sum + (t.amount || 0), 0);
+  const oneTimeTotal = transactions.filter(t => t.recurring !== true).reduce((sum, t) => sum + (t.amount || 0), 0);
+  const expenses = getExpenses().reduce((sum, e) => sum + (e.amount || 0), 0);
+  const profit = mrrTotal + oneTimeTotal - expenses;
+  
+  container.innerHTML = `
+    <div class="mrr-row"><div class="mrr-lbl">MRR mensuel</div><div class="mrr-val" style="color:var(--teal)">${formatCurrency(mrrTotal)}</div></div>
+    <div class="mrr-row"><div class="mrr-lbl">Paiements uniques</div><div class="mrr-val" style="color:var(--accent)">${formatCurrency(oneTimeTotal)}</div></div>
+    <div class="mrr-row"><div class="mrr-lbl">Dépenses</div><div class="mrr-val" style="color:var(--red)">-${formatCurrency(expenses)}</div></div>
+    <div class="mrr-row" style="border-bottom:none;padding-top:12px"><div class="mrr-lbl" style="font-weight:700">Bénéfice net</div><div style="font-family:var(--head);font-size:20px;font-weight:700;color:var(--green)">${formatCurrency(profit)}</div></div>`;
 }
 
-// ────────────────────────────────────────────────
-// RENDER PROJECTS
-// ────────────────────────────────────────────────
-function renderProjects(){
-  const d = getData();
-  const el = document.getElementById('projects-body');
-  const chip_el = document.getElementById('projects-count-chip');
-  chip_el.textContent = d.projects.length + ' active';
-  if(!d.projects.length){
-    el.innerHTML = emptyState('📁','No active projects','Projects will appear here once clients are onboarded and work begins.','+ New Project');
+// ============================================================
+// PROJECTS
+// ============================================================
+function renderProjects() {
+  const projects = getProjects();
+  const container = document.getElementById('projects-body');
+  if(!container) return;
+  
+  if(projects.length === 0) {
+    container.innerHTML = `<div class="empty-state"><div class="empty-icon">📁</div><div class="empty-title">Aucun projet</div><div class="empty-sub">Créez votre premier projet.</div><button class="empty-action" onclick="window.location.href='projects.html'">+ Nouveau projet</button></div>`;
     return;
   }
-  const rows = d.projects.map(p => {
-    const avHtml = p.team.map((init,i) => `
-      <div class="av" style="background:${avatarBg(i)}">${init}</div>`).join('');
-    const progClass = p.progress === 100 ? 'done' : '';
-    return `
-      <tr class="clickable">
-        <td style="font-weight:600">${p.name}</td>
-        <td style="color:var(--text2)">${p.client}</td>
-        <td>
-          <div class="prog-wrap">
-            <div class="prog-bar"><div class="prog-fill ${progClass}" style="width:${p.progress}%"></div></div>
-            <div class="prog-pct ${progClass}">${p.progress}%</div>
-          </div>
-        </td>
-        <td><div class="avs">${avHtml}</div></td>
-        <td>${chip(p.service, p.svc)}</td>
-        <td>${chip(p.status, p.st)}</td>
-        <td style="font-size:12px;color:${p.dc}">${p.flag}${p.due}</td>
+  
+  const tasks = getTasks();
+  const activeProjects = projects.filter(p => p.status === 'Active').slice(0,5);
+  
+  container.innerHTML = `<table class="tbl"><thead><tr><th>Projet</th><th>Client</th><th>Progression</th><th>Échéance</th><th>Statut</th></tr></thead><tbody>
+    ${activeProjects.map(p => {
+      const projectTasks = tasks.filter(t => t.projectId === p.id);
+      const done = projectTasks.filter(t => t.status === 'Done').length;
+      const pct = projectTasks.length ? Math.round(done / projectTasks.length * 100) : 0;
+      const statusClass = p.status === 'Active' ? 'blue' : (p.status === 'Completed' ? 'green' : 'yellow');
+      return `<tr class="clickable" onclick="window.location.href='projects.html'">
+        <td style="font-weight:600">${p.name}</td><td style="color:var(--text2)">${p.client || '—'}</td>
+        <td><div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:${pct}%"></div></div><div class="prog-pct">${pct}%</div></div></td>
+        <td style="font-size:12px">${p.due ? formatDateShort(p.due) : '—'}</td>
+        <td><span class="chip ${statusClass}">${p.status}</span></td>
       </tr>`;
+    }).join('')}
+  </tbody></table>`;
+}
+
+// ============================================================
+// LEADERBOARD
+// ============================================================
+function renderLeaderboard() {
+  const callers = getCallers();
+  const outreachers = getOutreachers();
+  const freelancers = getFreelancers();
+  const container = document.getElementById('lb-body');
+  if(!container) return;
+  
+  const allPeople = [
+    ...callers.map(c => ({ name: c.name, role: 'Cold Caller', revenue: (c.dailyKPI?.closes || 0) * 1000, initials: c.name?.charAt(0) || 'C' })),
+    ...outreachers.map(o => ({ name: o.name, role: 'Outreacher', revenue: (o.dailyKPI?.meetings || 0) * 800, initials: o.name?.charAt(0) || 'O' })),
+    ...freelancers.map(f => ({ name: f.name, role: 'Freelancer', revenue: (f.workHistory?.projects || 0) * 500, initials: f.name?.charAt(0) || 'F' }))
+  ];
+  
+  const sorted = allPeople.sort((a,b) => b.revenue - a.revenue).slice(0,5);
+  
+  if(sorted.length === 0) {
+    container.innerHTML = `<div class="empty-state"><div class="empty-icon">🏆</div><div class="empty-title">Aucune donnée</div><div class="empty-sub">Ajoutez des membres d'équipe.</div></div>`;
+    return;
+  }
+  
+  const colors = ['var(--amber)','var(--text2)','#b87333'];
+  container.innerHTML = sorted.map((p,i) => `
+    <div class="lb-item"><div class="lb-rank" style="color:${colors[i]||'var(--text3)'}">#${i+1}</div>
+    <div class="lb-av" style="background:linear-gradient(135deg,var(--accent),var(--teal))">${p.initials}</div>
+    <div style="flex:1"><div class="lb-name">${p.name}</div><div class="lb-role">${p.role}</div></div>
+    <div class="lb-rev">${formatCurrency(p.revenue)}</div></div>
+  `).join('');
+}
+
+// ============================================================
+// NICHE REVENUE
+// ============================================================
+function renderNiche() {
+  const deals = getDeals();
+  const container = document.getElementById('niche-body');
+  if(!container) return;
+  
+  const wonDeals = deals.filter(d => d.stage === 'won');
+  const nicheMap = new Map();
+  wonDeals.forEach(d => {
+    if(d.niche) {
+      nicheMap.set(d.niche, (nicheMap.get(d.niche) || 0) + (d.value || 0));
+    }
+  });
+  
+  const niches = Array.from(nicheMap.entries()).map(([name, value]) => ({ name, value })).sort((a,b) => b.value - a.value).slice(0,5);
+  const maxValue = niches[0]?.value || 1;
+  
+  if(niches.length === 0) {
+    container.innerHTML = `<div class="empty-state"><div class="empty-icon">📊</div><div class="empty-title">Aucune donnée</div><div class="empty-sub">Les revenus par niche apparaîtront ici.</div></div>`;
+    return;
+  }
+  
+  container.innerHTML = niches.map(n => {
+    const pct = Math.round(n.value / maxValue * 100);
+    return `<div class="niche-item"><div class="niche-dot" style="background:var(--accent)"></div>
+    <div class="niche-label">${n.name}</div><div class="niche-bar-wrap"><div class="niche-bar-fill" style="width:${pct}%;background:var(--accent)"></div></div>
+    <div class="niche-val">${formatCurrency(n.value)}</div></div>`;
   }).join('');
-  el.innerHTML = `
-    <table class="tbl">
-      <thead>
-        <tr><th>Project</th><th>Client</th><th>Progress</th><th>Team</th><th>Service</th><th>Status</th><th>Due Date</th></tr>
-      </thead>
-      <tbody>${rows}</tbody>
-    </table>`;
 }
 
-// ────────────────────────────────────────────────
-// RENDER LEADERBOARD
-// ────────────────────────────────────────────────
-function renderLeaderboard(){
-  const d = getData();
-  const el = document.getElementById('lb-body');
-  if(!d.leaderboard.length){
-    el.innerHTML = emptyState('🏆','No performance data yet','Leaderboard populates once team members start logging activity.','');
-    return;
-  }
-  const rankColors = ['var(--amber)','var(--text2)','#b87333'];
-  el.innerHTML = d.leaderboard.map((e,i) => `
-    <div class="lb-item">
-      <div class="lb-rank" style="color:${rankColors[i]||'var(--text3)'}">#${i+1}</div>
-      <div class="lb-av" style="background:${e.bg}">${e.initials}</div>
-      <div style="flex:1;min-width:0">
-        <div class="lb-name">${e.name}</div>
-        <div class="lb-role">${e.role}</div>
-      </div>
-      <div style="text-align:right;flex-shrink:0">
-        <div class="lb-rev">$${e.revenue.toLocaleString()}</div>
-        <div class="lb-meta">${e.sub}</div>
-      </div>
-      ${chip(e.grade, e.gc, true)}
-    </div>`).join('');
-}
-
-// ────────────────────────────────────────────────
-// RENDER NICHE
-// ────────────────────────────────────────────────
-function renderNiche(){
-  const d = getData();
-  const el = document.getElementById('niche-body');
-  if(!d.niches.length){
-    el.innerHTML = emptyState('📊','No revenue data','Revenue breakdown by niche will appear once deals are closed.','');
-    return;
-  }
-  let summaryHtml = '';
-  if(d.nicheSummary){
-    const s = d.nicheSummary;
-    summaryHtml = `
-      <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border);display:flex;justify-content:space-between">
-        <div><div style="font-size:11px;color:var(--text3)">Best niche</div><div style="font-size:14px;font-weight:700;color:var(--accent)">${s.best}</div></div>
-        <div style="text-align:right"><div style="font-size:11px;color:var(--text3)">Avg LTV</div><div style="font-size:14px;font-weight:700;color:var(--teal)">${s.ltv}</div></div>
-        <div style="text-align:right"><div style="font-size:11px;color:var(--text3)">Churn rate</div><div style="font-size:14px;font-weight:700;color:var(--red)">${s.churn}</div></div>
-      </div>`;
-  }
-  el.innerHTML = d.niches.map(n => `
-    <div class="niche-item">
-      <div class="niche-dot" style="background:${n.color}"></div>
-      <div class="niche-label">${n.label}</div>
-      <div class="niche-bar-wrap"><div class="niche-bar-fill" style="width:${n.pct}%;background:${n.color}"></div></div>
-      <div class="niche-val">$${n.value.toLocaleString()}</div>
-    </div>`).join('') + summaryHtml;
-}
-
-// ────────────────────────────────────────────────
-// DATE / TIME
-// ────────────────────────────────────────────────
-function renderDate(){
+// ============================================================
+// DATE
+// ============================================================
+function renderDate() {
   const now = new Date();
-  const opts = {weekday:'long',day:'numeric',month:'long',year:'numeric'};
-  const t = now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
-  document.getElementById('page-date').textContent =
-    now.toLocaleDateString('en-US', opts) + ' · ' + t;
-  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  document.getElementById('lb-month').textContent =
-    months[now.getMonth()] + ' ' + now.getFullYear();
+  const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+  const time = now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+  const dateEl = document.getElementById('page-date');
+  if(dateEl) dateEl.textContent = now.toLocaleDateString('fr-FR', options) + ' · ' + time;
+  
+  const months = ['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Aoû','Sep','Oct','Nov','Déc'];
+  const lbMonth = document.getElementById('lb-month');
+  if(lbMonth) lbMonth.textContent = months[now.getMonth()] + ' ' + now.getFullYear();
 }
 
-// ────────────────────────────────────────────────
-// RENDER ALL
-// ────────────────────────────────────────────────
-function renderAll(){
-  renderStats();
-  renderPipeline();
-  renderToday();
-  renderAlerts();
-  renderMRR();
-  renderProjects();
-  renderLeaderboard();
-  renderNiche();
+// ============================================================
+// EXPORT
+// ============================================================
+function exportAllData() {
+  const data = {
+    deals: getDeals(),
+    projects: getProjects(),
+    tasks: getTasks(),
+    callers: getCallers(),
+    outreachers: getOutreachers(),
+    freelancers: getFreelancers(),
+    transactions: getTransactions(),
+    expenses: getExpenses(),
+    exportedAt: new Date().toISOString()
+  };
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `niche_crm_export_${new Date().toISOString().split('T')[0]}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
-// ────────────────────────────────────────────────
-// INIT
-// ────────────────────────────────────────────────
+// ============================================================
+// INITIALISATION
+// ============================================================
+function initDemoData() {
+  // Ajouter des exemples si localStorage est vide
+  if(getDeals().length === 0) {
+    saveDeals([
+      { id: '1', company: 'TechCorp', contact: 'Jean Martin', stage: 'lead', value: 5000, niche: 'SaaS', assigned: 'Karim', createdAt: new Date().toISOString() },
+      { id: '2', company: 'GreenOps', contact: 'Marie Claire', stage: 'meeting', value: 8000, niche: 'E-commerce', assigned: 'Sara', createdAt: new Date().toISOString() }
+    ]);
+  }
+  if(getProjects().length === 0) {
+    saveProjects([
+      { id: '1', name: 'Site Web TechCorp', client: 'TechCorp', status: 'Active', due: new Date(Date.now() + 30*86400000).toISOString().split('T')[0], budget: 5000 },
+      { id: '2', name: 'Campagne Ads', client: 'GreenOps', status: 'Active', due: new Date(Date.now() + 15*86400000).toISOString().split('T')[0], budget: 3000 }
+    ]);
+  }
+}
+
+initDemoData();
 renderDate();
-renderAll();
+updateStats();
+renderPipeline();
+renderToday();
+renderAlerts();
+renderMRR();
+renderProjects();
+renderLeaderboard();
+renderNiche();
 setInterval(renderDate, 60000);
 </script>
 </body>
