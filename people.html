@@ -3,19 +3,15 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Niche CRM — People</title>
+<title>Niche CRM — People Management</title>
+<link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%233b7ef8'/%3E%3Ctext x='50' y='68' font-size='48' text-anchor='middle' fill='white' font-weight='bold' font-family='Arial'%3ENC%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#04091a;--bg2:#070f24;--surface:#0b152e;--surface2:#111d3f;--surface3:#162248;
   --border:#1c2d55;--border2:#243460;
-  --accent:#3b7ef8;--accent-glow:rgba(59,126,248,.18);
-  --teal:#22d3b8;--teal-glow:rgba(34,211,184,.14);
-  --amber:#f59e0b;--amber-glow:rgba(245,158,11,.14);
-  --red:#f43f5e;--red-glow:rgba(244,63,94,.14);
-  --green:#10b981;--green-glow:rgba(16,185,129,.14);
-  --purple:#8b5cf6;
+  --accent:#3b7ef8;--teal:#22d3b8;--amber:#f59e0b;--red:#f43f5e;--green:#10b981;--purple:#8b5cf6;--orange:#f97316;
   --text:#e2e8f8;--text2:#8da0c4;--text3:#4e637a;
   --head:'Space Grotesk',sans-serif;--body:'Plus Jakarta Sans',sans-serif;
   --sw:240px;--radius:12px;--radius-sm:8px;
@@ -24,1116 +20,624 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:14
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:var(--body)}
 
-/* ─── SIDEBAR ─── */
+/* Sidebar */
 .sidebar{width:var(--sw);min-height:100vh;background:linear-gradient(180deg,var(--surface) 0%,var(--bg2) 100%);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:200}
 .logo-wrap{padding:22px 20px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--teal));display:flex;align-items:center;justify-content:center;font-family:var(--head);font-weight:700;font-size:14px;color:#fff;flex-shrink:0}
+.logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--teal));display:flex;align-items:center;justify-content:center;font-family:var(--head);font-weight:700;font-size:14px;color:#fff}
 .logo-text{font-family:var(--head);font-weight:700;font-size:17px;letter-spacing:-.3px}
-.logo-version{font-size:10px;color:var(--text3);margin-top:1px}
+.logo-ver{font-size:10px;color:var(--text3);margin-top:1px}
 .nav{flex:1;overflow-y:auto;padding:12px 0}
-.nav-group{margin-bottom:4px}
-.nav-section-label{font-size:10px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--text3);padding:10px 20px 5px}
-.nav-item{display:flex;align-items:center;gap:9px;padding:9px 14px 9px 18px;margin:1px 8px;border-radius:var(--radius-sm);font-size:13.5px;font-weight:500;color:var(--text2);cursor:pointer;text-decoration:none;transition:all .15s;position:relative}
+.nav-section{font-size:10px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--text3);padding:10px 20px 5px}
+.nav-item{display:flex;align-items:center;gap:9px;padding:9px 14px 9px 18px;margin:1px 8px;border-radius:var(--radius-sm);font-size:13.5px;font-weight:500;color:var(--text2);transition:all .15s}
 .nav-item:hover{background:var(--surface2);color:var(--text)}
 .nav-item.active{background:linear-gradient(90deg,rgba(59,126,248,.18),rgba(59,126,248,.06));color:var(--accent);font-weight:600}
 .nav-item.active::before{content:'';position:absolute;left:0;top:22%;height:56%;width:2.5px;background:var(--accent);border-radius:0 2px 2px 0}
-.nav-icon{font-size:15px;width:18px;text-align:center;flex-shrink:0}
+.nav-item{position:relative}
+.nav-ic{font-size:15px;width:18px;text-align:center}
 .nav-badge{margin-left:auto;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:rgba(244,63,94,.18);color:var(--red)}
 .nav-badge.blue{background:rgba(59,126,248,.15);color:var(--accent)}
-.nav-badge.teal{background:rgba(34,211,184,.12);color:var(--teal)}
-.sidebar-profile{padding:14px 16px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.profile-av{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#3b7ef8,#22d3b8);display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+.sidebar-footer{padding:14px 16px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.profile-av{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#3b7ef8,#22d3b8);display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:13px;font-weight:700;color:#fff}
 .profile-name{font-size:13px;font-weight:600}
 .profile-role{font-size:11px;color:var(--text3)}
 .profile-menu{margin-left:auto;width:26px;height:26px;border-radius:6px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;color:var(--text2)}
 
-/* ─── MAIN ─── */
+/* Main */
 .main{margin-left:var(--sw);flex:1;display:flex;flex-direction:column;min-height:100vh}
 .topbar{height:60px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 28px;gap:14px;position:sticky;top:0;z-index:100}
 .breadcrumb{flex:1;font-size:13px;color:var(--text2)}
-.breadcrumb strong{color:var(--text);font-weight:600}
-.search{display:flex;align-items:center;gap:7px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 13px;width:230px;transition:border-color .15s}
-.search:focus-within{border-color:var(--accent)}
+.breadcrumb strong{color:var(--text)}
+.search{display:flex;align-items:center;gap:7px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 13px;width:230px}
 .search input{background:none;border:none;outline:none;font-family:var(--body);font-size:13px;color:var(--text);width:100%}
 .search input::placeholder{color:var(--text3)}
-.tb-btn{width:36px;height:36px;border-radius:var(--radius-sm);background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;position:relative;transition:background .15s;color:var(--text2)}
-.tb-btn:hover{background:var(--surface3)}
-.btn-primary{display:flex;align-items:center;gap:6px;background:var(--accent);color:#fff;border:none;padding:9px 16px;border-radius:var(--radius-sm);font-family:var(--body);font-size:13px;font-weight:600;cursor:pointer;transition:opacity .15s;white-space:nowrap}
+.kbd{font-size:11px;background:var(--surface3);border:1px solid var(--border);padding:1px 6px;border-radius:4px;color:var(--text3)}
+.tb-btn{width:36px;height:36px;border-radius:var(--radius-sm);background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;color:var(--text2)}
+.btn-primary{display:flex;align-items:center;gap:6px;background:var(--accent);color:#fff;border:none;padding:9px 16px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer}
 .btn-primary:hover{opacity:.88}
-.btn-ghost{display:flex;align-items:center;gap:6px;background:var(--surface2);color:var(--text2);border:1px solid var(--border);padding:8px 14px;border-radius:var(--radius-sm);font-family:var(--body);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;white-space:nowrap}
+.btn-ghost{display:flex;align-items:center;gap:6px;background:var(--surface2);color:var(--text2);border:1px solid var(--border);padding:8px 14px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;cursor:pointer}
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
-
-/* ─── CONTENT ─── */
+.btn-sm{padding:6px 12px;font-size:12px}
 .content{padding:26px 28px;flex:1}
+
+/* Page Header */
 .page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
 .page-title{font-family:var(--head);font-size:22px;font-weight:700}
-.page-sub{font-size:13px;color:var(--text3);margin-top:3px}
+.page-sub{font-size:13px;color:var(--text3);margin-top:4px}
 
-/* ─── TABS ─── */
-.tabs{display:flex;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:5px;margin-bottom:22px;width:fit-content}
-.tab{padding:9px 20px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;color:var(--text2);transition:all .18s;display:flex;align-items:center;gap:7px;white-space:nowrap}
-.tab:hover{color:var(--text);background:var(--surface2)}
+/* Tabs */
+.tabs{display:flex;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:4px;width:fit-content;margin-bottom:22px}
+.tab{padding:9px 24px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;color:var(--text2);transition:all .15s}
 .tab.active{background:var(--accent);color:#fff}
-.tab-count{background:rgba(255,255,255,.2);border-radius:20px;padding:1px 7px;font-size:10px;font-weight:700}
-.tab.active .tab-count{background:rgba(255,255,255,.25)}
-.tab:not(.active) .tab-count{background:var(--surface2);color:var(--text3)}
+.tab:hover:not(.active){background:var(--surface2);color:var(--text)}
 
-/* ─── CHIPS / BADGES ─── */
-.chip{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600}
+/* Stats Row */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px}
+.stat-label{font-size:11px;color:var(--text3);font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-bottom:8px}
+.stat-val{font-family:var(--head);font-size:24px;font-weight:700}
+.stat-sub{font-size:11px;color:var(--text3);margin-top:4px}
+
+/* Profile Cards */
+.profiles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.profile-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;cursor:pointer;transition:all .18s;position:relative}
+.profile-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.profile-header{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.profile-avatar{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#fff;flex-shrink:0}
+.profile-info{flex:1}
+.profile-name{font-family:var(--head);font-size:16px;font-weight:700;margin-bottom:4px}
+.profile-username{font-size:11px;color:var(--text3);margin-bottom:4px}
+.profile-contact{font-size:11px;color:var(--text2);display:flex;gap:12px;flex-wrap:wrap}
+.profile-details{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.detail-item{font-size:12px}
+.detail-label{color:var(--text3);font-size:10px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:2px}
+.detail-value{font-weight:600;color:var(--text)}
+.kpi-row{display:flex;gap:16px;margin-bottom:12px}
+.kpi-item{flex:1;text-align:center;padding:8px;background:var(--surface2);border-radius:8px}
+.kpi-num{font-family:var(--head);font-size:18px;font-weight:700}
+.kpi-lbl{font-size:10px;color:var(--text3);margin-top:2px}
+.score-badge{display:inline-flex;align-items:center;justify-content:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.score-A{background:rgba(16,185,129,.15);color:var(--green)}
+.score-B{background:rgba(59,126,248,.15);color:var(--accent)}
+.score-C{background:rgba(245,158,11,.15);color:var(--amber)}
+.score-D{background:rgba(244,63,94,.15);color:var(--red)}
+.profile-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.payment-info{font-size:12px;color:var(--teal);font-weight:600}
+.chip{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600}
 .chip.green{background:rgba(16,185,129,.1);color:var(--green)}
 .chip.blue{background:rgba(59,126,248,.1);color:var(--accent)}
 .chip.yellow{background:rgba(245,158,11,.1);color:var(--amber)}
-.chip.red{background:rgba(244,63,94,.1);color:var(--red)}
 .chip.purple{background:rgba(139,92,246,.1);color:var(--purple)}
-.chip.teal{background:rgba(34,211,184,.1);color:var(--teal)}
-.chip.gray{background:var(--surface2);color:var(--text2)}
+.chip.red{background:rgba(244,63,94,.1);color:var(--red)}
 
-/* ─── GRADE BADGE ─── */
-.grade{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:12px;font-weight:800;flex-shrink:0}
-.grade.A{background:rgba(16,185,129,.15);color:var(--green);border:1px solid rgba(16,185,129,.25)}
-.grade.B{background:rgba(59,126,248,.12);color:var(--accent);border:1px solid rgba(59,126,248,.2)}
-.grade.C{background:rgba(245,158,11,.12);color:var(--amber);border:1px solid rgba(245,158,11,.2)}
-.grade.D{background:rgba(244,63,94,.12);color:var(--red);border:1px solid rgba(244,63,94,.2)}
-.grade.none{background:var(--surface3);color:var(--text3);border:1px solid var(--border);font-size:9px;text-align:center;line-height:1.2}
-
-/* ─── OVERVIEW STATS ─── */
-.ov-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
-.ov-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
-.ov-stat-val{font-family:var(--head);font-size:22px;font-weight:700;margin-bottom:3px}
-.ov-stat-lbl{font-size:12px;color:var(--text2)}
-.ov-stat-sub{font-size:11px;color:var(--text3);margin-top:4px}
-.ov-stat-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-
-/* ─── PERSON GRID ─── */
-.person-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-
-/* ─── PERSON CARD ─── */
-.person-card{
-  background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);
-  padding:20px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;
-}
-.person-card:hover{border-color:var(--accent);transform:translateY(-2px);background:var(--surface3)}
-.person-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--card-accent,var(--accent));opacity:0;transition:opacity .2s}
-.person-card:hover::before{opacity:1}
-.pc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px}
-.pc-av{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:15px;font-weight:700;color:#fff;flex-shrink:0}
-.pc-meta{flex:1;margin-left:12px;min-width:0}
-.pc-name{font-size:14px;font-weight:700;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pc-role{font-size:11px;color:var(--text3);margin-bottom:5px}
-.avail{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600}
-.avail-dot{width:7px;height:7px;border-radius:50%}
-
-/* ─── KPI GRID ─── */
-.pc-kpis{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}
-.kpi-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center}
-.kpi-val{font-family:var(--head);font-size:16px;font-weight:700;margin-bottom:2px}
-.kpi-lbl{font-size:10px;color:var(--text3);line-height:1.3}
-.kpi-empty{font-family:var(--head);font-size:12px;font-weight:600;color:var(--text3);margin-bottom:2px}
-
-/* ─── BAR ROW ─── */
-.pc-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
-.pc-bar-label{font-size:11px;color:var(--text3);width:80px;flex-shrink:0}
-.pc-bar-track{flex:1;height:4px;background:var(--surface);border-radius:2px;overflow:hidden}
-.pc-bar-fill{height:100%;border-radius:2px}
-.pc-bar-val{font-size:11px;font-weight:600;width:30px;text-align:right;flex-shrink:0}
-.pc-bar-empty{font-size:10px;color:var(--text3);width:30px;text-align:right;flex-shrink:0}
-
-/* ─── FOOTER ─── */
-.pc-footer{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--border);margin-top:8px}
-.pc-salary{font-size:12px;color:var(--text3)}
-.pc-salary strong{color:var(--text);font-weight:600}
-
-/* ─── TABLE ─── */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:18px}
-.card-hd{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 14px;border-bottom:1px solid var(--border)}
-.card-title{font-family:var(--head);font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:7px}
-.card-dot{width:7px;height:7px;border-radius:50%}
-.card-bd{padding:20px}
-.tbl{width:100%;border-collapse:collapse}
-.tbl th{font-size:10.5px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;color:var(--text3);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border)}
-.tbl td{padding:11px 14px;font-size:13px;border-bottom:1px solid rgba(28,45,85,.4);vertical-align:middle}
-.tbl tr:last-child td{border-bottom:none}
-.tbl tr:hover td{background:rgba(59,126,248,.03)}
-
-/* ─── SKILL TAGS ─── */
-.skill-tag{display:inline-flex;background:var(--surface3);border:1px solid var(--border);color:var(--text2);font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;margin:2px}
-
-/* ─── TASK CARD ─── */
-.task-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;margin-bottom:10px;transition:border-color .15s}
-.task-card:hover{border-color:var(--accent)}
-.task-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px}
-.task-name{font-size:13px;font-weight:700}
-.task-client{font-size:11px;color:var(--text3);margin-top:2px}
-.task-status-wrap{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
-.status-opt{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text3);cursor:pointer}
-.status-circle{width:10px;height:10px;border-radius:50%;border:2px solid var(--border)}
-
-/* ─── EMPTY STATE ─── */
-.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:52px 20px;text-align:center}
-.empty-icon{font-size:36px;margin-bottom:14px;opacity:.5}
-.empty-title{font-family:var(--head);font-size:15px;font-weight:700;color:var(--text2);margin-bottom:6px}
-.empty-sub{font-size:13px;color:var(--text3);max-width:320px;line-height:1.6;margin-bottom:18px}
-
-/* ─── SECTION HEADER ─── */
-.sec-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.sec-title{font-family:var(--head);font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px}
-.sec-actions{display:flex;gap:8px}
-
-/* ─── TAB PANELS ─── */
-.tab-panel{display:none}
-.tab-panel.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.tab-panel.active{animation:fadeIn .22s ease}
-
-/* ─── ADD PERSON MODAL ─── */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(4,9,26,.82);z-index:500;align-items:center;justify-content:center}
+/* Modal */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(4,9,26,.85);z-index:500;align-items:center;justify-content:center}
 .modal-overlay.open{display:flex}
-.modal{background:var(--surface);border:1px solid var(--border2);border-radius:16px;width:520px;max-width:95vw;max-height:88vh;overflow-y:auto;padding:28px}
-.modal-title{font-family:var(--head);font-size:18px;font-weight:700;margin-bottom:6px}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:16px;width:600px;max-width:95vw;padding:28px;position:relative}
+.modal-title{font-family:var(--head);font-size:18px;font-weight:700;margin-bottom:5px}
 .modal-sub{font-size:13px;color:var(--text3);margin-bottom:22px}
-.modal-close{position:absolute;top:20px;right:20px;width:30px;height:30px;border-radius:8px;background:var(--surface2);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--text2)}
-.form-row{margin-bottom:14px}
+.modal-close{position:absolute;top:20px;right:20px;width:30px;height:30px;border-radius:8px;background:var(--surface2);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.form-group{margin-bottom:14px}
 .form-label{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--text3);margin-bottom:6px;display:block}
-.form-input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 13px;font-family:var(--body);font-size:13px;color:var(--text);outline:none;transition:border-color .15s}
+.form-input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 13px;font-family:var(--body);font-size:13px;color:var(--text);outline:none}
 .form-input:focus{border-color:var(--accent)}
-.form-input::placeholder{color:var(--text3)}
+.form-select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 13px;font-family:var(--body);font-size:13px;color:var(--text);outline:none}
 .form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
-.form-select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 13px;font-family:var(--body);font-size:13px;color:var(--text);outline:none;cursor:pointer}
-.form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:24px;padding-top:18px;border-top:1px solid var(--border)}
-.type-selector{display:flex;gap:8px;margin-bottom:18px}
-.type-btn{flex:1;padding:10px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface2);color:var(--text2);font-size:12px;font-weight:600;cursor:pointer;text-align:center;transition:all .15s}
-.type-btn.sel{border-color:var(--accent);background:rgba(59,126,248,.1);color:var(--accent)}
-
-/* ─── CONNECT DB BANNER ─── */
-.db-banner{background:linear-gradient(90deg,rgba(59,126,248,.08),rgba(34,211,184,.06));border:1px solid rgba(59,126,248,.2);border-radius:var(--radius);padding:14px 18px;display:flex;align-items:center;gap:14px;margin-bottom:20px}
-.db-banner-icon{font-size:20px;flex-shrink:0}
-.db-banner-text{flex:1}
-.db-banner-title{font-size:13px;font-weight:700;margin-bottom:2px}
-.db-banner-sub{font-size:11px;color:var(--text3)}
-
-/* ─── ANIMATIONS ─── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.person-card{animation:fadeUp .35s ease both}
-.person-card:nth-child(1){animation-delay:.04s}
-.person-card:nth-child(2){animation-delay:.08s}
-.person-card:nth-child(3){animation-delay:.12s}
-.person-card:nth-child(4){animation-delay:.16s}
-.person-card:nth-child(5){animation-delay:.20s}
-.person-card:nth-child(6){animation-delay:.24s}
-
-/* ─── MATCHING FILTER BAR ─── */
-.filter-bar{background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius);padding:14px 18px;margin-bottom:18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.form-select-sm{background:var(--surface3);border:1px solid var(--border);color:var(--text2);padding:7px 12px;border-radius:var(--radius-sm);font-family:var(--body);font-size:12px;cursor:pointer;outline:none}
+.form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:22px;padding-top:16px;border-top:1px solid var(--border)}
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:50px 20px;text-align:center}
+.empty-icon{font-size:36px;margin-bottom:14px;opacity:.45}
+.empty-title{font-family:var(--head);font-size:15px;font-weight:700;color:var(--text2);margin-bottom:6px}
+.empty-sub{font-size:13px;color:var(--text3);max-width:300px;margin-bottom:18px}
 </style>
 </head>
 <body>
 
-<!-- ═══ SIDEBAR ═══ -->
+<!-- Sidebar -->
 <aside class="sidebar">
   <div class="logo-wrap">
     <div class="logo-icon">NC</div>
-    <div>
-      <div class="logo-text">Niche CRM</div>
-      <div class="logo-version">Agency OS v1.0</div>
-    </div>
+    <div><div class="logo-text">Niche CRM</div><div class="logo-ver">Agency OS v1.0</div></div>
   </div>
   <nav class="nav">
-    <div class="nav-group">
-      <div class="nav-section-label">Main</div>
-      <a class="nav-item" href="index.html"><span class="nav-icon">⊞</span> Dashboard</a>
-      <a class="nav-item active" href="people.html"><span class="nav-icon">👥</span> People <span class="nav-badge blue" id="nav-total">0</span></a>
-      <a class="nav-item" href="pipeline.html"><span class="nav-icon">⟶</span> Pipeline</a>
-      <a class="nav-item" href="projects.html"><span class="nav-icon">📁</span> Projects</a>
-      <a class="nav-item" href="analytics.html"><span class="nav-icon">📊</span> Analytics</a>
+    <div>
+      <div class="nav-section">Main</div>
+      <a class="nav-item" href="index.html"><span class="nav-ic">⊞</span> Dashboard</a>
+      <a class="nav-item active" href="people.html"><span class="nav-ic">👥</span> People</a>
+      <a class="nav-item" href="pipeline.html"><span class="nav-ic">⟶</span> Pipeline</a>
+      <a class="nav-item" href="projects.html"><span class="nav-ic">📁</span> Projects</a>
+      <a class="nav-item" href="analytics.html"><span class="nav-ic">📊</span> Analytics</a>
     </div>
-    <div class="nav-group">
-      <div class="nav-section-label">Client</div>
-      <a class="nav-item" href="client-portal.html"><span class="nav-icon">🌐</span> Client Portal</a>
-      <a class="nav-item" href="finance.html"><span class="nav-icon">💰</span> Finance</a>
-      <a class="nav-item" href="#"><span class="nav-icon">📄</span> Reports</a>
-      <a class="nav-item" href="#"><span class="nav-icon">🤝</span> Manage Clients</a>
+    <div>
+      <div class="nav-section">Client</div>
+      <a class="nav-item" href="client-portal.html"><span class="nav-ic">🌐</span> Client Portal</a>
+      <a class="nav-item" href="finance.html"><span class="nav-ic">💰</span> Finance</a>
+      <a class="nav-item" href="#"><span class="nav-ic">📄</span> Reports</a>
     </div>
-    <div class="nav-group">
-      <div class="nav-section-label">System</div>
-      <a class="nav-item" href="#"><span class="nav-icon">🔔</span> Alerts</a>
-      <a class="nav-item" href="#"><span class="nav-icon">⚙️</span> Settings</a>
+    <div>
+      <div class="nav-section">System</div>
+      <a class="nav-item" href="#"><span class="nav-ic">🔔</span> Alerts</a>
+      <a class="nav-item" href="#"><span class="nav-ic">⚙️</span> Settings</a>
     </div>
   </nav>
-  <div class="sidebar-profile">
+  <div class="sidebar-footer">
     <div class="profile-av">AN</div>
-    <div>
-      <div class="profile-name">Admin</div>
-      <div class="profile-role">Super Admin</div>
-    </div>
+    <div><div class="profile-name">Admin</div><div class="profile-role">Super Admin</div></div>
     <div class="profile-menu">···</div>
   </div>
 </aside>
 
-<!-- ═══ MAIN ═══ -->
+<!-- Main -->
 <div class="main">
   <header class="topbar">
-    <div class="breadcrumb">Home / <strong>People Management</strong></div>
+    <div class="breadcrumb">People / <strong>Team Management</strong></div>
     <div class="search">
-      <span style="color:var(--text3);font-size:13px">🔍</span>
-      <input type="text" id="search-input" placeholder="Search by name, niche, role…" oninput="handleSearch(this.value)"/>
-      <span style="color:var(--text3);font-size:11px;background:var(--surface3);border:1px solid var(--border);padding:1px 6px;border-radius:4px;flex-shrink:0">⌘K</span>
+      <span>🔍</span>
+      <input type="text" id="search-input" placeholder="Search by name, role, niche..." oninput="handleSearch(this.value)"/>
+      <span class="kbd">⌘K</span>
     </div>
     <div style="display:flex;gap:7px">
-      <div class="tb-btn" title="Notifications">🔔</div>
-      <div class="tb-btn" title="Messages">✉️</div>
+      <div class="tb-btn">🔔</div>
+      <div class="tb-btn">✉️</div>
     </div>
-    <button class="btn-primary" onclick="openModal()">+ Add Person</button>
+    <button class="btn-primary" onclick="openAddModal()">+ Add Person</button>
   </header>
 
   <main class="content">
-
-    <!-- DB BANNER -->
-    <div class="db-banner">
-      <div class="db-banner-icon">🔌</div>
-      <div class="db-banner-text">
-        <div class="db-banner-title">Connect your database to load real team data</div>
-        <div class="db-banner-sub">People added here will sync with your backend once the API is configured. All data below is live from your database.</div>
-      </div>
-      <button class="btn-ghost" style="font-size:12px;padding:7px 12px">Configure API</button>
-    </div>
-
-    <!-- PAGE HEADER -->
     <div class="page-header">
       <div>
         <div class="page-title">People Management</div>
-        <div class="page-sub" id="page-sub-count">Cold Callers · Cold Outreachers · Freelancers — 0 people added</div>
+        <div class="page-sub" id="page-sub">Manage callers, outreachers & freelancers</div>
       </div>
       <div style="display:flex;gap:8px">
-        <button class="btn-ghost" onclick="exportCSV()">📥 Export CSV</button>
-        <button class="btn-ghost">⚙️ Scoring Rules</button>
-        <button class="btn-primary" onclick="openModal()">+ Add Person</button>
+        <button class="btn-ghost btn-sm">📥 Export CSV</button>
       </div>
     </div>
 
-    <!-- OVERVIEW STATS -->
-    <div class="ov-stats">
-      <div class="ov-stat">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start">
-          <div>
-            <div class="ov-stat-val" id="stat-callers">0</div>
-            <div class="ov-stat-lbl">Cold Callers</div>
-            <div class="ov-stat-sub" id="stat-callers-sub">No callers added yet</div>
-          </div>
-          <div class="ov-stat-icon" style="background:rgba(59,126,248,.14)">📞</div>
-        </div>
-      </div>
-      <div class="ov-stat">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start">
-          <div>
-            <div class="ov-stat-val" id="stat-outreachers">0</div>
-            <div class="ov-stat-lbl">Outreachers</div>
-            <div class="ov-stat-sub" id="stat-outreachers-sub">No outreachers added yet</div>
-          </div>
-          <div class="ov-stat-icon" style="background:rgba(34,211,184,.12)">📧</div>
-        </div>
-      </div>
-      <div class="ov-stat">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start">
-          <div>
-            <div class="ov-stat-val" id="stat-freelancers">0</div>
-            <div class="ov-stat-lbl">Freelancers</div>
-            <div class="ov-stat-sub" id="stat-freelancers-sub">No freelancers added yet</div>
-          </div>
-          <div class="ov-stat-icon" style="background:rgba(139,92,246,.12)">🎨</div>
-        </div>
-      </div>
-      <div class="ov-stat">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start">
-          <div>
-            <div class="ov-stat-val" id="stat-cost">$0</div>
-            <div class="ov-stat-lbl">Team Cost / Month</div>
-            <div class="ov-stat-sub" id="stat-cost-sub">Add team members to calculate</div>
-          </div>
-          <div class="ov-stat-icon" style="background:rgba(245,158,11,.12)">💰</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TABS -->
+    <!-- Tabs -->
     <div class="tabs">
-      <div class="tab active" onclick="switchTab('callers',this)">📞 Cold Callers <span class="tab-count" id="tab-count-callers">0</span></div>
-      <div class="tab" onclick="switchTab('outreachers',this)">📧 Outreachers <span class="tab-count" id="tab-count-outreachers">0</span></div>
-      <div class="tab" onclick="switchTab('freelancers',this)">🎨 Freelancers <span class="tab-count" id="tab-count-freelancers">0</span></div>
+      <div class="tab active" data-tab="callers" onclick="switchTab('callers')">📞 Cold Callers</div>
+      <div class="tab" data-tab="outreachers" onclick="switchTab('outreachers')">✉️ Cold Outreachers</div>
+      <div class="tab" data-tab="freelancers" onclick="switchTab('freelancers')">💻 Freelancers</div>
     </div>
 
-    <!-- ══════════════════ TAB 1: COLD CALLERS ══════════════════ -->
-    <div class="tab-panel active" id="panel-callers">
-      <div class="sec-header">
-        <div class="sec-title"><span style="color:var(--accent)">●</span> Cold Callers Team</div>
-        <div class="sec-actions">
-          <button class="btn-ghost" onclick="filterByGrade('callers')">🔽 Filter by Grade</button>
-          <button class="btn-ghost" onclick="filterByNiche('callers')">📊 Niche</button>
-        </div>
-      </div>
-
-      <div class="person-grid" id="grid-callers">
-        <!-- Populated by JS -->
-      </div>
-
-      <!-- Call Log Table -->
-      <div class="card" style="margin-top:20px">
-        <div class="card-hd">
-          <div class="card-title"><span class="card-dot" style="background:var(--accent)"></span>Today's Call Log</div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <div class="chip blue" id="call-log-count">0 calls</div>
-            <div style="font-size:12px;color:var(--accent);cursor:pointer;font-weight:500" onclick="exportCallLog()">Export →</div>
-          </div>
-        </div>
-        <div id="call-log-body">
-          <div class="empty-state">
-            <div class="empty-icon">📋</div>
-            <div class="empty-title">No calls logged today</div>
-            <div class="empty-sub">Call activity will appear here once callers start making calls. Connect your call tracking tool to auto-log calls.</div>
-          </div>
-        </div>
-      </div>
+    <!-- Stats Row -->
+    <div class="stats-row" id="stats-row">
+      <!-- dynamic -->
     </div>
 
-    <!-- ══════════════════ TAB 2: OUTREACHERS ══════════════════ -->
-    <div class="tab-panel" id="panel-outreachers">
-      <div class="sec-header">
-        <div class="sec-title"><span style="color:var(--teal)">●</span> Cold Outreach Team</div>
-        <div class="sec-actions">
-          <button class="btn-ghost">🔽 Filter</button>
-          <button class="btn-ghost">📊 By Channel</button>
-        </div>
-      </div>
-
-      <div class="person-grid" id="grid-outreachers">
-        <!-- Populated by JS -->
-      </div>
-
-      <!-- Message Log Table -->
-      <div class="card" style="margin-top:20px">
-        <div class="card-hd">
-          <div class="card-title"><span class="card-dot" style="background:var(--teal)"></span>Message Log — Today</div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <div class="chip teal" id="msg-log-count">0 messages</div>
-            <div style="font-size:12px;color:var(--accent);cursor:pointer;font-weight:500">Export →</div>
-          </div>
-        </div>
-        <div id="msg-log-body">
-          <div class="empty-state">
-            <div class="empty-icon">💬</div>
-            <div class="empty-title">No messages logged today</div>
-            <div class="empty-sub">Outreach activity will appear here once your team starts sending. Connect Instantly, Apollo, or Expandi to auto-import logs.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══════════════════ TAB 3: FREELANCERS ══════════════════ -->
-    <div class="tab-panel" id="panel-freelancers">
-      <div class="sec-header">
-        <div class="sec-title"><span style="color:var(--purple)">●</span> Freelancer Talent Pool</div>
-        <div class="sec-actions">
-          <button class="btn-ghost">🔽 Filter by Skill</button>
-          <button class="btn-ghost">📊 Availability</button>
-          <button class="btn-primary" onclick="openModalType('freelancer')">+ Add Freelancer</button>
-        </div>
-      </div>
-
-      <!-- Matching Filter Bar -->
-      <div class="filter-bar">
-        <div style="font-size:12px;font-weight:700;color:var(--text2)">🔍 Find Talent:</div>
-        <select class="form-select-sm" id="fl-filter-skill" onchange="applyFLFilter()">
-          <option value="">All Skills</option>
-          <option>Design</option>
-          <option>Development</option>
-          <option>SEO</option>
-          <option>Paid Ads</option>
-          <option>Video</option>
-          <option>Copywriting</option>
-          <option>Automation</option>
-        </select>
-        <select class="form-select-sm" id="fl-filter-budget" onchange="applyFLFilter()">
-          <option value="">Any Budget</option>
-          <option>Under $500</option>
-          <option>$500–$1000</option>
-          <option>$1000–$2000</option>
-          <option>$2000+</option>
-        </select>
-        <select class="form-select-sm" id="fl-filter-tz" onchange="applyFLFilter()">
-          <option value="">Any Timezone</option>
-          <option>GMT+0 (UK)</option>
-          <option>GMT+1 (Morocco)</option>
-          <option>GMT+2 (Egypt)</option>
-          <option>EST (US)</option>
-        </select>
-        <div class="chip green" id="fl-avail-count" style="margin-left:auto">● 0 available now</div>
-      </div>
-
-      <div class="person-grid" id="grid-freelancers">
-        <!-- Populated by JS -->
-      </div>
-
-      <!-- Active Task Cards -->
-      <div class="card" style="margin-top:20px">
-        <div class="card-hd">
-          <div class="card-title"><span class="card-dot" style="background:var(--purple)"></span>Active Task Cards</div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <div class="chip purple" id="task-count-chip">0 active tasks</div>
-            <div style="font-size:12px;color:var(--accent);cursor:pointer;font-weight:500" href="projects.html">Projects →</div>
-          </div>
-        </div>
-        <div id="task-cards-body" class="card-bd">
-          <div class="empty-state" style="padding:32px 20px">
-            <div class="empty-icon">📌</div>
-            <div class="empty-title">No active tasks assigned</div>
-            <div class="empty-sub">Task cards will appear here when freelancers are assigned to client projects. Go to Projects to create tasks.</div>
-            <a href="projects.html" class="btn-primary" style="text-decoration:none">Go to Projects →</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    <!-- Profiles Grid -->
+    <div id="profiles-container"></div>
   </main>
 </div>
 
-<!-- ═══ ADD PERSON MODAL ═══ -->
-<div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
-  <div class="modal" style="position:relative">
+<!-- Add/Edit Modal -->
+<div class="modal-overlay" id="person-modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
     <div class="modal-close" onclick="closeModal()">✕</div>
-    <div class="modal-title">Add New Person</div>
-    <div class="modal-sub">Fill in the details. All fields marked * are required.</div>
-
-    <!-- Type selector -->
-    <div class="type-selector">
-      <div class="type-btn sel" id="type-caller" onclick="selectType('caller')">📞 Cold Caller</div>
-      <div class="type-btn" id="type-outreacher" onclick="selectType('outreacher')">📧 Outreacher</div>
-      <div class="type-btn" id="type-freelancer" onclick="selectType('freelancer')">🎨 Freelancer</div>
+    <div class="modal-title" id="modal-title">Add Person</div>
+    <div class="modal-sub" id="modal-sub">Fill in the details below</div>
+    <input type="hidden" id="edit-id"/>
+    <input type="hidden" id="person-type"/>
+    
+    <div id="modal-fields">
+      <!-- dynamic based on type -->
     </div>
-
-    <div class="form-row-2">
-      <div class="form-row" style="margin-bottom:0">
-        <label class="form-label">Full Name *</label>
-        <input class="form-input" id="f-name" type="text" placeholder="e.g. Karim Moussaoui"/>
-      </div>
-      <div class="form-row" style="margin-bottom:0">
-        <label class="form-label">Username</label>
-        <input class="form-input" id="f-username" type="text" placeholder="@username"/>
-      </div>
-    </div>
-
-    <div class="form-row-2" style="margin-top:14px">
-      <div class="form-row" style="margin-bottom:0">
-        <label class="form-label">Phone</label>
-        <input class="form-input" id="f-phone" type="tel" placeholder="+212 6XX XXX XXX"/>
-      </div>
-      <div class="form-row" style="margin-bottom:0">
-        <label class="form-label">Gmail *</label>
-        <input class="form-input" id="f-email" type="email" placeholder="name@gmail.com"/>
-      </div>
-    </div>
-
-    <!-- Caller / Outreacher fields -->
-    <div id="caller-fields">
-      <div class="form-row" style="margin-top:14px">
-        <label class="form-label">Niche (market they call) *</label>
-        <input class="form-input" id="f-niche" type="text" placeholder="e.g. E-commerce, SaaS, Real Estate"/>
-      </div>
-      <div class="form-row-2" style="margin-top:0">
-        <div class="form-row" style="margin-bottom:0">
-          <label class="form-label">Base Salary ($/month)</label>
-          <input class="form-input" id="f-base" type="number" placeholder="e.g. 800"/>
-        </div>
-        <div class="form-row" style="margin-bottom:0">
-          <label class="form-label">Start Date</label>
-          <input class="form-input" id="f-start" type="date"/>
-        </div>
-      </div>
-      <div class="form-row-2" style="margin-top:0">
-        <div class="form-row" style="margin-bottom:0">
-          <label class="form-label">Commission / Meeting ($)</label>
-          <input class="form-input" id="f-comm-meet" type="number" placeholder="e.g. 50"/>
-        </div>
-        <div class="form-row" style="margin-bottom:0">
-          <label class="form-label">Bonus / Close ($)</label>
-          <input class="form-input" id="f-comm-close" type="number" placeholder="e.g. 200"/>
-        </div>
-      </div>
-    </div>
-
-    <!-- Outreacher-specific -->
-    <div id="outreacher-fields" style="display:none">
-      <div class="form-row" style="margin-top:14px">
-        <label class="form-label">Channels Used *</label>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
-          <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer;color:var(--text2)"><input type="checkbox" id="ch-email" value="Email"/> Email</label>
-          <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer;color:var(--text2)"><input type="checkbox" id="ch-linkedin" value="LinkedIn"/> LinkedIn</label>
-          <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer;color:var(--text2)"><input type="checkbox" id="ch-instagram" value="Instagram"/> Instagram</label>
-          <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer;color:var(--text2)"><input type="checkbox" id="ch-twitter" value="Twitter/X"/> Twitter/X</label>
-        </div>
-      </div>
-      <div class="form-row-2">
-        <div class="form-row" style="margin-bottom:0">
-          <label class="form-label">Base Salary ($/month)</label>
-          <input class="form-input" id="f-or-base" type="number" placeholder="e.g. 700"/>
-        </div>
-        <div class="form-row" style="margin-bottom:0">
-          <label class="form-label">Start Date</label>
-          <input class="form-input" id="f-or-start" type="date"/>
-        </div>
-      </div>
-    </div>
-
-    <!-- Freelancer-specific -->
-    <div id="freelancer-fields" style="display:none">
-      <div class="form-row" style="margin-top:14px">
-        <label class="form-label">Specialization *</label>
-        <select class="form-select form-input" id="f-spec">
-          <option value="">Select specialization…</option>
-          <option>Design (Brand / UI/UX)</option>
-          <option>Development (Full Stack)</option>
-          <option>SEO + Paid Ads</option>
-          <option>Video Editing + Motion</option>
-          <option>Copywriting</option>
-          <option>Automation + CRM Setup</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <label class="form-label">Skills (comma-separated)</label>
-        <input class="form-input" id="f-skills" type="text" placeholder="e.g. Figma, Webflow, Brand Identity"/>
-      </div>
-      <div class="form-row-2">
-        <div class="form-row" style="margin-bottom:0">
-          <label class="form-label">Rate ($/h)</label>
-          <input class="form-input" id="f-rate-h" type="number" placeholder="e.g. 35"/>
-        </div>
-        <div class="form-row" style="margin-bottom:0">
-          <label class="form-label">Rate ($/project)</label>
-          <input class="form-input" id="f-rate-p" type="number" placeholder="e.g. 800"/>
-        </div>
-      </div>
-      <div class="form-row-2" style="margin-top:0">
-        <div class="form-row" style="margin-bottom:0">
-          <label class="form-label">Timezone</label>
-          <select class="form-select form-input" id="f-tz">
-            <option value="">Select…</option>
-            <option>GMT+0 (UK)</option>
-            <option>GMT+1 (Morocco)</option>
-            <option>GMT+2 (Egypt)</option>
-            <option>EST (US)</option>
-            <option>PST (US West)</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="form-row" style="margin-bottom:0">
-          <label class="form-label">Portfolio / Resume URL</label>
-          <input class="form-input" id="f-portfolio" type="url" placeholder="https://…"/>
-        </div>
-      </div>
-    </div>
-
-    <div id="form-error" style="display:none;background:rgba(244,63,94,.1);border:1px solid rgba(244,63,94,.25);border-radius:8px;padding:10px 13px;font-size:12px;color:var(--red);margin-top:14px"></div>
-
     <div class="form-actions">
       <button class="btn-ghost" onclick="closeModal()">Cancel</button>
-      <button class="btn-primary" onclick="savePerson()">Save Person</button>
+      <button class="btn-primary" onclick="savePerson()">Save</button>
     </div>
   </div>
 </div>
 
 <script>
-// ─── STATE ───
-let people = JSON.parse(localStorage.getItem('crm_people') || '[]');
-let currentType = 'caller';
+// Data storage
+let callers = JSON.parse(localStorage.getItem('crm_callers') || '[]');
+let outreachers = JSON.parse(localStorage.getItem('crm_outreachers') || '[]');
+let freelancers = JSON.parse(localStorage.getItem('crm_freelancers') || '[]');
+
+let currentTab = 'callers';
 let searchQuery = '';
 
-// ─── INIT ───
-function init() {
-  renderAll();
+// Helper functions
+function saveAll() {
+  localStorage.setItem('crm_callers', JSON.stringify(callers));
+  localStorage.setItem('crm_outreachers', JSON.stringify(outreachers));
+  localStorage.setItem('crm_freelancers', JSON.stringify(freelancers));
 }
 
-// ─── RENDER ALL ───
-function renderAll() {
-  const callers = people.filter(p => p.type === 'caller');
-  const outreachers = people.filter(p => p.type === 'outreacher');
-  const freelancers = people.filter(p => p.type === 'freelancer');
-
-  // Update counts
-  document.getElementById('stat-callers').textContent = callers.length;
-  document.getElementById('stat-outreachers').textContent = outreachers.length;
-  document.getElementById('stat-freelancers').textContent = freelancers.length;
-  document.getElementById('tab-count-callers').textContent = callers.length;
-  document.getElementById('tab-count-outreachers').textContent = outreachers.length;
-  document.getElementById('tab-count-freelancers').textContent = freelancers.length;
-  document.getElementById('nav-total').textContent = people.length;
-  document.getElementById('page-sub-count').textContent =
-    `Cold Callers · Cold Outreachers · Freelancers — ${people.length} ${people.length === 1 ? 'person' : 'people'} added`;
-
-  // Stats sub
-  document.getElementById('stat-callers-sub').textContent =
-    callers.length ? `${callers.length} caller${callers.length>1?'s':''} · Activity tracked per session` : 'No callers added yet';
-  document.getElementById('stat-outreachers-sub').textContent =
-    outreachers.length ? `${outreachers.length} outreacher${outreachers.length>1?'s':''} · Reply rate tracked live` : 'No outreachers added yet';
-  document.getElementById('stat-freelancers-sub').textContent =
-    freelancers.length ? `${freelancers.length} freelancer${freelancers.length>1?'s':''} · Talent pool` : 'No freelancers added yet';
-
-  // Team cost
-  const totalCost = people.reduce((sum, p) => {
-    const base = parseInt(p.base) || parseInt(p.rateH) || 0;
-    return sum + base;
-  }, 0);
-  document.getElementById('stat-cost').textContent = totalCost > 0 ? '$' + totalCost.toLocaleString() : '$0';
-  document.getElementById('stat-cost-sub').textContent =
-    totalCost > 0 ? 'Sum of base salaries / month' : 'Add team members to calculate';
-
-  // Freelancer availability
-  const available = freelancers.filter(f => f.availability === 'available' || !f.availability).length;
-  document.getElementById('fl-avail-count').textContent = `● ${available} available now`;
-
-  renderGrid('callers', callers);
-  renderGrid('outreachers', outreachers);
-  renderGrid('freelancers', freelancers);
+function getCurrentList() {
+  if (currentTab === 'callers') return callers;
+  if (currentTab === 'outreachers') return outreachers;
+  return freelancers;
 }
 
-function renderGrid(type, list) {
-  const grid = document.getElementById('grid-' + type);
-  const q = searchQuery.toLowerCase();
-  const filtered = q ? list.filter(p =>
-    p.name?.toLowerCase().includes(q) ||
-    p.niche?.toLowerCase().includes(q) ||
-    p.spec?.toLowerCase().includes(q) ||
-    p.skills?.toLowerCase().includes(q)
-  ) : list;
+function updateStats() {
+  const totalCallers = callers.length;
+  const totalOutreachers = outreachers.length;
+  const totalFreelancers = freelancers.length;
+  const totalActive = callers.filter(c=>c.status!=='terminated').length + 
+                      outreachers.filter(o=>o.status!=='terminated').length +
+                      freelancers.filter(f=>f.status!=='terminated').length;
+  
+  document.getElementById('stats-row').innerHTML = `
+    <div class="stat-card"><div class="stat-label">Cold Callers</div><div class="stat-val">${totalCallers}</div><div class="stat-sub">Active: ${callers.filter(c=>c.status!=='terminated').length}</div></div>
+    <div class="stat-card"><div class="stat-label">Cold Outreachers</div><div class="stat-val">${totalOutreachers}</div><div class="stat-sub">Active: ${outreachers.filter(o=>o.status!=='terminated').length}</div></div>
+    <div class="stat-card"><div class="stat-label">Freelancers</div><div class="stat-val">${totalFreelancers}</div><div class="stat-sub">Active: ${freelancers.filter(f=>f.status!=='terminated').length}</div></div>
+    <div class="stat-card"><div class="stat-label">Total Team</div><div class="stat-val">${totalCallers+totalOutreachers+totalFreelancers}</div><div class="stat-sub">Active: ${totalActive}</div></div>
+  `;
+}
 
+function getScoreBadge(score) {
+  if (score >= 90) return '<span class="score-badge score-A">A (90%+) → Bonus</span>';
+  if (score >= 70) return '<span class="score-badge score-B">B (70-89%) → Standard</span>';
+  if (score >= 50) return '<span class="score-badge score-C">C (50-69%) → Warning</span>';
+  return '<span class="score-badge score-D">D (<50%) → PIP</span>';
+}
+
+function calculateCallerScore(caller) {
+  let score = 0;
+  if (caller.dailyKPI) {
+    const callsPct = Math.min((caller.dailyKPI.calls || 0) / (caller.dailyKPI.callsTarget || 50) * 100, 100);
+    const meetingsPct = Math.min((caller.dailyKPI.meetings || 0) / (caller.dailyKPI.meetingsTarget || 2) * 100, 100);
+    score = (callsPct * 0.4 + meetingsPct * 0.6);
+  }
+  return Math.round(score);
+}
+
+function calculateOutreacherScore(out) {
+  let score = 0;
+  if (out.dailyKPI) {
+    const sentPct = Math.min((out.dailyKPI.sent || 0) / (out.dailyKPI.sentTarget || 200) * 100, 100);
+    const replyPct = out.dailyKPI.replyRate ? (out.dailyKPI.replyRate / 12 * 100) : 0;
+    score = (sentPct * 0.3 + replyPct * 0.7);
+  }
+  return Math.round(score);
+}
+
+function calculateFreelancerScore(freelancer) {
+  let score = 0;
+  if (freelancer.workHistory) {
+    const satisfaction = (freelancer.workHistory.satisfaction || 3) / 5 * 100;
+    const onTime = (freelancer.workHistory.onTimeRate || 80);
+    score = (satisfaction * 0.5 + onTime * 0.5);
+  }
+  return Math.round(score);
+}
+
+function renderProfiles() {
+  let list = getCurrentList();
+  let filtered = list.filter(p => {
+    if (!searchQuery) return true;
+    const q = searchQuery.toLowerCase();
+    return p.name?.toLowerCase().includes(q) || 
+           p.niche?.toLowerCase().includes(q) ||
+           p.skills?.toLowerCase().includes(q);
+  });
+  
+  const container = document.getElementById('profiles-container');
   if (!filtered.length) {
-    grid.innerHTML = buildEmptyCard(type, list.length > 0 && q);
+    container.innerHTML = `<div class="empty-state"><div class="empty-icon">👥</div><div class="empty-title">No ${currentTab} found</div><div class="empty-sub">Add your first team member to get started</div><button class="btn-primary" onclick="openAddModal()">+ Add ${currentTab === 'callers' ? 'Cold Caller' : (currentTab === 'outreachers' ? 'Cold Outreacher' : 'Freelancer')}</button></div>`;
     return;
   }
-  grid.innerHTML = filtered.map(p => buildPersonCard(p)).join('');
+  
+  container.innerHTML = `<div class="profiles-grid">${filtered.map(p => {
+    if (currentTab === 'callers') return renderCallerCard(p);
+    if (currentTab === 'outreachers') return renderOutreacherCard(p);
+    return renderFreelancerCard(p);
+  }).join('')}</div>`;
 }
 
-function buildEmptyCard(type, isFiltered) {
-  const icons = {callers:'📞', outreachers:'📧', freelancers:'🎨'};
-  const labels = {callers:'cold caller', outreachers:'outreacher', freelancers:'freelancer'};
-  const icon = icons[type];
-  const label = labels[type];
-  if (isFiltered) {
-    return `<div style="grid-column:1/-1">
-      <div class="empty-state">
-        <div class="empty-icon">🔍</div>
-        <div class="empty-title">No results match your search</div>
-        <div class="empty-sub">Try a different name, niche, or skill.</div>
-      </div></div>`;
+function renderCallerCard(c) {
+  const score = calculateCallerScore(c);
+  return `
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="profile-avatar" style="background:linear-gradient(135deg,var(--accent),var(--teal))">${c.name?.charAt(0) || 'C'}</div>
+        <div class="profile-info">
+          <div class="profile-name">${c.name || '—'}</div>
+          <div class="profile-username">@${c.username || 'username'}</div>
+          <div class="profile-contact">📞 ${c.phone || '—'} · ✉️ ${c.email || '—'}</div>
+        </div>
+      </div>
+      <div class="profile-details">
+        <div class="detail-item"><div class="detail-label">Started</div><div class="detail-value">${c.startDate || '—'}</div></div>
+        <div class="detail-item"><div class="detail-label">Niche</div><div class="detail-value">${c.niche || '—'}</div></div>
+        <div class="detail-item"><div class="detail-label">Salary</div><div class="detail-value">${c.salary || '$0'}</div></div>
+        <div class="detail-item"><div class="detail-label">Status</div><div class="detail-value">${c.status === 'terminated' ? '❌ Terminated' : (c.status === 'active' ? '✅ Active' : '⏸️ Paused')}</div></div>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi-item"><div class="kpi-num">${c.dailyKPI?.calls || 0}</div><div class="kpi-lbl">Calls</div></div>
+        <div class="kpi-item"><div class="kpi-num">${c.dailyKPI?.meetings || 0}</div><div class="kpi-lbl">Meetings</div></div>
+        <div class="kpi-item"><div class="kpi-num">${c.dailyKPI?.closes || 0}</div><div class="kpi-lbl">Closes</div></div>
+      </div>
+      <div class="profile-footer">
+        ${getScoreBadge(score)}
+        <div class="payment-info">💰 ${c.commission ? `$${c.commission}/meeting` : '—'}</div>
+        <button class="btn-ghost btn-sm" onclick="editPerson('${c.id}')">✏️ Edit</button>
+      </div>
+    </div>`;
+}
+
+function renderOutreacherCard(o) {
+  const score = calculateOutreacherScore(o);
+  return `
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="profile-avatar" style="background:linear-gradient(135deg,var(--purple),var(--teal))">${o.name?.charAt(0) || 'O'}</div>
+        <div class="profile-info">
+          <div class="profile-name">${o.name || '—'}</div>
+          <div class="profile-username">@${o.username || 'username'}</div>
+          <div class="profile-contact">📞 ${o.phone || '—'} · ✉️ ${o.email || '—'}</div>
+        </div>
+      </div>
+      <div class="profile-details">
+        <div class="detail-item"><div class="detail-label">Channels</div><div class="detail-value">${o.channels || 'Email/LinkedIn'}</div></div>
+        <div class="detail-item"><div class="detail-label">Salary</div><div class="detail-value">${o.salary || '$0'}</div></div>
+        <div class="detail-item"><div class="detail-label">Status</div><div class="detail-value">${o.status === 'terminated' ? '❌ Terminated' : (o.status === 'active' ? '✅ Active' : '⏸️ Paused')}</div></div>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi-item"><div class="kpi-num">${o.dailyKPI?.sent || 0}</div><div class="kpi-lbl">Sent</div></div>
+        <div class="kpi-item"><div class="kpi-num">${o.dailyKPI?.replies || 0}</div><div class="kpi-lbl">Replies</div></div>
+        <div class="kpi-item"><div class="kpi-num">${o.dailyKPI?.meetings || 0}</div><div class="kpi-lbl">Meetings</div></div>
+      </div>
+      <div class="profile-footer">
+        ${getScoreBadge(score)}
+        <div class="payment-info">📧 Reply rate: ${o.dailyKPI?.replyRate || 0}%</div>
+        <button class="btn-ghost btn-sm" onclick="editPerson('${o.id}')">✏️ Edit</button>
+      </div>
+    </div>`;
+}
+
+function renderFreelancerCard(f) {
+  const score = calculateFreelancerScore(f);
+  return `
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="profile-avatar" style="background:linear-gradient(135deg,var(--amber),var(--orange))">${f.name?.charAt(0) || 'F'}</div>
+        <div class="profile-info">
+          <div class="profile-name">${f.name || '—'}</div>
+          <div class="profile-username">@${f.username || 'username'}</div>
+          <div class="profile-contact">📞 ${f.phone || '—'} · ✉️ ${f.email || '—'}</div>
+        </div>
+      </div>
+      <div class="profile-details">
+        <div class="detail-item"><div class="detail-label">Skills</div><div class="detail-value">${f.skills || '—'}</div></div>
+        <div class="detail-item"><div class="detail-label">Rate</div><div class="detail-value">${f.rate || '$0/h'}</div></div>
+        <div class="detail-item"><div class="detail-label">Timezone</div><div class="detail-value">${f.timezone || '—'}</div></div>
+        <div class="detail-item"><div class="detail-label">Status</div><div class="detail-value">${f.status === 'terminated' ? '❌ Terminated' : (f.status === 'active' ? '✅ Active' : '⏸️ Paused')}</div></div>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi-item"><div class="kpi-num">${f.workHistory?.projects || 0}</div><div class="kpi-lbl">Projects</div></div>
+        <div class="kpi-item"><div class="kpi-num">${f.workHistory?.satisfaction || '—'}★</div><div class="kpi-lbl">Rating</div></div>
+        <div class="kpi-item"><div class="kpi-num">${f.workHistory?.onTimeRate || 0}%</div><div class="kpi-lbl">On Time</div></div>
+      </div>
+      <div class="profile-footer">
+        ${getScoreBadge(score)}
+        <div class="payment-info">🔗 ${f.portfolio ? 'Portfolio ✓' : 'No portfolio'}</div>
+        <button class="btn-ghost btn-sm" onclick="editPerson('${f.id}')">✏️ Edit</button>
+      </div>
+    </div>`;
+}
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelector(`.tab[data-tab="${tab}"]`).classList.add('active');
+  updateStats();
+  renderProfiles();
+}
+
+function handleSearch(val) {
+  searchQuery = val;
+  renderProfiles();
+}
+
+function openAddModal() {
+  document.getElementById('modal-title').innerText = `Add ${currentTab === 'callers' ? 'Cold Caller' : (currentTab === 'outreachers' ? 'Cold Outreacher' : 'Freelancer')}`;
+  document.getElementById('person-type').value = currentTab;
+  document.getElementById('edit-id').value = '';
+  
+  let fieldsHtml = '';
+  if (currentTab === 'callers') {
+    fieldsHtml = `
+      <div class="form-row-2"><div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" id="f-name" placeholder="e.g. Karim Moussaoui"/></div>
+      <div class="form-group"><label class="form-label">Username</label><input class="form-input" id="f-username" placeholder="username"/></div></div>
+      <div class="form-row-2"><div class="form-group"><label class="form-label">Phone</label><input class="form-input" id="f-phone" placeholder="+212..."/></div>
+      <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="f-email" placeholder="email@domain.com"/></div></div>
+      <div class="form-row-2"><div class="form-group"><label class="form-label">Start Date</label><input class="form-input" id="f-start" type="date"/></div>
+      <div class="form-group"><label class="form-label">Niche</label><input class="form-input" id="f-niche" placeholder="E-commerce/SaaS/Real Estate..."/></div></div>
+      <div class="form-row-2"><div class="form-group"><label class="form-label">Salary (monthly)</label><input class="form-input" id="f-salary" placeholder="$0"/></div>
+      <div class="form-group"><label class="form-label">Commission ($/meeting)</label><input class="form-input" id="f-commission" placeholder="$0"/></div></div>
+      <div class="form-group"><label class="form-label">Status</label><select class="form-select" id="f-status"><option value="active">Active</option><option value="paused">Paused</option><option value="terminated">Terminated</option></select></div>
+      <div style="border-top:1px solid var(--border);margin:12px 0;padding-top:12px"><div class="form-label">Daily KPI</div></div>
+      <div class="form-row-2"><div class="form-group"><label class="form-label">Calls Made (target:50)</label><input class="form-input" id="f-calls" type="number" value="0"/></div>
+      <div class="form-group"><label class="form-label">Meetings Booked (target:2%)</label><input class="form-input" id="f-meetings" type="number" value="0"/></div></div>
+      <div class="form-group"><label class="form-label">Closes (actual)</label><input class="form-input" id="f-closes" type="number" value="0"/></div>`;
+  } else if (currentTab === 'outreachers') {
+    fieldsHtml = `
+      <div class="form-row-2"><div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" id="f-name" placeholder="e.g. Sara Bencheikh"/></div>
+      <div class="form-group"><label class="form-label">Username</label><input class="form-input" id="f-username" placeholder="username"/></div></div>
+      <div class="form-row-2"><div class="form-group"><label class="form-label">Phone</label><input class="form-input" id="f-phone" placeholder="+212..."/></div>
+      <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="f-email" placeholder="email@domain.com"/></div></div>
+      <div class="form-row-2"><div class="form-group"><label class="form-label">Channels</label><select class="form-select" id="f-channels"><option>Email/LinkedIn/Instagram</option><option>Email Only</option><option>LinkedIn Only</option></select></div>
+      <div class="form-group"><label class="form-label">Salary (monthly)</label><input class="form-input" id="f-salary" placeholder="$0"/></div></div>
+      <div class="form-group"><label class="form-label">Status</label><select class="form-select" id="f-status"><option value="active">Active</option><option value="paused">Paused</option><option value="terminated">Terminated</option></select></div>
+      <div style="border-top:1px solid var(--border);margin:12px 0;padding-top:12px"><div class="form-label">Daily KPI</div></div>
+      <div class="form-row-2"><div class="form-group"><label class="form-label">Messages Sent (target:200)</label><input class="form-input" id="f-sent" type="number" value="0"/></div>
+      <div class="form-group"><label class="form-label">Replies Received</label><input class="form-input" id="f-replies" type="number" value="0"/></div></div>
+      <div class="form-row-2"><div class="form-group"><label class="form-label">Reply Rate %</label><input class="form-input" id="f-replyRate" type="number" value="0"/></div>
+      <div class="form-group"><label class="form-label">Meetings Booked</label><input class="form-input" id="f-meetings" type="number" value="0"/></div></div>`;
+  } else {
+    fieldsHtml = `
+      <div class="form-row-2"><div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" id="f-name" placeholder="e.g. Mehdi Rachidi"/></div>
+      <div class="form-group"><label class="form-label">Username</label><input class="form-input" id="f-username" placeholder="username"/></div></div>
+      <div class="form-row-2"><div class="form-group"><label class="form-label">Phone</label><input class="form-input" id="f-phone" placeholder="+212..."/></div>
+      <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="f-email" placeholder="email@domain.com"/></div></div>
+      <div class="form-row-2"><div class="form-group"><label class="form-label">Skills</label><input class="form-input" id="f-skills" placeholder="Design/Dev/SEO/Ads..."/></div>
+      <div class="form-group"><label class="form-label">Rate ($/h or $/project)</label><input class="form-input" id="f-rate" placeholder="$50/h"/></div></div>
+      <div class="form-row-2"><div class="form-group"><label class="form-label">Timezone</label><input class="form-input" id="f-timezone" placeholder="GMT+1"/></div>
+      <div class="form-group"><label class="form-label">Portfolio Link</label><input class="form-input" id="f-portfolio" placeholder="https://..."/></div></div>
+      <div class="form-group"><label class="form-label">Status</label><select class="form-select" id="f-status"><option value="active">Active</option><option value="paused">Paused</option><option value="terminated">Terminated</option></select></div>
+      <div style="border-top:1px solid var(--border);margin:12px 0;padding-top:12px"><div class="form-label">Work History</div></div>
+      <div class="form-row-2"><div class="form-group"><label class="form-label">Projects Completed</label><input class="form-input" id="f-projects" type="number" value="0"/></div>
+      <div class="form-group"><label class="form-label">Client Satisfaction (1-5)</label><input class="form-input" id="f-satisfaction" type="number" step="0.1" max="5" value="4"/></div></div>
+      <div class="form-row-2"><div class="form-group"><label class="form-label">On Time Rate (%)</label><input class="form-input" id="f-onTime" type="number" value="85"/></div>
+      <div class="form-group"><label class="form-label">Revision Requests</label><input class="form-input" id="f-revisions" type="number" value="0"/></div></div>`;
   }
-  return `<div style="grid-column:1/-1">
-    <div class="empty-state">
-      <div class="empty-icon">${icon}</div>
-      <div class="empty-title">No ${label}s added yet</div>
-      <div class="empty-sub">Add your first ${label} to start tracking KPIs, activity, and performance scores.</div>
-      <button class="btn-primary" onclick="openModalType('${type.replace(/s$/,'')}')">+ Add ${label.charAt(0).toUpperCase()+label.slice(1)}</button>
-    </div></div>`;
-}
-
-function buildPersonCard(p) {
-  const initials = p.name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2);
-  const gradients = [
-    'linear-gradient(135deg,#f59e0b,#f97316)',
-    'linear-gradient(135deg,#8b5cf6,#3b7ef8)',
-    'linear-gradient(135deg,#10b981,#22d3b8)',
-    'linear-gradient(135deg,#3b7ef8,#22d3b8)',
-    'linear-gradient(135deg,#f43f5e,#f59e0b)',
-    'linear-gradient(135deg,#8b5cf6,#22d3b8)',
-    'linear-gradient(135deg,#22d3b8,#3b7ef8)',
-    'linear-gradient(135deg,#f59e0b,#8b5cf6)',
-  ];
-  const grad = gradients[p.name.length % gradients.length];
-  const accentColors = {caller:'var(--accent)', outreacher:'var(--teal)', freelancer:'var(--purple)'};
-  const accent = accentColors[p.type] || 'var(--accent)';
-  const startText = p.start ? `Since ${formatDate(p.start)}` : (p.orStart ? `Since ${formatDate(p.orStart)}` : 'No start date');
-
-  if (p.type === 'caller') return buildCallerCard(p, initials, grad, accent, startText);
-  if (p.type === 'outreacher') return buildOutreacherCard(p, initials, grad, accent, startText);
-  if (p.type === 'freelancer') return buildFreelancerCard(p, initials, grad, accent);
-  return '';
-}
-
-function buildCallerCard(p, initials, grad, accent, startText) {
-  const salary = p.base ? `Base <strong>$${p.base}</strong>/mo` : 'Salary not set';
-  const commission = (p.commMeet ? ` + <strong>$${p.commMeet}</strong>/meet` : '') + (p.commClose ? ` + <strong>$${p.commClose}</strong>/close` : '');
-  return `
-  <div class="person-card" style="--card-accent:${accent}" onclick="openPersonDetail('${p.id}')">
-    <div class="pc-top">
-      <div style="display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0">
-        <div class="pc-av" style="background:${grad}">${initials}</div>
-        <div class="pc-meta">
-          <div class="pc-name">${p.name}</div>
-          <div class="pc-role">📞 Cold Caller${p.niche ? ' · ' + p.niche : ''}</div>
-          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-            <div class="avail"><span class="avail-dot" style="background:var(--green)"></span><span style="color:var(--green)">Active</span></div>
-            <span style="color:var(--text3)">·</span>
-            <span style="font-size:11px;color:var(--text3)">${startText}</span>
-          </div>
-        </div>
-      </div>
-      <div class="grade none" title="Grade calculated from KPI data">N/A</div>
-    </div>
-    <div class="pc-kpis">
-      <div class="kpi-box"><div class="kpi-empty">—</div><div class="kpi-lbl">Calls<br/>today</div></div>
-      <div class="kpi-box"><div class="kpi-empty">—</div><div class="kpi-lbl">Meetings<br/>booked</div></div>
-      <div class="kpi-box"><div class="kpi-empty">—</div><div class="kpi-lbl">Closes<br/>this week</div></div>
-    </div>
-    <div class="pc-bar-row"><div class="pc-bar-label">Call rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:0%;background:${accent}"></div></div><div class="pc-bar-empty">—</div></div>
-    <div class="pc-bar-row"><div class="pc-bar-label">Pickup rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:0%;background:var(--teal)"></div></div><div class="pc-bar-empty">—</div></div>
-    <div class="pc-bar-row"><div class="pc-bar-label">Meeting rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:0%;background:var(--green)"></div></div><div class="pc-bar-empty">—</div></div>
-    <div style="margin-top:8px;font-size:11px;color:var(--text3);display:flex;align-items:center;gap:4px">
-      <span>📊</span> KPIs will populate once call tracking is connected
-    </div>
-    <div class="pc-footer">
-      <div class="pc-salary">${salary}${commission}</div>
-      <div style="display:flex;gap:6px">
-        <button class="btn-ghost" style="padding:4px 10px;font-size:11px" onclick="event.stopPropagation();editPerson('${p.id}')">Edit</button>
-        <button class="btn-ghost" style="padding:4px 10px;font-size:11px;color:var(--red);border-color:rgba(244,63,94,.3)" onclick="event.stopPropagation();deletePerson('${p.id}')">Remove</button>
-      </div>
-    </div>
-  </div>`;
-}
-
-function buildOutreacherCard(p, initials, grad, accent, startText) {
-  const channels = p.channels ? p.channels.join(' + ') : 'No channels set';
-  const salary = p.orBase ? `Base <strong>$${p.orBase}</strong>/mo` : 'Salary not set';
-  return `
-  <div class="person-card" style="--card-accent:${accent}" onclick="openPersonDetail('${p.id}')">
-    <div class="pc-top">
-      <div style="display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0">
-        <div class="pc-av" style="background:${grad}">${initials}</div>
-        <div class="pc-meta">
-          <div class="pc-name">${p.name}</div>
-          <div class="pc-role">📧 Cold Outreach · ${channels}</div>
-          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-            <div class="avail"><span class="avail-dot" style="background:var(--green)"></span><span style="color:var(--green)">Active</span></div>
-            <span style="color:var(--text3)">·</span>
-            <span style="font-size:11px;color:var(--text3)">${startText}</span>
-          </div>
-        </div>
-      </div>
-      <div class="grade none" title="Grade calculated from reply rates">N/A</div>
-    </div>
-    <div class="pc-kpis">
-      <div class="kpi-box"><div class="kpi-empty">—</div><div class="kpi-lbl">Emails<br/>sent</div></div>
-      <div class="kpi-box"><div class="kpi-empty">—</div><div class="kpi-lbl">LinkedIn<br/>msgs</div></div>
-      <div class="kpi-box"><div class="kpi-empty">—</div><div class="kpi-lbl">Reply<br/>rate</div></div>
-    </div>
-    <div class="pc-bar-row"><div class="pc-bar-label">Email quota</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:0%;background:${accent}"></div></div><div class="pc-bar-empty">—</div></div>
-    <div class="pc-bar-row"><div class="pc-bar-label">Reply rate</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:0%;background:var(--teal)"></div></div><div class="pc-bar-empty">—</div></div>
-    <div class="pc-bar-row"><div class="pc-bar-label">Meetings</div><div class="pc-bar-track"><div class="pc-bar-fill" style="width:0%;background:var(--green)"></div></div><div class="pc-bar-empty">—</div></div>
-    <div style="margin-top:8px;font-size:11px;color:var(--text3);display:flex;align-items:center;gap:4px">
-      <span>🔗</span> Connect Instantly / Apollo / Expandi to auto-import stats
-    </div>
-    <div class="pc-footer">
-      <div class="pc-salary">${salary}</div>
-      <div style="display:flex;gap:6px">
-        <button class="btn-ghost" style="padding:4px 10px;font-size:11px" onclick="event.stopPropagation();editPerson('${p.id}')">Edit</button>
-        <button class="btn-ghost" style="padding:4px 10px;font-size:11px;color:var(--red);border-color:rgba(244,63,94,.3)" onclick="event.stopPropagation();deletePerson('${p.id}')">Remove</button>
-      </div>
-    </div>
-  </div>`;
-}
-
-function buildFreelancerCard(p, initials, grad, accent) {
-  const skillTags = p.skills ? p.skills.split(',').map(s=>`<span class="skill-tag">${s.trim()}</span>`).join('') : '<span style="font-size:11px;color:var(--text3)">No skills added</span>';
-  const rateDisplay = p.rateH ? `$${p.rateH}/h` : (p.rateP ? `$${p.rateP}/proj` : 'Rate not set');
-  const rateProjectText = p.rateP ? `or $${p.rateP}/proj` : '';
-  const tz = p.tz || 'TZ not set';
-  return `
-  <div class="person-card" style="--card-accent:${accent}" onclick="openPersonDetail('${p.id}')">
-    <div class="pc-top">
-      <div style="display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0">
-        <div class="pc-av" style="background:${grad}">${initials}</div>
-        <div class="pc-meta">
-          <div class="pc-name">${p.name}</div>
-          <div class="pc-role">${getSpecIcon(p.spec)} ${p.spec || 'Specialization not set'}</div>
-          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:2px">
-            <div class="avail"><span class="avail-dot" style="background:var(--green)"></span><span style="color:var(--green)">Available</span></div>
-            <span style="color:var(--text3)">· ${tz}</span>
-          </div>
-        </div>
-      </div>
-      <div style="text-align:right">
-        <div style="font-family:var(--head);font-size:15px;font-weight:700;color:var(--teal)">${rateDisplay !== 'Rate not set' ? rateDisplay : '—'}</div>
-        <div style="font-size:10px;color:var(--text3)">${rateProjectText}</div>
-      </div>
-    </div>
-    <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px;min-height:24px">${skillTags}</div>
-    <div class="pc-kpis">
-      <div class="kpi-box"><div class="kpi-empty">—</div><div class="kpi-lbl">Projects<br/>done</div></div>
-      <div class="kpi-box"><div class="kpi-empty">—</div><div class="kpi-lbl">Client<br/>rating</div></div>
-      <div class="kpi-box"><div class="kpi-empty">—</div><div class="kpi-lbl">On-time<br/>delivery</div></div>
-    </div>
-    <div style="font-size:11px;color:var(--text3);margin-bottom:10px;display:flex;align-items:center;gap:4px">
-      <span>📊</span> Performance data will show after first project
-    </div>
-    <div class="pc-footer">
-      ${p.portfolio ? `<a href="${p.portfolio}" target="_blank" style="color:var(--accent);font-size:12px;text-decoration:none" onclick="event.stopPropagation()">📎 Portfolio →</a>` : '<span style="font-size:12px;color:var(--text3)">No portfolio linked</span>'}
-      <div style="display:flex;gap:6px">
-        <button class="btn-ghost" style="padding:4px 10px;font-size:11px" onclick="event.stopPropagation();editPerson('${p.id}')">Edit</button>
-        <button class="btn-ghost" style="padding:4px 10px;font-size:11px;color:var(--red);border-color:rgba(244,63,94,.3)" onclick="event.stopPropagation();deletePerson('${p.id}')">Remove</button>
-      </div>
-    </div>
-  </div>`;
-}
-
-function getSpecIcon(spec) {
-  if (!spec) return '🎨';
-  if (spec.toLowerCase().includes('design')) return '🎨';
-  if (spec.toLowerCase().includes('dev')) return '💻';
-  if (spec.toLowerCase().includes('seo') || spec.toLowerCase().includes('ads')) return '📈';
-  if (spec.toLowerCase().includes('video')) return '🎬';
-  if (spec.toLowerCase().includes('copy')) return '✍️';
-  if (spec.toLowerCase().includes('auto')) return '⚡';
-  return '🔧';
-}
-
-function formatDate(dateStr) {
-  if (!dateStr) return '';
-  try {
-    const d = new Date(dateStr);
-    return d.toLocaleDateString('en-US', {month:'short', year:'numeric'});
-  } catch { return dateStr; }
-}
-
-// ─── MODAL ───
-function openModal() { openModalType('caller'); }
-function openModalType(type) {
-  selectType(type);
-  document.getElementById('modal-overlay').classList.add('open');
-  clearForm();
-}
-function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); clearForm(); }
-function handleOverlayClick(e) { if (e.target === document.getElementById('modal-overlay')) closeModal(); }
-
-function selectType(type) {
-  currentType = type;
-  ['caller','outreacher','freelancer'].forEach(t => {
-    document.getElementById('type-' + t).classList.toggle('sel', t === type);
-  });
-  document.getElementById('caller-fields').style.display = (type === 'caller') ? '' : 'none';
-  document.getElementById('outreacher-fields').style.display = (type === 'outreacher') ? '' : 'none';
-  document.getElementById('freelancer-fields').style.display = (type === 'freelancer') ? '' : 'none';
-}
-
-function clearForm() {
-  ['f-name','f-username','f-phone','f-email','f-niche','f-base','f-start','f-comm-meet','f-comm-close',
-   'f-or-base','f-or-start','f-spec','f-skills','f-rate-h','f-rate-p','f-tz','f-portfolio'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.value = '';
-  });
-  ['ch-email','ch-linkedin','ch-instagram','ch-twitter'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.checked = false;
-  });
-  document.getElementById('form-error').style.display = 'none';
-  document.getElementById('form-error').textContent = '';
-}
-
-function savePerson() {
-  const name = document.getElementById('f-name').value.trim();
-  const email = document.getElementById('f-email').value.trim();
-  if (!name) return showError('Full name is required.');
-  if (!email) return showError('Email is required.');
-
-  let person = {
-    id: Date.now().toString(),
-    type: currentType,
-    name, email,
-    username: document.getElementById('f-username').value.trim(),
-    phone: document.getElementById('f-phone').value.trim(),
-    createdAt: new Date().toISOString(),
-  };
-
-  if (currentType === 'caller') {
-    const niche = document.getElementById('f-niche').value.trim();
-    if (!niche) return showError('Niche is required for callers.');
-    Object.assign(person, {
-      niche,
-      base: document.getElementById('f-base').value,
-      start: document.getElementById('f-start').value,
-      commMeet: document.getElementById('f-comm-meet').value,
-      commClose: document.getElementById('f-comm-close').value,
-    });
-  } else if (currentType === 'outreacher') {
-    const channels = ['ch-email','ch-linkedin','ch-instagram','ch-twitter']
-      .filter(id => document.getElementById(id)?.checked)
-      .map(id => document.getElementById(id).value);
-    if (!channels.length) return showError('Select at least one outreach channel.');
-    Object.assign(person, {
-      channels,
-      orBase: document.getElementById('f-or-base').value,
-      orStart: document.getElementById('f-or-start').value,
-    });
-  } else if (currentType === 'freelancer') {
-    const spec = document.getElementById('f-spec').value;
-    if (!spec) return showError('Specialization is required for freelancers.');
-    Object.assign(person, {
-      spec,
-      skills: document.getElementById('f-skills').value.trim(),
-      rateH: document.getElementById('f-rate-h').value,
-      rateP: document.getElementById('f-rate-p').value,
-      tz: document.getElementById('f-tz').value,
-      portfolio: document.getElementById('f-portfolio').value.trim(),
-      availability: 'available',
-    });
-  }
-
-  people.push(person);
-  save();
-  closeModal();
-  renderAll();
-
-  // Switch to the right tab
-  const tabMap = {caller:'callers', outreacher:'outreachers', freelancer:'freelancers'};
-  const tabId = tabMap[currentType];
-  const tabEl = document.querySelector(`.tab:nth-child(${tabId==='callers'?1:tabId==='outreachers'?2:3})`);
-  if (tabEl) switchTab(tabId, tabEl);
-}
-
-function showError(msg) {
-  const el = document.getElementById('form-error');
-  el.textContent = '⚠ ' + msg;
-  el.style.display = 'block';
+  document.getElementById('modal-fields').innerHTML = fieldsHtml;
+  document.getElementById('person-modal').classList.add('open');
 }
 
 function editPerson(id) {
-  const p = people.find(x => x.id === id);
-  if (!p) return;
-  openModalType(p.type);
-  // Pre-fill
-  document.getElementById('f-name').value = p.name || '';
-  document.getElementById('f-email').value = p.email || '';
-  document.getElementById('f-username').value = p.username || '';
-  document.getElementById('f-phone').value = p.phone || '';
-  if (p.type === 'caller') {
-    document.getElementById('f-niche').value = p.niche || '';
-    document.getElementById('f-base').value = p.base || '';
-    document.getElementById('f-start').value = p.start || '';
-    document.getElementById('f-comm-meet').value = p.commMeet || '';
-    document.getElementById('f-comm-close').value = p.commClose || '';
-  } else if (p.type === 'outreacher') {
-    p.channels?.forEach(ch => {
-      const el = document.querySelector(`input[value="${ch}"]`);
-      if (el) el.checked = true;
-    });
-    document.getElementById('f-or-base').value = p.orBase || '';
-    document.getElementById('f-or-start').value = p.orStart || '';
-  } else if (p.type === 'freelancer') {
-    document.getElementById('f-spec').value = p.spec || '';
-    document.getElementById('f-skills').value = p.skills || '';
-    document.getElementById('f-rate-h').value = p.rateH || '';
-    document.getElementById('f-rate-p').value = p.rateP || '';
-    document.getElementById('f-tz').value = p.tz || '';
-    document.getElementById('f-portfolio').value = p.portfolio || '';
+  let list = getCurrentList();
+  let person = list.find(p => p.id === id);
+  if (!person) return;
+  
+  document.getElementById('modal-title').innerText = `Edit ${currentTab === 'callers' ? 'Cold Caller' : (currentTab === 'outreachers' ? 'Cold Outreacher' : 'Freelancer')}`;
+  document.getElementById('person-type').value = currentTab;
+  document.getElementById('edit-id').value = id;
+  
+  if (currentTab === 'callers') {
+    document.getElementById('modal-fields').innerHTML = getCallerFormHtml(person);
+    document.getElementById('f-name').value = person.name || '';
+    document.getElementById('f-username').value = person.username || '';
+    document.getElementById('f-phone').value = person.phone || '';
+    document.getElementById('f-email').value = person.email || '';
+    document.getElementById('f-start').value = person.startDate || '';
+    document.getElementById('f-niche').value = person.niche || '';
+    document.getElementById('f-salary').value = person.salary || '';
+    document.getElementById('f-commission').value = person.commission || '';
+    document.getElementById('f-status').value = person.status || 'active';
+    document.getElementById('f-calls').value = person.dailyKPI?.calls || 0;
+    document.getElementById('f-meetings').value = person.dailyKPI?.meetings || 0;
+    document.getElementById('f-closes').value = person.dailyKPI?.closes || 0;
+  } else if (currentTab === 'outreachers') {
+    document.getElementById('modal-fields').innerHTML = getOutreacherFormHtml(person);
+    document.getElementById('f-name').value = person.name || '';
+    document.getElementById('f-username').value = person.username || '';
+    document.getElementById('f-phone').value = person.phone || '';
+    document.getElementById('f-email').value = person.email || '';
+    document.getElementById('f-channels').value = person.channels || 'Email/LinkedIn/Instagram';
+    document.getElementById('f-salary').value = person.salary || '';
+    document.getElementById('f-status').value = person.status || 'active';
+    document.getElementById('f-sent').value = person.dailyKPI?.sent || 0;
+    document.getElementById('f-replies').value = person.dailyKPI?.replies || 0;
+    document.getElementById('f-replyRate').value = person.dailyKPI?.replyRate || 0;
+    document.getElementById('f-meetings').value = person.dailyKPI?.meetings || 0;
+  } else {
+    document.getElementById('modal-fields').innerHTML = getFreelancerFormHtml(person);
+    document.getElementById('f-name').value = person.name || '';
+    document.getElementById('f-username').value = person.username || '';
+    document.getElementById('f-phone').value = person.phone || '';
+    document.getElementById('f-email').value = person.email || '';
+    document.getElementById('f-skills').value = person.skills || '';
+    document.getElementById('f-rate').value = person.rate || '';
+    document.getElementById('f-timezone').value = person.timezone || '';
+    document.getElementById('f-portfolio').value = person.portfolio || '';
+    document.getElementById('f-status').value = person.status || 'active';
+    document.getElementById('f-projects').value = person.workHistory?.projects || 0;
+    document.getElementById('f-satisfaction').value = person.workHistory?.satisfaction || 4;
+    document.getElementById('f-onTime').value = person.workHistory?.onTimeRate || 85;
+    document.getElementById('f-revisions').value = person.workHistory?.revisions || 0;
   }
-  // Replace save to update
-  const saveBtn = document.querySelector('.form-actions .btn-primary');
-  saveBtn.textContent = 'Update Person';
-  saveBtn.onclick = () => updatePerson(id);
+  document.getElementById('person-modal').classList.add('open');
 }
 
-function updatePerson(id) {
-  people = people.filter(x => x.id !== id);
-  // Re-use save logic: save will push new record — instead, inline it
-  const name = document.getElementById('f-name').value.trim();
-  const email = document.getElementById('f-email').value.trim();
-  if (!name) return showError('Full name is required.');
-  if (!email) return showError('Email is required.');
-  let person = { id, type: currentType, name, email,
-    username: document.getElementById('f-username').value.trim(),
-    phone: document.getElementById('f-phone').value.trim(),
-    createdAt: new Date().toISOString() };
-  if (currentType === 'caller') {
-    Object.assign(person, { niche: document.getElementById('f-niche').value.trim(),
-      base: document.getElementById('f-base').value, start: document.getElementById('f-start').value,
-      commMeet: document.getElementById('f-comm-meet').value, commClose: document.getElementById('f-comm-close').value });
-  } else if (currentType === 'outreacher') {
-    const channels = ['ch-email','ch-linkedin','ch-instagram','ch-twitter']
-      .filter(i => document.getElementById(i)?.checked).map(i => document.getElementById(i).value);
-    Object.assign(person, { channels, orBase: document.getElementById('f-or-base').value,
-      orStart: document.getElementById('f-or-start').value });
-  } else if (currentType === 'freelancer') {
-    Object.assign(person, { spec: document.getElementById('f-spec').value,
-      skills: document.getElementById('f-skills').value.trim(), rateH: document.getElementById('f-rate-h').value,
-      rateP: document.getElementById('f-rate-p').value, tz: document.getElementById('f-tz').value,
-      portfolio: document.getElementById('f-portfolio').value.trim(), availability: 'available' });
+function getCallerFormHtml(p) { return `<div class="form-row-2"><div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" id="f-name"/></div><div class="form-group"><label class="form-label">Username</label><input class="form-input" id="f-username"/></div></div><div class="form-row-2"><div class="form-group"><label class="form-label">Phone</label><input class="form-input" id="f-phone"/></div><div class="form-group"><label class="form-label">Email</label><input class="form-input" id="f-email"/></div></div><div class="form-row-2"><div class="form-group"><label class="form-label">Start Date</label><input class="form-input" id="f-start" type="date"/></div><div class="form-group"><label class="form-label">Niche</label><input class="form-input" id="f-niche"/></div></div><div class="form-row-2"><div class="form-group"><label class="form-label">Salary (monthly)</label><input class="form-input" id="f-salary"/></div><div class="form-group"><label class="form-label">Commission ($/meeting)</label><input class="form-input" id="f-commission"/></div></div><div class="form-group"><label class="form-label">Status</label><select class="form-select" id="f-status"><option value="active">Active</option><option value="paused">Paused</option><option value="terminated">Terminated</option></select></div><div style="border-top:1px solid var(--border);margin:12px 0;padding-top:12px"><div class="form-label">Daily KPI</div></div><div class="form-row-2"><div class="form-group"><label class="form-label">Calls Made (target:50)</label><input class="form-input" id="f-calls" type="number"/></div><div class="form-group"><label class="form-label">Meetings Booked (target:2%)</label><input class="form-input" id="f-meetings" type="number"/></div></div><div class="form-group"><label class="form-label">Closes (actual)</label><input class="form-input" id="f-closes" type="number"/></div>`; }
+function getOutreacherFormHtml(p) { return `<div class="form-row-2"><div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" id="f-name"/></div><div class="form-group"><label class="form-label">Username</label><input class="form-input" id="f-username"/></div></div><div class="form-row-2"><div class="form-group"><label class="form-label">Phone</label><input class="form-input" id="f-phone"/></div><div class="form-group"><label class="form-label">Email</label><input class="form-input" id="f-email"/></div></div><div class="form-row-2"><div class="form-group"><label class="form-label">Channels</label><select class="form-select" id="f-channels"><option>Email/LinkedIn/Instagram</option><option>Email Only</option><option>LinkedIn Only</option></select></div><div class="form-group"><label class="form-label">Salary (monthly)</label><input class="form-input" id="f-salary"/></div></div><div class="form-group"><label class="form-label">Status</label><select class="form-select" id="f-status"><option value="active">Active</option><option value="paused">Paused</option><option value="terminated">Terminated</option></select></div><div style="border-top:1px solid var(--border);margin:12px 0;padding-top:12px"><div class="form-label">Daily KPI</div></div><div class="form-row-2"><div class="form-group"><label class="form-label">Messages Sent (target:200)</label><input class="form-input" id="f-sent" type="number"/></div><div class="form-group"><label class="form-label">Replies Received</label><input class="form-input" id="f-replies" type="number"/></div></div><div class="form-row-2"><div class="form-group"><label class="form-label">Reply Rate %</label><input class="form-input" id="f-replyRate" type="number"/></div><div class="form-group"><label class="form-label">Meetings Booked</label><input class="form-input" id="f-meetings" type="number"/></div></div>`; }
+function getFreelancerFormHtml(p) { return `<div class="form-row-2"><div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" id="f-name"/></div><div class="form-group"><label class="form-label">Username</label><input class="form-input" id="f-username"/></div></div><div class="form-row-2"><div class="form-group"><label class="form-label">Phone</label><input class="form-input" id="f-phone"/></div><div class="form-group"><label class="form-label">Email</label><input class="form-input" id="f-email"/></div></div><div class="form-row-2"><div class="form-group"><label class="form-label">Skills</label><input class="form-input" id="f-skills"/></div><div class="form-group"><label class="form-label">Rate ($/h or $/project)</label><input class="form-input" id="f-rate"/></div></div><div class="form-row-2"><div class="form-group"><label class="form-label">Timezone</label><input class="form-input" id="f-timezone"/></div><div class="form-group"><label class="form-label">Portfolio Link</label><input class="form-input" id="f-portfolio"/></div></div><div class="form-group"><label class="form-label">Status</label><select class="form-select" id="f-status"><option value="active">Active</option><option value="paused">Paused</option><option value="terminated">Terminated</option></select></div><div style="border-top:1px solid var(--border);margin:12px 0;padding-top:12px"><div class="form-label">Work History</div></div><div class="form-row-2"><div class="form-group"><label class="form-label">Projects Completed</label><input class="form-input" id="f-projects" type="number"/></div><div class="form-group"><label class="form-label">Client Satisfaction (1-5)</label><input class="form-input" id="f-satisfaction" type="number" step="0.1" max="5"/></div></div><div class="form-row-2"><div class="form-group"><label class="form-label">On Time Rate (%)</label><input class="form-input" id="f-onTime" type="number"/></div><div class="form-group"><label class="form-label">Revision Requests</label><input class="form-input" id="f-revisions" type="number"/></div></div>`; }
+
+function savePerson() {
+  const type = document.getElementById('person-type').value;
+  const editId = document.getElementById('edit-id').value;
+  const name = document.getElementById('f-name')?.value.trim();
+  if (!name) return alert('Name is required');
+  
+  if (type === 'callers') {
+    const newPerson = {
+      id: editId || Date.now().toString(),
+      name,
+      username: document.getElementById('f-username')?.value || '',
+      phone: document.getElementById('f-phone')?.value || '',
+      email: document.getElementById('f-email')?.value || '',
+      startDate: document.getElementById('f-start')?.value || '',
+      niche: document.getElementById('f-niche')?.value || '',
+      salary: document.getElementById('f-salary')?.value || '',
+      commission: document.getElementById('f-commission')?.value || '',
+      status: document.getElementById('f-status')?.value || 'active',
+      dailyKPI: {
+        calls: parseInt(document.getElementById('f-calls')?.value) || 0,
+        callsTarget: 50,
+        meetings: parseInt(document.getElementById('f-meetings')?.value) || 0,
+        meetingsTarget: 2,
+        closes: parseInt(document.getElementById('f-closes')?.value) || 0
+      }
+    };
+    if (editId) {
+      const index = callers.findIndex(c => c.id === editId);
+      if (index !== -1) callers[index] = newPerson;
+    } else callers.push(newPerson);
+  } else if (type === 'outreachers') {
+    const newPerson = {
+      id: editId || Date.now().toString(),
+      name,
+      username: document.getElementById('f-username')?.value || '',
+      phone: document.getElementById('f-phone')?.value || '',
+      email: document.getElementById('f-email')?.value || '',
+      channels: document.getElementById('f-channels')?.value || 'Email/LinkedIn',
+      salary: document.getElementById('f-salary')?.value || '',
+      status: document.getElementById('f-status')?.value || 'active',
+      dailyKPI: {
+        sent: parseInt(document.getElementById('f-sent')?.value) || 0,
+        sentTarget: 200,
+        replies: parseInt(document.getElementById('f-replies')?.value) || 0,
+        replyRate: parseInt(document.getElementById('f-replyRate')?.value) || 0,
+        meetings: parseInt(document.getElementById('f-meetings')?.value) || 0
+      }
+    };
+    if (editId) {
+      const index = outreachers.findIndex(o => o.id === editId);
+      if (index !== -1) outreachers[index] = newPerson;
+    } else outreachers.push(newPerson);
+  } else {
+    const newPerson = {
+      id: editId || Date.now().toString(),
+      name,
+      username: document.getElementById('f-username')?.value || '',
+      phone: document.getElementById('f-phone')?.value || '',
+      email: document.getElementById('f-email')?.value || '',
+      skills: document.getElementById('f-skills')?.value || '',
+      rate: document.getElementById('f-rate')?.value || '',
+      timezone: document.getElementById('f-timezone')?.value || '',
+      portfolio: document.getElementById('f-portfolio')?.value || '',
+      status: document.getElementById('f-status')?.value || 'active',
+      workHistory: {
+        projects: parseInt(document.getElementById('f-projects')?.value) || 0,
+        satisfaction: parseFloat(document.getElementById('f-satisfaction')?.value) || 4,
+        onTimeRate: parseInt(document.getElementById('f-onTime')?.value) || 85,
+        revisions: parseInt(document.getElementById('f-revisions')?.value) || 0
+      }
+    };
+    if (editId) {
+      const index = freelancers.findIndex(f => f.id === editId);
+      if (index !== -1) freelancers[index] = newPerson;
+    } else freelancers.push(newPerson);
   }
-  people.push(person);
-  save();
+  saveAll();
   closeModal();
-  renderAll();
+  updateStats();
+  renderProfiles();
 }
 
-function deletePerson(id) {
-  if (!confirm('Remove this person from the system?')) return;
-  people = people.filter(x => x.id !== id);
-  save();
-  renderAll();
+function closeModal() {
+  document.getElementById('person-modal').classList.remove('open');
 }
 
-function openPersonDetail(id) {
-  // Future: open detail panel or navigate to person page
-  // For now, trigger edit as placeholder
-  // editPerson(id);
-}
-
-// ─── SEARCH ───
-function handleSearch(val) {
-  searchQuery = val;
-  renderAll();
-}
-
-// ─── FILTERS ───
-function filterByGrade() { /* Future: implement grade filter */ }
-function filterByNiche() { /* Future: implement niche filter */ }
-function applyFLFilter() { /* Future: filter freelancers by skill/budget/tz */ }
-
-// ─── EXPORT ───
-function exportCSV() {
-  if (!people.length) return alert('No people to export yet.');
-  const headers = ['ID','Type','Name','Email','Phone','Niche/Spec','Start Date','Base Salary'];
-  const rows = people.map(p => [
-    p.id, p.type, p.name, p.email, p.phone || '',
-    p.niche || p.spec || (p.channels ? p.channels.join('+') : ''),
-    p.start || p.orStart || '',
-    p.base || p.orBase || (p.rateH ? `$${p.rateH}/h` : '') || ''
-  ]);
-  const csv = [headers, ...rows].map(r => r.map(c => `"${c}"`).join(',')).join('\n');
-  const a = document.createElement('a');
-  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
-  a.download = 'people_export_' + new Date().toISOString().split('T')[0] + '.csv';
-  a.click();
-}
-
-function exportCallLog() { alert('Call log export requires call tracking integration.'); }
-
-// ─── SAVE ───
-function save() { localStorage.setItem('crm_people', JSON.stringify(people)); }
-
-// ─── TAB SWITCH ───
-function switchTab(tabId, el) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('panel-' + tabId).classList.add('active');
-}
-
-// ─── KEYBOARD SHORTCUT ───
-document.addEventListener('keydown', e => {
-  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-    e.preventDefault();
-    document.getElementById('search-input').focus();
-  }
-  if (e.key === 'Escape') closeModal();
-});
-
-init();
+// Initial render
+updateStats();
+renderProfiles();
 </script>
 </body>
 </html>
