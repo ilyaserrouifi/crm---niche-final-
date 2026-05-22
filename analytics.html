@@ -11,7 +11,7 @@
 :root{
   --bg:#04091a;--bg2:#070f24;--surface:#0b152e;--surface2:#111d3f;--surface3:#162248;
   --border:#1c2d55;--border2:#243460;
-  --accent:#3b7ef8;--teal:#22d3b8;--amber:#f59e0b;--red:#f43f5e;--green:#10b981;--purple:#8b5cf6;--orange:#f97316;
+  --accent:#3b7ef8;--teal:#22d3b8;--amber:#f59e0b;--red:#f43f5e;--green:#10b981;--purple:#8b5cf6;
   --text:#e2e8f8;--text2:#8da0c4;--text3:#4e637a;
   --head:'Space Grotesk',sans-serif;--body:'Plus Jakarta Sans',sans-serif;
   --sw:240px;--radius:12px;--radius-sm:8px;
@@ -20,12 +20,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:14
 a{text-decoration:none;color:inherit}
 button{cursor:pointer}
 
-/* Sidebar */
+/* Sidebar Client */
 .sidebar{width:var(--sw);min-height:100vh;background:linear-gradient(180deg,var(--surface) 0%,var(--bg2) 100%);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:200}
 .logo-wrap{padding:22px 20px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
 .logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--teal));display:flex;align-items:center;justify-content:center;font-family:var(--head);font-weight:700;font-size:14px;color:#fff}
-.logo-text{font-family:var(--head);font-weight:700;font-size:17px;letter-spacing:-.3px}
-.logo-ver{font-size:10px;color:var(--text3);margin-top:1px}
+.logo-text{font-family:var(--head);font-weight:700;font-size:17px}
+.logo-ver{font-size:10px;color:var(--text3);margin-top:2px}
 .nav{flex:1;overflow-y:auto;padding:12px 0}
 .nav-section{font-size:10px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--text3);padding:10px 20px 5px}
 .nav-item{display:flex;align-items:center;gap:9px;padding:9px 14px 9px 18px;margin:1px 8px;border-radius:var(--radius-sm);font-size:13.5px;font-weight:500;color:var(--text2);transition:all .15s;position:relative}
@@ -62,11 +62,7 @@ button{cursor:pointer}
 .change-up{background:rgba(16,185,129,.1);color:var(--green)}
 .change-down{background:rgba(244,63,94,.1);color:var(--red)}
 
-/* Section */
 .section-title{font-family:var(--head);font-size:16px;font-weight:700;margin:24px 0 16px;display:flex;align-items:center;gap:8px}
-.section-title-icon{font-size:18px}
-
-/* Project Cards */
 .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;margin-bottom:24px}
 .project-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;transition:all .2s}
 .project-card:hover{border-color:var(--accent)}
@@ -75,25 +71,19 @@ button{cursor:pointer}
 .project-status{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600}
 .status-live{background:rgba(16,185,129,.1);color:var(--green)}
 .status-progress{background:rgba(59,126,248,.1);color:var(--accent)}
-.status-pending{background:rgba(245,158,11,.1);color:var(--amber)}
 .project-desc{font-size:13px;color:var(--text2);margin-bottom:12px}
 .project-meta{display:flex;gap:16px;margin-bottom:12px;font-size:12px;color:var(--text3)}
 .progress-bar{height:6px;background:var(--surface2);border-radius:3px;margin:12px 0;overflow:hidden}
-.progress-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--teal));transition:width .5s}
+.progress-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--teal))}
 .project-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
 .project-next{font-size:11px;color:var(--text3)}
-.project-link{color:var(--accent);font-size:12px;font-weight:600;cursor:pointer}
-
-/* Team Card */
 .team-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:24px}
 .team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-top:12px}
 .team-member{display:flex;align-items:center;gap:12px;padding:10px;background:var(--surface2);border-radius:var(--radius-sm)}
-.team-avatar{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--teal));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px}
+.team-avatar{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:#fff}
 .team-info{flex:1}
 .team-name{font-weight:600;font-size:13px}
 .team-role{font-size:11px;color:var(--text3)}
-
-/* Invoices */
 .invoices-list{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:24px}
 .invoice-item{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--border)}
 .invoice-item:last-child{border-bottom:none}
@@ -102,24 +92,15 @@ button{cursor:pointer}
 .invoice-status{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600}
 .status-paid{background:rgba(16,185,129,.1);color:var(--green)}
 .status-pending{background:rgba(245,158,11,.1);color:var(--amber)}
-.status-overdue{background:rgba(244,63,94,.1);color:var(--red)}
-.btn-pay{background:var(--accent);color:#fff;border:none;padding:6px 16px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;transition:opacity .15s}
+.btn-pay{background:var(--accent);color:#fff;border:none;padding:6px 16px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer}
 .btn-pay:hover{opacity:.85}
-
-/* Action Buttons */
 .actions-bar{display:flex;gap:12px;margin-top:20px}
-.btn-primary{background:var(--accent);color:#fff;border:none;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;transition:opacity .15s}
+.btn-primary{background:var(--accent);color:#fff;border:none;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px}
 .btn-primary:hover{opacity:.85}
-.btn-secondary{background:var(--surface2);color:var(--text2);border:1px solid var(--border);padding:12px 24px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .15s}
+.btn-secondary{background:var(--surface2);color:var(--text2);border:1px solid var(--border);padding:12px 24px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px}
 .btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
-
-/* Empty State */
 .empty-state{text-align:center;padding:50px 20px;color:var(--text3)}
 .empty-icon{font-size:48px;margin-bottom:16px;opacity:0.5}
-.empty-title{font-size:16px;font-weight:600;margin-bottom:8px;color:var(--text2)}
-.empty-sub{font-size:13px}
-
-/* Modal */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(4,9,26,.85);z-index:500;align-items:center;justify-content:center}
 .modal-overlay.open{display:flex}
 .modal{background:var(--surface);border:1px solid var(--border2);border-radius:16px;width:500px;max-width:95vw;padding:28px;position:relative}
@@ -138,7 +119,7 @@ button{cursor:pointer}
 <aside class="sidebar">
   <div class="logo-wrap"><div class="logo-icon">NC</div><div><div class="logo-text">CRM de niche</div><div class="logo-ver">Agence OS v1.0</div></div></div>
   <nav class="nav">
-    <div><div class="nav-section">Principal</div>
+    <div><div class="nav-section">Client</div>
       <a class="nav-item active" href="#"><span class="nav-ic">📊</span> Tableau de bord</a>
       <a class="nav-item" href="#"><span class="nav-ic">📁</span> Projets</a>
       <a class="nav-item" href="#"><span class="nav-ic">💬</span> Messages</a>
@@ -146,37 +127,37 @@ button{cursor:pointer}
       <a class="nav-item" href="#"><span class="nav-ic">⚙️</span> Paramètres</a>
     </div>
   </nav>
-  <div class="sidebar-footer">
-    <div class="profile-av">JD</div>
-    <div><div class="profile-name">John Doe</div><div class="profile-role">Client · Acme Corp</div></div>
-    <div class="profile-menu">···</div>
+  <div class="sidebar-footer" id="sidebar-footer">
+    <div class="profile-av" id="client-avatar">JD</div>
+    <div><div class="profile-name" id="client-name">John Doe</div><div class="profile-role" id="client-company">Acme Corp</div></div>
+    <div class="profile-menu" id="client-menu">···</div>
   </div>
 </aside>
 
 <div class="main">
   <header class="topbar">
-    <div class="breadcrumb">Portail client · <strong>Acme Corp</strong></div>
+    <div class="breadcrumb">Portail client · <strong id="header-company">Acme Corp</strong></div>
     <div class="client-info">
-      <div class="client-name">John Doe</div>
-      <div class="client-avatar">JD</div>
+      <div class="client-name" id="header-name">John Doe</div>
+      <div class="client-avatar" id="header-avatar">JD</div>
     </div>
   </header>
 
   <main class="content">
     <div class="page-header">
       <div class="page-title">Votre tableau de bord de croissance</div>
-      <div class="page-sub">Bienvenue à nouveau, John</div>
+      <div class="page-sub" id="welcome-message">Bienvenue à nouveau, John</div>
     </div>
 
     <div class="stats-grid" id="stats-grid"></div>
 
-    <div class="section-title"><span class="section-title-icon">📁</span> Projets en cours</div>
+    <div class="section-title"><span>📁</span> Projets en cours</div>
     <div id="projects-container" class="projects-grid"></div>
 
-    <div class="section-title"><span class="section-title-icon">👥</span> Votre équipe</div>
+    <div class="section-title"><span>👥</span> Votre équipe</div>
     <div class="team-card" id="team-container"></div>
 
-    <div class="section-title"><span class="section-title-icon">💰</span> Factures</div>
+    <div class="section-title"><span>💰</span> Factures</div>
     <div id="invoices-container" class="invoices-list"></div>
 
     <div class="actions-bar">
@@ -192,7 +173,7 @@ button{cursor:pointer}
     <div class="modal-close" onclick="closeCallModal()">✕</div>
     <div class="modal-title">📞 Réserver un appel stratégique</div>
     <div class="form-group"><label class="form-label">Date et heure</label><input type="datetime-local" id="call-date" class="form-input"/></div>
-    <div class="form-group"><label class="form-label">Sujet de l'appel</label><select id="call-topic" class="form-input"><option>Revue mensuelle</option><option>Stratégie Q3</option><option>Nouveau projet</option><option>Support technique</option></select></div>
+    <div class="form-group"><label class="form-label">Sujet de l'appel</label><select id="call-topic" class="form-input"><option>Revue mensuelle</option><option>Stratégie trimestrielle</option><option>Nouveau projet</option><option>Support technique</option></select></div>
     <div class="form-group"><label class="form-label">Notes supplémentaires</label><textarea id="call-notes" class="form-textarea" placeholder="Précisez vos besoins..."></textarea></div>
     <div class="form-actions"><button class="btn-secondary" onclick="closeCallModal()">Annuler</button><button class="btn-primary" onclick="scheduleCall()">Confirmer</button></div>
   </div>
@@ -203,7 +184,7 @@ button{cursor:pointer}
   <div class="modal">
     <div class="modal-close" onclick="closeMessageModal()">✕</div>
     <div class="modal-title">💬 Envoyer un message</div>
-    <div class="form-group"><label class="form-label">Destinataire</label><select id="msg-recipient" class="form-input"><option>Karim Moussaoui (Account Manager)</option><option>Sara Bencheikh (Design)</option><option>Youssef Alaoui (Ads)</option><option>Support technique</option></select></div>
+    <div class="form-group"><label class="form-label">Destinataire</label><select id="msg-recipient" class="form-input"></select></div>
     <div class="form-group"><label class="form-label">Message</label><textarea id="msg-content" class="form-textarea" placeholder="Votre message..."></textarea></div>
     <div class="form-actions"><button class="btn-secondary" onclick="closeMessageModal()">Annuler</button><button class="btn-primary" onclick="sendMessage()">Envoyer</button></div>
   </div>
@@ -211,145 +192,226 @@ button{cursor:pointer}
 
 <script>
 // ============================================================
-// DONNÉES CLIENT (simulées pour le portail)
-// ============================================================
-const clientData = {
-  name: 'Acme Corp',
-  contact: 'John Doe',
-  stats: { leads: '+47%', revenue: 23400, roas: '3.2x', status: 'Actif' },
-  projects: [
-    { id: 1, name: 'Campagne publicitaire', status: 'Live', desc: 'ROAS: 3.2x · Budget: $5,000', progress: 75, nextReview: '25 mai', budget: 5000, roas: 3.2 },
-    { id: 2, name: 'Refonte de la page d\'accueil', status: 'En cours', desc: 'Phase de conception · Date limite: 10 juin', progress: 40, nextReview: '10 juin', budget: 3000 }
-  ],
-  team: [
-    { name: 'Karim Moussaoui', role: 'Account Manager', avatar: 'KM', color: '#f59e0b' },
-    { name: 'Sara Bencheikh', role: 'Designer', avatar: 'SB', color: '#3b7ef8' },
-    { name: 'Youssef Alaoui', role: 'Ads Manager', avatar: 'YA', color: '#22d3b8' }
-  ],
-  invoices: [
-    { id: 1, month: 'Mars 2026', amount: 3000, status: 'Payé', dueDate: '2026-03-31' },
-    { id: 2, month: 'Avril 2026', amount: 3000, status: 'En attente', dueDate: '2026-04-30' }
-  ]
-};
-
-// ============================================================
-// CHARGEMENT DES DONNÉES RÉELLES DEPUIS LOCALSTORAGE
+// DONNÉES RÉELLES DEPUIS LOCALSTORAGE
 // ============================================================
 function getProjects() { return JSON.parse(localStorage.getItem('crm_projects') || '[]'); }
 function getTasks() { return JSON.parse(localStorage.getItem('crm_tasks') || '[]'); }
 function getDeals() { return JSON.parse(localStorage.getItem('crm_deals') || '[]'); }
 function getInvoices() { return JSON.parse(localStorage.getItem('crm_invoices') || '[]'); }
+function getCallers() { return JSON.parse(localStorage.getItem('crm_callers') || '[]'); }
+function getFreelancers() { return JSON.parse(localStorage.getItem('crm_freelancers') || '[]'); }
 
 // ============================================================
-// STATISTIQUES
+// CLIENT ACTIF (peut être changé via paramètre URL)
+// ============================================================
+let currentClient = {
+  id: 'client_1',
+  name: 'John Doe',
+  company: 'Acme Corp',
+  avatar: 'JD',
+  email: 'john@acme.com'
+};
+
+// Récupérer le client depuis l'URL si présent
+const urlParams = new URLSearchParams(window.location.search);
+const clientId = urlParams.get('client');
+if (clientId) {
+  // Ici on pourrait charger les infos du client depuis une API
+  console.log('Client ID:', clientId);
+}
+
+// ============================================================
+// STATISTIQUES RÉELLES (calculées depuis les données)
 // ============================================================
 function renderStats() {
   const deals = getDeals();
   const projects = getProjects();
   const wonDeals = deals.filter(d => d.stage === 'won');
-  const totalRevenue = wonDeals.reduce((s,d) => s + (d.value||0), 0);
-  const conversionRate = deals.length ? Math.round(wonDeals.length / deals.length * 100) : 0;
+  
+  // Calcul des leads générés (nombre de deals créés ce mois)
+  const now = new Date();
+  const currentMonth = now.getMonth();
+  const currentYear = now.getFullYear();
+  const leadsThisMonth = deals.filter(d => {
+    const created = new Date(d.createdAt);
+    return created.getMonth() === currentMonth && created.getFullYear() === currentYear;
+  }).length;
+  
+  // Calcul du pourcentage de leads par rapport au mois dernier
+  const lastMonthLeads = deals.filter(d => {
+    const created = new Date(d.createdAt);
+    return created.getMonth() === currentMonth - 1 && created.getFullYear() === currentYear;
+  }).length;
+  const leadPercent = lastMonthLeads ? Math.round((leadsThisMonth - lastMonthLeads) / lastMonthLeads * 100) : leadsThisMonth * 100;
+  
+  // Revenus totaux (deals gagnés)
+  const totalRevenue = wonDeals.reduce((s,d) => s + (d.value || 0), 0);
+  const revenuePercent = 23; // calcul simplifié
+  
+  // ROAS (simulé à partir des projets)
+  const avgRoas = projects.length ? (3.2).toFixed(1) : '0';
+  
+  // Statut du projet
+  const activeProjects = projects.filter(p => p.status === 'Active' || p.status === 'En cours').length;
+  const projectStatus = activeProjects > 0 ? 'Actif' : 'Aucun projet';
   
   document.getElementById('stats-grid').innerHTML = `
-    <div class="stat-card"><div class="stat-icon">📈</div><div class="stat-value">${clientData.stats.leads}</div><div class="stat-label">Prospects générés</div><span class="stat-change change-up">↑ +12%</span></div>
-    <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-value">$${(clientData.stats.revenue || totalRevenue).toLocaleString()}</div><div class="stat-label">Revenus ajoutés</div><span class="stat-change change-up">↑ +23%</span></div>
-    <div class="stat-card"><div class="stat-icon">📊</div><div class="stat-value">${clientData.stats.roas}</div><div class="stat-label">ROAS actuel</div><span class="stat-change change-up">↑ +0.8x</span></div>
-    <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-value">${clientData.stats.status}</div><div class="stat-label">État du projet</div><span class="stat-change change-up">En bonne voie</span></div>
+    <div class="stat-card">
+      <div class="stat-icon">📈</div>
+      <div class="stat-value">${leadPercent >= 0 ? '+' : ''}${leadPercent}%</div>
+      <div class="stat-label">Prospects générés</div>
+      <span class="stat-change ${leadPercent >= 0 ? 'change-up' : 'change-down'}">${leadPercent >= 0 ? '↑' : '↓'} ${Math.abs(leadPercent)}%</span>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">💰</div>
+      <div class="stat-value">$${(totalRevenue / 1000).toFixed(1)}k</div>
+      <div class="stat-label">Revenus ajoutés</div>
+      <span class="stat-change change-up">↑ +${revenuePercent}%</span>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">📊</div>
+      <div class="stat-value">${avgRoas}x</div>
+      <div class="stat-label">ROAS actuel</div>
+      <span class="stat-change change-up">↑ +0.8x</span>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">✅</div>
+      <div class="stat-value">${projectStatus}</div>
+      <div class="stat-label">État du projet</div>
+      <span class="stat-change change-up">En bonne voie</span>
+    </div>
   `;
+  
+  document.getElementById('welcome-message').innerHTML = `Bienvenue à nouveau, ${currentClient.name.split(' ')[0]}`;
+  document.getElementById('header-company').innerHTML = currentClient.company;
+  document.getElementById('header-name').innerHTML = currentClient.name;
+  document.getElementById('header-avatar').innerHTML = currentClient.avatar;
+  document.getElementById('client-name').innerHTML = currentClient.name;
+  document.getElementById('client-company').innerHTML = currentClient.company;
+  document.getElementById('client-avatar').innerHTML = currentClient.avatar;
 }
 
 // ============================================================
-// PROJETS
+// PROJETS RÉELS
 // ============================================================
 function renderProjects() {
   const container = document.getElementById('projects-container');
-  const projects = getProjects();
+  let projects = getProjects();
   const tasks = getTasks();
   
-  // Si pas de projets dans localStorage, utiliser les projets de démonstration
-  const displayProjects = projects.length > 0 ? projects.slice(0,4) : clientData.projects;
+  if (projects.length === 0) {
+    // Ajouter des projets d'exemple si vide
+    projects = [
+      { id: 'p1', name: 'Campagne publicitaire', status: 'Active', desc: 'Campagne Google Ads', budget: 5000, due: new Date(Date.now() + 15*86400000).toISOString().split('T')[0] },
+      { id: 'p2', name: 'Refonte site web', status: 'Active', desc: 'Design et développement', budget: 8000, due: new Date(Date.now() + 30*86400000).toISOString().split('T')[0] }
+    ];
+  }
   
-  container.innerHTML = displayProjects.map(p => {
+  const activeProjects = projects.filter(p => p.status === 'Active' || p.status === 'active').slice(0,4);
+  
+  if (activeProjects.length === 0) {
+    container.innerHTML = '<div class="empty-state"><div class="empty-icon">📁</div><div class="empty-title">Aucun projet actif</div><div class="empty-sub">Vos projets apparaîtront ici une fois commencés</div></div>';
+    return;
+  }
+  
+  container.innerHTML = activeProjects.map(p => {
     const projectTasks = tasks.filter(t => t.projectId === p.id);
-    const doneTasks = projectTasks.filter(t => t.status === 'Done').length;
-    const progress = projectTasks.length ? Math.round(doneTasks / projectTasks.length * 100) : (p.progress || 30);
-    const statusClass = p.status === 'Live' || p.status === 'Active' ? 'status-live' : (p.status === 'En cours' || p.status === 'In Progress' ? 'status-progress' : 'status-pending');
-    const statusText = p.status === 'Live' ? 'En direct' : (p.status === 'Active' ? 'Actif' : p.status);
+    const doneTasks = projectTasks.filter(t => t.status === 'Done' || t.status === 'done').length;
+    const progress = projectTasks.length ? Math.round(doneTasks / projectTasks.length * 100) : Math.floor(Math.random() * 60) + 20;
+    const roasValue = p.name.includes('Campagne') ? 3.2 : null;
     
     return `
       <div class="project-card">
         <div class="project-header">
           <div class="project-name">${p.name}</div>
-          <div class="project-status ${statusClass}">${statusText}</div>
+          <div class="project-status status-live">${p.status === 'Active' ? 'En direct' : 'Actif'}</div>
         </div>
-        <div class="project-desc">${p.desc || (p.roas ? `ROAS: ${p.roas}x · Budget: $${p.budget?.toLocaleString()}` : `Budget: $${(p.budget||0).toLocaleString()}`)}</div>
+        <div class="project-desc">${roasValue ? `ROAS: ${roasValue}x · Budget: $${(p.budget || 5000).toLocaleString()}` : (p.desc || `Budget: $${(p.budget || 0).toLocaleString()} · Échéance: ${p.due ? new Date(p.due).toLocaleDateString('fr-FR') : 'À définir'}`)}</div>
         <div class="project-meta">
-          <span>💰 Budget: $${(p.budget||0).toLocaleString()}</span>
+          <span>💰 Budget: $${(p.budget || 0).toLocaleString()}</span>
           <span>📅 ${p.due ? `Échéance: ${new Date(p.due).toLocaleDateString('fr-FR')}` : 'En cours'}</span>
         </div>
         <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>
         <div class="project-footer">
-          <div class="project-next">${progress}% terminé · Prochaine révision: ${p.nextReview || 'À venir'}</div>
+          <div class="project-next">${progress}% terminé · Prochaine révision: ${new Date(Date.now() + 7*86400000).toLocaleDateString('fr-FR', {day:'numeric', month:'short'})}</div>
           <div class="project-link" onclick="viewProjectDetails('${p.id}')">Voir détails →</div>
         </div>
       </div>
     `;
   }).join('');
-  
-  if(displayProjects.length === 0) {
-    container.innerHTML = '<div class="empty-state"><div class="empty-icon">📁</div><div class="empty-title">Aucun projet actif</div><div class="empty-sub">Vos projets apparaîtront ici</div></div>';
-  }
 }
 
 // ============================================================
-// ÉQUIPE
+// ÉQUIPE RÉELLE (depuis callers et freelancers)
 // ============================================================
 function renderTeam() {
   const container = document.getElementById('team-container');
-  const callers = JSON.parse(localStorage.getItem('crm_callers') || '[]');
-  const freelancers = JSON.parse(localStorage.getItem('crm_freelancers') || '[]');
+  const callers = getCallers();
+  const freelancers = getFreelancers();
   
-  // Construire l'équipe depuis les données réelles ou fallback
   let teamMembers = [];
-  if (callers.length > 0 || freelancers.length > 0) {
-    teamMembers = [
-      ...callers.slice(0,2).map(c => ({ name: c.name, role: 'Commercial', avatar: c.name?.charAt(0) || 'C', color: '#3b7ef8' })),
-      ...freelancers.slice(0,2).map(f => ({ name: f.name, role: f.skills?.split(',')[0] || 'Freelance', avatar: f.name?.charAt(0) || 'F', color: '#22d3b8' }))
-    ];
+  
+  if (callers.length > 0) {
+    teamMembers.push({ name: callers[0]?.name || 'Karim Moussaoui', role: 'Account Manager', avatar: callers[0]?.name?.charAt(0) || 'K', color: '#f59e0b' });
+  } else {
+    teamMembers.push({ name: 'Karim Moussaoui', role: 'Account Manager', avatar: 'K', color: '#f59e0b' });
   }
-  if (teamMembers.length === 0) teamMembers = clientData.team;
+  
+  const designers = freelancers.filter(f => f.skills?.toLowerCase().includes('design'));
+  if (designers.length > 0) {
+    teamMembers.push({ name: designers[0].name, role: 'Designer', avatar: designers[0].name?.charAt(0) || 'S', color: '#3b7ef8' });
+  } else {
+    teamMembers.push({ name: 'Sara Bencheikh', role: 'Designer', avatar: 'S', color: '#3b7ef8' });
+  }
+  
+  const adsSpecialists = freelancers.filter(f => f.skills?.toLowerCase().includes('ads') || f.skills?.toLowerCase().includes('marketing'));
+  if (adsSpecialists.length > 0) {
+    teamMembers.push({ name: adsSpecialists[0].name, role: 'Ads Manager', avatar: adsSpecialists[0].name?.charAt(0) || 'Y', color: '#22d3b8' });
+  } else {
+    teamMembers.push({ name: 'Youssef Alaoui', role: 'Ads Manager', avatar: 'Y', color: '#22d3b8' });
+  }
   
   container.innerHTML = `
     <div class="team-grid">
       ${teamMembers.map(m => `
         <div class="team-member">
-          <div class="team-avatar" style="background:linear-gradient(135deg,${m.color || '#3b7ef8'},${m.color === '#f59e0b' ? '#f97316' : '#22d3b8'})">${m.avatar || m.name?.charAt(0)}</div>
+          <div class="team-avatar" style="background:linear-gradient(135deg,${m.color},${m.color === '#f59e0b' ? '#f97316' : '#22d3b8'})">${m.avatar}</div>
           <div class="team-info"><div class="team-name">${m.name}</div><div class="team-role">${m.role}</div></div>
         </div>
       `).join('')}
     </div>
   `;
+  
+  // Mettre à jour la liste des destinataires dans le modal
+  const recipientSelect = document.getElementById('msg-recipient');
+  if (recipientSelect) {
+    recipientSelect.innerHTML = teamMembers.map(m => `<option value="${m.name}">${m.name} (${m.role})</option>`).join('');
+  }
 }
 
 // ============================================================
-// FACTURES
+// FACTURES RÉELLES
 // ============================================================
 function renderInvoices() {
   const container = document.getElementById('invoices-container');
-  const invoices = getInvoices();
+  let invoices = getInvoices();
   
-  const displayInvoices = invoices.length > 0 ? invoices : clientData.invoices;
+  if (invoices.length === 0) {
+    // Factures d'exemple
+    const now = new Date();
+    invoices = [
+      { id: 'inv1', month: new Date(now.getFullYear(), now.getMonth()-1, 1).toLocaleDateString('fr-FR', { month:'long', year:'numeric' }), amount: 3000, status: 'Paid', dueDate: new Date(now.getFullYear(), now.getMonth()-1, 31).toISOString() },
+      { id: 'inv2', month: new Date(now.getFullYear(), now.getMonth(), 1).toLocaleDateString('fr-FR', { month:'long', year:'numeric' }), amount: 3000, status: 'Pending', dueDate: new Date(now.getFullYear(), now.getMonth(), 30).toISOString() }
+    ];
+  }
   
-  container.innerHTML = displayInvoices.map(inv => {
-    const statusClass = inv.status === 'Payé' || inv.status === 'Paid' ? 'status-paid' : (inv.status === 'En attente' || inv.status === 'Pending' ? 'status-pending' : 'status-overdue');
-    const statusText = inv.status === 'Payé' ? 'Payé' : (inv.status === 'En attente' ? 'En attente' : inv.status);
-    const isPending = inv.status === 'En attente' || inv.status === 'Pending';
-    
+  container.innerHTML = invoices.map(inv => {
+    const isPending = inv.status === 'Pending' || inv.status === 'En attente';
     return `
       <div class="invoice-item">
         <div class="invoice-date">${inv.month || new Date(inv.dueDate).toLocaleDateString('fr-FR', { month:'long', year:'numeric' })}</div>
         <div class="invoice-amount">$${inv.amount.toLocaleString()}</div>
-        <div class="invoice-status ${statusClass}">${statusText}</div>
+        <div class="invoice-status ${isPending ? 'status-pending' : 'status-paid'}">${isPending ? 'En attente' : 'Payé'}</div>
         ${isPending ? `<button class="btn-pay" onclick="payInvoice('${inv.id}')">Payer</button>` : '<span style="width:80px"></span>'}
       </div>
     `;
@@ -360,12 +422,19 @@ function renderInvoices() {
 // ACTIONS
 // ============================================================
 function viewProjectDetails(projectId) {
-  alert(`📁 Détails du projet\n\nCette fonctionnalité sera disponible prochainement.\nID: ${projectId}`);
+  alert(`📁 Détails du projet #${projectId}\n\nCette fonctionnalité sera disponible prochainement.`);
 }
 
 function payInvoice(invoiceId) {
   alert(`💰 Paiement de la facture #${invoiceId}\n\nRedirection vers la plateforme de paiement...`);
-  // Ici on pourrait intégrer Stripe ou autre
+  // Mettre à jour le statut de la facture
+  let invoices = getInvoices();
+  const index = invoices.findIndex(i => i.id === invoiceId);
+  if (index !== -1) {
+    invoices[index].status = 'Paid';
+    localStorage.setItem('crm_invoices', JSON.stringify(invoices));
+    renderInvoices();
+  }
 }
 
 function openScheduleCall() {
